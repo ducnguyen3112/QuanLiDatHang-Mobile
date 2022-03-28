@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+
+    android:theme="@style/Theme.Design.NoActionBar"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".LoginActivity">
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_marginTop="80dp"
+        android:text="welcome back!"
+        android:fontFamily="@font/goldman"
+        android:textSize="38sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etUser"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="16dp"
+
+        android:hint="Enter your username"
+        android:textSize="22sp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etPasswd"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="28dp"
+        android:hint="Enter your password"
+        android:textSize="22sp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnLogin"
+        android:text="SIGN IN"
+        android:background="@color/white"
+        android:textColor="#1495d7"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+
+
+
+
+</LinearLayout>
