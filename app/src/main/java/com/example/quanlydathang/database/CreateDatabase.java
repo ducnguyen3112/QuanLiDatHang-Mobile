@@ -14,6 +14,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
     public static final String TB_SANPHAM= "SANPHAM";
     public static final String TB_DONDATHANG= "DONDATHANG";
     public static final String TB_TTDDH= "TTDDH";
+    public static final String TB_USER="USER";
 
     public static final String TB_KHACHHANG_MAKH= "MAKH";
     public static final String TB_KHACHHANG_TENKH= "TENKH";
@@ -32,6 +33,12 @@ public class CreateDatabase extends SQLiteOpenHelper {
     public static final String TB_TTDDH_MADH= "MADH";
     public static final String TB_TTDDH_MASP= "MASP";
     public static final String TB_TTDDH_SLDAT= "SLDAT";
+
+    public static final String TB_USER_ID="USERID";
+    public static final String TB_USER_USERNAME="USERNAME";
+    public static final String TB_USER_PASSWD="PASSWORD";
+
+
 
     public CreateDatabase(@Nullable Context context) {
         super(context, DB_NAME, null,1);
@@ -61,10 +68,16 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 + TB_TTDDH_MASP + " INTEGER, "
                 + TB_TTDDH_SLDAT + " INTEGER, "
                 +"PRIMARY KEY ( " +TB_TTDDH_MADH+","+TB_TTDDH_MASP +"))";
+
+        String tbUSER="CREATE TABLE "+ TB_USER + "("
+                + TB_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + TB_USER_USERNAME + " TEXT, "
+                + TB_USER_PASSWD + " TEXT )";
         sqLiteDatabase.execSQL(tbKhachHang);
         sqLiteDatabase.execSQL(tbSanPham);
         sqLiteDatabase.execSQL(tbDDH);
         sqLiteDatabase.execSQL(tbTTDDH);
+        sqLiteDatabase.execSQL(tbUSER);
     }
 
     @Override

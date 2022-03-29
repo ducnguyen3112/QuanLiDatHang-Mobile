@@ -4,9 +4,24 @@ public class DonHangDto {
     int maDH;
     String ngayDH;
     int maKH;
+    String tenKH;
+
+    public DonHangDto(int maDH, String ngayDH, int maKH, String tenKH) {
+        this.maDH = maDH;
+        this.ngayDH = ngayDH;
+        this.maKH = maKH;
+        this.tenKH = tenKH;
+    }
 
     public int getMaDH() {
         return maDH;
+    }
+    public String getTenKH() {
+        return tenKH;
+    }
+
+    public void setTenKH(String tenKH) {
+        this.tenKH = tenKH;
     }
 
     public void setMaDH(int maDH) {

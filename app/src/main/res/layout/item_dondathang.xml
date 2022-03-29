@@ -2,6 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
     >
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,19 +21,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_centerVertical="true"
+            android:paddingStart="15dp"
             android:layout_toEndOf="@+id/tvMaDH">
             <TextView
+                android:id="@+id/tvtenKH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Hồ Văn Trường"
                 android:textSize="30sp"
-                android:textAlignment="center"
+
                 ></TextView>
             <TextView
+                android:id="@+id/tvNgayDH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="31/12/2000 12:00"
-                android:textAlignment="center"
                 android:textSize="20sp"></TextView>
         </LinearLayout>
 

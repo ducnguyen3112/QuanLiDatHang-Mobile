@@ -4,14 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/bg.xml" value="0.1" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/.xml" value="0.15677083333333333" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/fira_sans.xml" value="0.1" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/goldman.xml" value="0.1" />
-        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_don_dat_hang.xml" value="0.25" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_don_dat_hang.xml" value="0.1" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_donhang.xml" value="0.275" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_main.xml" value="0.21784420289855072" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/item_dondathang.xml" value="0.264" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/menu/main_menu.xml" value="0.264" />
       </map>
     </option>
   </component>
