@@ -10,6 +10,7 @@ import com.example.quanlydathang.dto.UserDto;
 
 public class UserDao {
     SQLiteDatabase database;
+
     public UserDao(Context context ) {
         CreateDatabase createDatabase=new CreateDatabase(context);
         database = createDatabase.open();

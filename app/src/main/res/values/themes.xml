@@ -12,6 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
-    </style>
 
+    </style>
+    <style name="fontGoldman">
+        <item name="fontFamily">@font/goldman</item>
+        <item name="android:fontFamily">@font/goldman</item>
+    </style>
 </resources>
