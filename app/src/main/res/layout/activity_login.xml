@@ -21,6 +21,7 @@
         android:text="welcome back!"
         android:fontFamily="@font/goldman"
         android:textSize="38sp"
+        android:theme="@style/fontGoldman"
         android:textStyle="bold"/>
 
     <EditText
@@ -29,7 +30,7 @@
         android:id="@+id/etUser"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="16dp"
-
+        android:inputType="textPersonName"
         android:hint="Enter your username"
         android:textSize="22sp"/>
     <EditText
@@ -38,6 +39,7 @@
         android:id="@+id/etPasswd"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="28dp"
+        android:inputType="textPassword"
         android:hint="Enter your password"
         android:textSize="22sp"/>
     <Button

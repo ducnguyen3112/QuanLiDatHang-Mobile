@@ -4,8 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +24,15 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
 
     private List<DonHangDto> donHangDtoList;
     private List<DonHangDto> donHangDtoListOld;
+    private OnItemClickListener mlistener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+        void onDeleteClick(int position);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.mlistener=listener;
+    }
     public DonDatHangAdapter(List<DonHangDto> donHangDtoList) {
         this.donHangDtoList = donHangDtoList;
         this.donHangDtoListOld = donHangDtoList;
@@ -31,7 +43,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
     public DDHViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_dondathang,parent,false);
-        return new DDHViewHolder(view);
+        return new DDHViewHolder(view,mlistener );
     }
 
     @Override
@@ -93,12 +105,27 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
         private TextView tvMaDH;
         private TextView tvKH;
         private TextView tvNgayDH;
+        private ImageButton ibDelete;
 
-        public DDHViewHolder(@NonNull View itemView) {
+        public DDHViewHolder(@NonNull View itemView,final OnItemClickListener listener) {
             super(itemView);
             tvMaDH=itemView.findViewById(R.id.tvMaDH);
             tvKH=itemView.findViewById(R.id.tvtenKH);
             tvNgayDH=itemView.findViewById(R.id.tvNgayDH);
+            ibDelete=itemView.findViewById(R.id.ib_delete);
+            ibDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener!=null){
+                        int position=getAbsoluteAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION){
+                            listener.onDeleteClick(position);
+                        }
+                    }
+                }
+            });
         }
+
+
     }
 }

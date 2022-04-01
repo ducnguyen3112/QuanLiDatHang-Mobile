@@ -6,8 +6,10 @@ public class DonHangDto {
     int maKH;
     String tenKH;
 
-    public DonHangDto(int maDH, String ngayDH, int maKH, String tenKH) {
-        this.maDH = maDH;
+    public DonHangDto() {
+    }
+
+    public DonHangDto( String ngayDH, int maKH, String tenKH) {
         this.ngayDH = ngayDH;
         this.maKH = maKH;
         this.tenKH = tenKH;
