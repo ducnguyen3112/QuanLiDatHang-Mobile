@@ -12,7 +12,6 @@
     tools:context=".LoginActivity">
 
     <TextView
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -25,35 +24,46 @@
         android:textStyle="bold"/>
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/etUser"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="16dp"
+        style="@style/editTextLogin"
         android:inputType="textPersonName"
         android:hint="Enter your username"
-        android:textSize="22sp"/>
+        android:id="@+id/etUser"
+        android:layout_marginTop="50dp"
+        />
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/editTextLogin"
+        android:textSize="22sp"
         android:id="@+id/etPasswd"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="28dp"
         android:inputType="textPassword"
-        android:hint="Enter your password"
-        android:textSize="22sp"/>
-    <Button
+        android:hint="Enter your password"/>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnLogin"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+        <EditText
+            android:id="@+id/etOTP"
+            android:inputType="number"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="Enter OTP CODE"
+            android:layout_weight="1"/>
+        <Button
+            style="@style/btnLogin"
+            android:id="@+id/btnotp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send OTP"
+            />
+    </LinearLayout>
+
+    <Button
         android:text="SIGN IN"
-        android:background="@color/white"
-        android:textColor="#1495d7"
-        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnLogin"
+        style="@style/btnLogin"
         android:textSize="20sp"/>
-
-
-
-
-
 </LinearLayout>
