@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1086230361066",
+    "project_id": "sendotp-dec16",
+    "storage_bucket": "sendotp-dec16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086230361066:android:6beb072e4ba97fd2f7b893",
+        "android_client_info": {
+          "package_name": "com.example.quanlydathang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086230361066-rhhf9i37csb0c28ee6onb9ul19mf68a7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quanlydathang",
+            "certificate_hash": "3a5dc0a75adf547d747320cb450f4770a88e4d87"
+          }
+        },
+        {
+          "client_id": "1086230361066-qnjr6q0rs6ac0hs1suokcbncahbk0gk2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB775zyXyBiU-B1GAc9_tzCKDs6BKVRjW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086230361066-qnjr6q0rs6ac0hs1suokcbncahbk0gk2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

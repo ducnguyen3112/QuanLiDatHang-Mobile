@@ -72,6 +72,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
         String tbUSER="CREATE TABLE "+ TB_USER + "("
                 + TB_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TB_USER_USERNAME + " TEXT, "
+                + TB_USER_USERNAME + " SDT, "
                 + TB_USER_PASSWD + " TEXT )";
         sqLiteDatabase.execSQL(tbKhachHang);
         sqLiteDatabase.execSQL(tbSanPham);
