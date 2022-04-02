@@ -9,10 +9,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.quanlydathang.database.CreateDatabase;
+import com.example.quanlydathang.ui.KhachHang.KhachHangActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CardView cvDH;
+    private CardView cvDH,cvKH;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -23,6 +24,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this,DonDatHangActivity.class);
+                startActivity(intent);
+            }
+        });
+        cvKH = findViewById(R.id.cvKhachHang);
+        cvKH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this, KhachHangActivity.class);
                 startActivity(intent);
             }
         });
