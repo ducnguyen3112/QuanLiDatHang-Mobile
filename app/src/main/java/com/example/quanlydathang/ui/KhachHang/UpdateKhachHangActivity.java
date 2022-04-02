@@ -28,6 +28,7 @@ public class UpdateKhachHangActivity extends AppCompatActivity {
         setControl();
         getAndSetIntentData();
         setEvent();
+
     }
 
 
