@@ -4,11 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/bg.xml" value="0.1" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2425" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/.xml" value="0.15677083333333333" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/fira_sans.xml" value="0.1" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/goldman.xml" value="0.1" />
-        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_don_dat_hang.xml" value="0.1" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_don_dat_hang.xml" value="0.264" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_donhang.xml" value="0.275" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_main.xml" value="0.21784420289855072" />
@@ -16,11 +17,6 @@
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/item_dondathang.xml" value="0.1791044776119403" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/themdonhang_dialog.xml" value="0.264" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/menu/main_menu.xml" value="0.264" />
-        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_add_khach_hang.xml" value="0.12360688956433637" />
-        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_khach_hang.xml" value="0.20878623188405798" />
-        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_main.xml" value="0.11005434782608696" />
-        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_update_khach_hang.xml" value="0.1322463768115942" />
-        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/layout/item_khach_hang.xml" value="0.20878623188405798" />
       </map>
     </option>
   </component>
