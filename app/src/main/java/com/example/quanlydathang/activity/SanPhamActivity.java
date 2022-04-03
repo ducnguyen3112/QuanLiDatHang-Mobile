@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.example.quanlydathang.MainActivity;
 import com.example.quanlydathang.R;
 import com.example.quanlydathang.adapter.SanPhamAdapter;
 import com.example.quanlydathang.database.DBSanPham;
@@ -33,11 +34,11 @@ public class SanPhamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_san_pham);
 
-        setControl();
-        db = new DBSanPham(getApplicationContext());
 
-        /*db.QueryData("drop table SANPHAM");
-        insertData();*/
+        db = new DBSanPham(getApplicationContext());
+        setControl();
+        /*db.QueryData("drop table SANPHAM");*/
+        /*db.insertData();*/
         db.loadDb(list);
         adapter = new SanPhamAdapter(SanPhamActivity.this, list);
         adapter.notifyDataSetChanged();

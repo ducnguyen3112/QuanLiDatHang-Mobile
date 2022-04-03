@@ -17,8 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.quanlydathang.R;
-import com.example.quanlydathang.activity.MainActivity;
-import com.example.quanlydathang.activity.SanPhamActivity;
 import com.example.quanlydathang.activity.ThemSPActivity;
 import com.example.quanlydathang.database.DBSanPham;
 import com.example.quanlydathang.dto.SanPham;

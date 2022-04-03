@@ -24,11 +24,13 @@
         <activity
             android:name=".activity.SanPhamActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
         <activity
             android:name=".activity.ThemSPActivity"
             android:exported="false"
-            android:parentActivityName=".activity.SanPhamActivity"/>
+            android:parentActivityName=".activity.SanPhamActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true"
