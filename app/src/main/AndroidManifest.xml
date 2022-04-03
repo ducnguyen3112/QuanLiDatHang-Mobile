@@ -22,6 +22,14 @@
             android:exported="false"
             android:parentActivityName=".ui.KhachHang.KhachHangActivity"/>
         <activity
+            android:name=".activity.SanPhamActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.SanPhamActivity"/>
+        <activity
+            android:name=".activity.ThemSPActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.ThemSPActivity"/>
+        <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.Light.NoActionBar">
