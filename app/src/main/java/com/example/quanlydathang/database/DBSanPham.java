@@ -87,6 +87,7 @@ public class DBSanPham extends SQLiteOpenHelper {
             list.add(sanPham);
             cursor.moveToNext();
         }
+
         cursor.close();
     }
 

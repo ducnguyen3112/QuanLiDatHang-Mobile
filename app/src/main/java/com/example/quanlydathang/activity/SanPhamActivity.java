@@ -19,7 +19,6 @@ import com.example.quanlydathang.dto.SanPham;
 import java.util.ArrayList;
 
 public class SanPhamActivity extends AppCompatActivity {
-
     private ListView listView;
     private ArrayList<SanPham> list = new ArrayList<>();
     private SanPhamAdapter adapter;
@@ -37,8 +36,8 @@ public class SanPhamActivity extends AppCompatActivity {
 
         db = new DBSanPham(getApplicationContext());
         setControl();
-        /*db.QueryData("drop table SANPHAM");*/
-        /*db.insertData();*/
+        /*db.QueryData("drop table SANPHAM");
+        db.insertData();*/
         db.loadDb(list);
         adapter = new SanPhamAdapter(SanPhamActivity.this, list);
         adapter.notifyDataSetChanged();

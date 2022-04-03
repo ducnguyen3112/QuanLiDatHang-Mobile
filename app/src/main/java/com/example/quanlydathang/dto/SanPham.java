@@ -6,6 +6,7 @@ public class SanPham {
     private int donGia;
 
     public SanPham() {
+        
     }
 
     public SanPham(String maSP, String tenSP, String xuatXu, int donGia) {

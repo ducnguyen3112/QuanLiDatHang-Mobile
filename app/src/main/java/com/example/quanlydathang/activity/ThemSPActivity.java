@@ -32,9 +32,7 @@ public class ThemSPActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_sp);
         setControl();
-
         Intent intent = new Intent(ThemSPActivity.this, SanPhamActivity.class);
-
         maSP = getIntent().getStringExtra("MASP");
         if (maSP != null) {
             toolbar.setTitle("Sửa thông tin");
@@ -45,7 +43,6 @@ public class ThemSPActivity extends AppCompatActivity {
             setInfo(sanPham);
             buttonThemSP.setText("Sửa thông tin");
         }
-
         handleClickButtonThemSP();
         setActionBar();
     }
