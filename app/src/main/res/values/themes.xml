@@ -31,4 +31,7 @@
         <item name="android:textColor">"#1495d7"</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="resendOTP">
+        <item name="android:textSize">17sp</item>
+    </style>
 </resources>

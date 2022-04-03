@@ -55,4 +55,13 @@ public class DonHangDao {
             return false;
         }
     }
+    public long suaDonHang(DonHangDto donHangDto){
+        ContentValues cv = new ContentValues();
+        cv.put(CreateDatabase.TB_DONDATHANG_MAKH, donHangDto.getMaKH());
+        cv.put(CreateDatabase.TB_DONDATHANG_NGAYDH, donHangDto.getNgayDH());
+        return database.update(CreateDatabase.TB_DONDATHANG
+        ,cv
+        ,CreateDatabase.TB_DONDATHANG_MADH+"="+donHangDto.getMaDH()
+        ,null);
+    }
 }
