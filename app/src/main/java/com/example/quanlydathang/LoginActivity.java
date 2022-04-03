@@ -1,25 +1,18 @@
 package com.example.quanlydathang;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.quanlydathang.dao.DonHangDao;
-import com.example.quanlydathang.dao.UserDao;
-import com.example.quanlydathang.database.CreateDatabase;
-import com.example.quanlydathang.dto.DonHangDto;
-import com.example.quanlydathang.dto.UserDto;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.quanlydathang.dao.UserDao;
 
 public class LoginActivity extends AppCompatActivity {
     SQLiteDatabase database;
@@ -27,15 +20,17 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText etUsername;
     private EditText etPasswd;
+    private TextView tvresendOTP;
+    private LinearLayout llResendOTP;
+    private Button btnsendOTP;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        btnLogin = findViewById(R.id.btnLogin);
-        etUsername=findViewById(R.id.etUser);
-        etPasswd=findViewById(R.id.etPasswd);
+        anhXa();
+
         userDao =new UserDao(this);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,5 +51,19 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+        btnsendOTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llResendOTP.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+    private void anhXa() {
+        btnLogin = findViewById(R.id.btnLogin);
+        etUsername=findViewById(R.id.etUser);
+        etPasswd=findViewById(R.id.etPasswd);
+        tvresendOTP=findViewById(R.id.tvGuiLaiOTP);
+        llResendOTP=findViewById(R.id.llresendOTP);
+        btnsendOTP=findViewById(R.id.btnsendOTP);
     }
 }

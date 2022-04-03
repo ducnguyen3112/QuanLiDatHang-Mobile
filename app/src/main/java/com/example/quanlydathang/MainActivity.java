@@ -9,12 +9,17 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.quanlydathang.database.CreateDatabase;
+import com.example.quanlydathang.ui.KhachHang.KhachHangActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+<<<<<<< HEAD
     private CardView cvDH;
     private CardView cardViewSanPham;
 
+=======
+    private CardView cvDH,cvKH;
+>>>>>>> 935b8f2e028d44fd17021a30f1389b9334cdbc69
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -28,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+<<<<<<< HEAD
 
         handleClickCardViewSanPham();
     }
@@ -38,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SanPhamActivity.class);
+=======
+        cvKH = findViewById(R.id.cvKhachHang);
+        cvKH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this, KhachHangActivity.class);
+>>>>>>> 935b8f2e028d44fd17021a30f1389b9334cdbc69
                 startActivity(intent);
             }
         });

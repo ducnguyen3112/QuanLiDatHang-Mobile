@@ -11,13 +11,17 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -25,10 +29,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlydathang.dao.DonHangDao;
+import com.example.quanlydathang.dao.KhachHangDao;
 import com.example.quanlydathang.dto.DonHangDto;
+import com.example.quanlydathang.dto.KhachHangDto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -39,47 +46,54 @@ public class DonDatHangActivity extends AppCompatActivity {
     private RecyclerView rcvDDH;
     private DonDatHangAdapter donDatHangAdapter;
     private SearchView searchView;
+    private  KhachHangDao   khachHangDao;
 
-
+    private EditText edNgayDHDialog ;
+    private TextView tvMaDHDialog ;
+    private Spinner spKHDialog ;
+    private Button btnThemDialog ;
+    private Button btnHuyDialog ;
+    String kh = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_don_dat_hang);
-
+        khachHangDao=new KhachHangDao(this);
         FloatingActionButton floatButton = findViewById(R.id.fab);
         floatButton.setOnClickListener(view -> {
-            Dialog dialog = new Dialog(DonDatHangActivity.this);
-            dialog.setTitle("Hộp thoại xử lý");
-            dialog.setCancelable(false);
-            dialog.setContentView(R.layout.themdonhang_dialog);
-            EditText edNgayDH = dialog.findViewById(R.id.etNgayDH);
-            edNgayDH.setInputType(InputType.TYPE_NULL);
-            Spinner spKH = dialog.findViewById(R.id.spKH);
-            Button btnThem = dialog.findViewById(R.id.btnthem);
-            Button btnHuy = dialog.findViewById(R.id.btnhuy);
-            btnHuy.setOnClickListener(new View.OnClickListener() {
+            Dialog dialog = getDialogDDH();
+            List<String> listKH=dsMaVaHoTenKH();
+            ArrayAdapter<String> arrayAdapter=new ArrayAdapter<>(this
+                    , androidx.appcompat.R.layout.support_simple_spinner_dropdown_item
+                    , listKH);
+            xuKienSpinner();
+            spKHDialog.setAdapter(arrayAdapter);
+            btnHuyDialog.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dialog.cancel();
                 }
             });
-            edNgayDH.setOnClickListener(new View.OnClickListener() {
+            edNgayDHDialog.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showDateTimeDialog(edNgayDH);
+                    showDateTimeDialog(edNgayDHDialog);
                 }
             });
-            dialog.show();
+            dialog .show();
 
-            btnThem.setOnClickListener(new View.OnClickListener() {
+
+            btnThemDialog.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    DonHangDto donHang=new DonHangDto(edNgayDH.getText().toString(),1,"John");
+                    if (edNgayDHDialog.getText().toString().isEmpty()){
+                        Toast.makeText(DonDatHangActivity.this
+                                , "Không được bỏ trống ngày giờ!", Toast.LENGTH_SHORT).show();
+                    }
+                    DonHangDto donHang=new DonHangDto(edNgayDHDialog.getText().toString(),getIdKHFromSpiner(kh),null);
                      int id= (int)themDonHang(donHang);
                     dialog.cancel();
-                    donHangDtoList=donHangDao.danhSachDonHang();
-                    donDatHangAdapter = new DonDatHangAdapter(donHangDtoList);
-                    rcvDDH.setAdapter(donDatHangAdapter);
+                    capNhatDulieuDH();
                     Toast.makeText(DonDatHangActivity.this
                             , "Thêm đơn hàng thành công!", Toast.LENGTH_SHORT).show();
 
@@ -102,7 +116,63 @@ public class DonDatHangActivity extends AppCompatActivity {
         donDatHangAdapter.setOnItemClickListener(new DonDatHangAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                updateOrShowDetailItem(position);
+                String[] items={"Sửa","Xem chi tiết"};
+                AlertDialog.Builder b=new AlertDialog.Builder(DonDatHangActivity.this);
+                b.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (i==0) {
+                            Dialog dialog = getDialogDDH();
+                            tvMaDHDialog.setVisibility(View.VISIBLE);
+                            int maDhDialog=donHangDtoList.get(position).getMaDH();
+                            tvMaDHDialog.setText(maDhDialog+"");
+                            btnThemDialog.setText("Cập nhập");
+                            List<String> listKH=dsMaVaHoTenKH();
+                            ArrayAdapter<String> arrayAdapter=new ArrayAdapter<>(DonDatHangActivity.this
+                                    , androidx.appcompat.R.layout.support_simple_spinner_dropdown_item
+                                    , listKH);
+                            xuKienSpinner();
+                            spKHDialog.setAdapter(arrayAdapter);
+                            btnHuyDialog.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialog.cancel();
+                                }
+                            });
+                            edNgayDHDialog.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    showDateTimeDialog(edNgayDHDialog);
+                                }
+                            });
+                            btnThemDialog.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    if (edNgayDHDialog.getText().toString().isEmpty()){
+                                        Toast.makeText(DonDatHangActivity.this
+                                                , "Không được bỏ trống ngày giờ!", Toast.LENGTH_SHORT).show();
+                                    }
+                                    DonHangDto donHang=new DonHangDto();
+                                    donHang.setMaDH(Integer.valueOf(tvMaDHDialog.getText().toString()));
+                                    donHang.setNgayDH(edNgayDHDialog.getText().toString());
+                                    donHang.setMaKH(getIdKHFromSpiner(kh));
+                                    donHangDao.suaDonHang(donHang);
+                                    dialog.cancel();
+                                    capNhatDulieuDH();
+                                    Toast.makeText(DonDatHangActivity.this
+                                            , "Sửa đơn đặt hàng thành công!", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+
+                            dialog.show();
+                        }else {
+                            Toast.makeText(DonDatHangActivity.this
+                                    , "bạn chọn xem chi tiết", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                b.show();
             }
 
             @Override
@@ -112,23 +182,42 @@ public class DonDatHangActivity extends AppCompatActivity {
         });
     }
 
-    private void updateOrShowDetailItem(int position) {
-        String[] items={"Sửa","Xem chi tiết"};
-        AlertDialog.Builder b=new AlertDialog.Builder(this);
-        b.setItems(items, new DialogInterface.OnClickListener() {
+    private void capNhatDulieuDH() {
+        donHangDtoList = donHangDao.danhSachDonHang();
+        donDatHangAdapter = new DonDatHangAdapter(donHangDtoList);
+        rcvDDH.setAdapter(donDatHangAdapter);
+    }
+
+    private void xuKienSpinner() {
+        spKHDialog.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if (i==0) {
-                    Toast.makeText(DonDatHangActivity.this
-                            , "bạn chọn sửa", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(DonDatHangActivity.this
-                            , "bạn chọn xem chi tiết", Toast.LENGTH_SHORT).show();
-                }
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                kh=spKHDialog.getSelectedItem().toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                kh="";
             }
         });
-        b.show();
     }
+
+    @NonNull
+    private Dialog getDialogDDH() {
+        Dialog dialog = new Dialog(DonDatHangActivity.this);
+        dialog.setTitle("Hộp thoại xử lý");
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.themdonhang_dialog);
+        tvMaDHDialog=dialog.findViewById(R.id.tvIdDonHangDialog);
+        edNgayDHDialog = dialog.findViewById(R.id.etNgayDH);
+        spKHDialog = dialog.findViewById(R.id.spKH);
+        btnThemDialog = dialog.findViewById(R.id.btnthem);
+        btnHuyDialog = dialog.findViewById(R.id.btnhuy);
+        edNgayDHDialog.setInputType(InputType.TYPE_NULL);
+        return dialog;
+    }
+
 
     private void removeItem(int position) {
 
@@ -142,9 +231,7 @@ public class DonDatHangActivity extends AppCompatActivity {
                            Toast.makeText(DonDatHangActivity.this
                                    , "Xóa đơn hàng thành công!", Toast.LENGTH_SHORT).show();
 
-                           donHangDtoList=donHangDao.danhSachDonHang();
-                           donDatHangAdapter = new DonDatHangAdapter(donHangDtoList);
-                           rcvDDH.setAdapter(donDatHangAdapter);
+                           capNhatDulieuDH();
 
                        }else {
                            Toast.makeText(DonDatHangActivity.this
@@ -232,5 +319,21 @@ public class DonDatHangActivity extends AppCompatActivity {
             return;
         }
         super.onBackPressed();
+    }
+    public List<String> dsMaVaHoTenKH(){
+        List<String> ds=new ArrayList<>();
+        List<KhachHangDto> dsKH= khachHangDao.getListKH();
+        for (KhachHangDto item :
+                dsKH) {
+            ds.add(item.getId()+" - "+item.getName());
+        }
+        return ds;
+    }
+    public int getIdKHFromSpiner(String str){
+        String[] words=str.split("-");
+        if (str!=""){
+            return Integer.valueOf(words[0].trim());
+        }
+        return 0;
     }
 }

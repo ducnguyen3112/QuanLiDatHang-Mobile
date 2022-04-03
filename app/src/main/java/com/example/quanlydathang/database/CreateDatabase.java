@@ -37,6 +37,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
     public static final String TB_USER_ID="USERID";
     public static final String TB_USER_USERNAME="USERNAME";
     public static final String TB_USER_PASSWD="PASSWORD";
+    public static final String TB_USER_SDT="SDT";
 
 
 
@@ -72,7 +73,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
         String tbUSER="CREATE TABLE "+ TB_USER + "("
                 + TB_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TB_USER_USERNAME + " TEXT, "
-                + TB_USER_USERNAME + " SDT, "
+                + TB_USER_SDT + " SDT, "
                 + TB_USER_PASSWD + " TEXT )";
         sqLiteDatabase.execSQL(tbKhachHang);
         sqLiteDatabase.execSQL(tbSanPham);
