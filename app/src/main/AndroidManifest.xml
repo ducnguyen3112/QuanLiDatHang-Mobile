@@ -24,11 +24,11 @@
         <activity
             android:name=".activity.SanPhamActivity"
             android:exported="false"
-            android:parentActivityName=".activity.SanPhamActivity"/>
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".activity.ThemSPActivity"
             android:exported="false"
-            android:parentActivityName=".activity.ThemSPActivity"/>
+            android:parentActivityName=".activity.SanPhamActivity"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true"
