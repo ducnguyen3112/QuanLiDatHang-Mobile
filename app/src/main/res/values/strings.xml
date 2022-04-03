@@ -2,4 +2,12 @@
     <string name="app_name">Quản lý đặt hàng</string>
     <string name="action_search">Search</string>
     <string name="dondathang_tilte">Danh sách đơn hàng</string>
+
+    <string name="title_tb_sp">Sản phẩm</string>
+    <string name="title_tb_themsp">Thêm sản phẩm</string>
+    <string name="title_tb_suasp">Sửa sản phẩm</string>
+    <string name="tenSP">Tên sản phẩm</string>
+    <string name="maSP">Mã sản phẩm</string>
+    <string name="xuatxu">Xuất xứ</string>
+    <string name="dongia">Đơn giá</string>
 </resources>
