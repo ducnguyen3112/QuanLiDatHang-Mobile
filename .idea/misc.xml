@@ -22,12 +22,14 @@
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/custom_button.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/custom_toast.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/error_shape.xml" value="0.1" />
+        <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/pressed_button.xml" value="0.1" />
+        <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/pressed_button_delete.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/success_shape.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/warning_shape.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/font/oswald.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_san_pham.xml" value="0.1" />
-        <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_them_sp.xml" value="0.1" />
+        <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_them_sp.xml" value="0.22" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/custom_alert.xml" value="0.22" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/custom_dialog.xml" value="0.22" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/custom_toast.xml" value="0.22" />

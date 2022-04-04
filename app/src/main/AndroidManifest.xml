@@ -23,13 +23,13 @@
             android:parentActivityName=".ui.KhachHang.KhachHangActivity"/>
 
         <activity
-            android:name=".activity.ThemSPActivity"
+            android:name=".activity.AddProductActivity"
             android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:parentActivityName=".activity.SanPhamActivity"/>
+            android:parentActivityName=".activity.ProductActivity"/>
 
         <activity
-            android:name=".activity.SanPhamActivity"
+            android:name=".activity.ProductActivity"
             android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:parentActivityName=".MainActivity"/>

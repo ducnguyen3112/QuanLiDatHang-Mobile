@@ -3,42 +3,36 @@ package com.example.quanlydathang.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import com.example.quanlydathang.R;
-import com.example.quanlydathang.activity.SanPhamActivity;
-import com.example.quanlydathang.activity.ThemSPActivity;
-import com.example.quanlydathang.database.DBSanPham;
-import com.example.quanlydathang.dto.SanPham;
-import com.example.quanlydathang.utils.CustomToast;
+import com.example.quanlydathang.activity.AddProductActivity;
+import com.example.quanlydathang.dao.ProductDao;
+import com.example.quanlydathang.dto.Product;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class SanPhamAdapter extends BaseAdapter {
+public class ProductAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<SanPham> list;
+    ArrayList<Product> list;
     TextView tenSP, maSP, xuatXu, donGia;
     ImageButton delete;
     int RESULT_PRODUCT_ACTIVITY = 0;
 
-    public SanPhamAdapter(Context context, ArrayList<SanPham> list) {
+    public ProductAdapter(Context context, ArrayList<Product> list) {
         this.context = context;
         this.list = list;
     }
@@ -49,7 +43,7 @@ public class SanPhamAdapter extends BaseAdapter {
     }
 
     @Override
-    public SanPham getItem(int i) {
+    public Product getItem(int i) {
         return list.get(i);
     }
 
@@ -63,8 +57,8 @@ public class SanPhamAdapter extends BaseAdapter {
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
         view = LayoutInflater.from(context).inflate(R.layout.item_sanpham, null);
         setControl(view);
-        SanPham sanPham = list.get(position);
-        maSP.setText(sanPham.getMaSP());
+        Product sanPham = list.get(position);
+        maSP.setText(sanPham.getMaSP()+"");
         tenSP.setText(sanPham.getTenSP());
         xuatXu.setText(sanPham.getXuatXu());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,##0");
@@ -81,8 +75,7 @@ public class SanPhamAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 view.setBackgroundColor(Color.rgb(141, 216, 158));
-                Intent intent = new Intent(((Activity) context), ThemSPActivity.class);
-                /*intent.putExtra("isupdate", true);*/
+                Intent intent = new Intent(((Activity) context), AddProductActivity.class);
                 intent.putExtra("MASP", sanPham.getMaSP());
                 ((Activity) context).startActivityForResult(intent, RESULT_PRODUCT_ACTIVITY);
             }
@@ -98,7 +91,7 @@ public class SanPhamAdapter extends BaseAdapter {
         delete = view.findViewById(R.id.buttonDelete);
     }
 
-    public void showDialog(SanPham sanPham, String msg){
+    public void showDialog(Product sanPham, String msg){
         Dialog dialog = new Dialog(context);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_dialog);
@@ -115,8 +108,8 @@ public class SanPhamAdapter extends BaseAdapter {
         buttonDongY.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBSanPham db = new DBSanPham(context.getApplicationContext());
-                db.xoaSP(sanPham.getMaSP());
+                ProductDao db = new ProductDao(context.getApplicationContext());
+                db.deleteProduct(sanPham.getMaSP());
                 db.loadDb(list);
                 notifyDataSetChanged();
                 dialog.dismiss();

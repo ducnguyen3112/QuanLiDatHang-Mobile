@@ -12,33 +12,30 @@ import android.widget.ListView;
 
 import com.example.quanlydathang.MainActivity;
 import com.example.quanlydathang.R;
-import com.example.quanlydathang.adapter.SanPhamAdapter;
-import com.example.quanlydathang.database.DBSanPham;
-import com.example.quanlydathang.dto.SanPham;
+import com.example.quanlydathang.adapter.ProductAdapter;
+import com.example.quanlydathang.dao.ProductDao;
+import com.example.quanlydathang.dto.Product;
 
 import java.util.ArrayList;
 
-public class SanPhamActivity extends AppCompatActivity {
+public class ProductActivity extends AppCompatActivity {
     private ListView listView;
-    private ArrayList<SanPham> list = new ArrayList<>();
-    private SanPhamAdapter adapter;
+    private ArrayList<Product> list = new ArrayList<>();
+    private ProductAdapter adapter;
     Toolbar toolbar;
     Button buttonAdd;
     ImageButton buttonDelete;
-    DBSanPham db;
+    ProductDao dao;
     int RESULT_PRODUCT_ACTIVITY = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_san_pham);
-
-        db = new DBSanPham(getApplicationContext());
         setControl();
-        /*db.QueryData("drop table SANPHAM");*/
-        /*db.insertData();*/
-        db.loadDb(list);
-        adapter = new SanPhamAdapter(SanPhamActivity.this, list);
+        dao = new ProductDao(getApplicationContext());
+        dao.loadDb(list);
+        adapter = new ProductAdapter(ProductActivity.this, list);
         adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
 
@@ -69,8 +66,8 @@ public class SanPhamActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SanPhamActivity.this, ThemSPActivity.class);
-                /*intent.putExtra("isupdate", false);*/
+                Intent intent = new Intent(ProductActivity.this, AddProductActivity.class);
+                intent.putExtra("MASP",0);
                 startActivityForResult(intent, RESULT_PRODUCT_ACTIVITY);
             }
         });
@@ -81,7 +78,7 @@ public class SanPhamActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 0:
-                db.loadDb(list);
+                dao.loadDb(list);
                 adapter.notifyDataSetChanged();
                 break;
             default:

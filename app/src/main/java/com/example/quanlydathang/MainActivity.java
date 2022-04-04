@@ -7,13 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.quanlydathang.activity.SanPhamActivity;
+import com.example.quanlydathang.activity.ProductActivity;
 import com.example.quanlydathang.ui.KhachHang.KhachHangActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CardView cvDH,cvKH;
-    private CardView cardViewSanPham;
+    private CardView cvDH,cvKH,cardViewSanPham;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         handleClickCardViewSanPham();
     }
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         cardViewSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SanPhamActivity.class);
+                Intent intent = new Intent(MainActivity.this, ProductActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,26 +1,30 @@
 package com.example.quanlydathang.dto;
 
-public class SanPham {
+public class Product {
 
-    private String maSP , tenSP,xuatXu;
-    private int donGia;
+    private String tenSP,xuatXu;
+    private int maSP, donGia;
 
-    public SanPham() {
-        
+    public Product() {}
+
+    public Product(String tenSP, String xuatXu, int donGia) {
+        this.tenSP = tenSP;
+        this.xuatXu = xuatXu;
+        this.donGia = donGia;
     }
 
-    public SanPham(String maSP, String tenSP, String xuatXu, int donGia) {
+    public Product(int maSP, String tenSP, String xuatXu, int donGia) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.xuatXu = xuatXu;
         this.donGia = donGia;
     }
 
-    public String getMaSP() {
+    public int getMaSP() {
         return maSP;
     }
 
-    public void setMaSP(String maSP) {
+    public void setMaSP(int maSP) {
         this.maSP = maSP;
     }
 
