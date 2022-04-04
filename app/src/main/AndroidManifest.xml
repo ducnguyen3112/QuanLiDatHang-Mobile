@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DonDatHangActivity"
+            android:name=".activitydonhang.DonDatHangActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity

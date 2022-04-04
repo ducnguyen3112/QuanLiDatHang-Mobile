@@ -1,24 +1,21 @@
-package com.example.quanlydathang;
+package com.example.quanlydathang.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quanlydathang.R;
 import com.example.quanlydathang.dto.DonHangDto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DDHViewHolder> implements Filterable {
 

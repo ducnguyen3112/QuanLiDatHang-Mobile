@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.quanlydathang.activity.ProductActivity;
+import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
 import com.example.quanlydathang.ui.KhachHang.KhachHangActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         cvDH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,DonDatHangActivity.class);
+                Intent intent=new Intent(MainActivity.this, DonDatHangActivity.class);
                 startActivity(intent);
             }
         });
