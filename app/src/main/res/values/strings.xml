@@ -10,4 +10,12 @@
     <string name="maSP">Mã sản phẩm</string>
     <string name="xuatxu">Xuất xứ</string>
     <string name="dongia">Đơn giá</string>
+    <string name="themsp">Thêm sản phẩm</string>
+    <string name="suasp">Sửa thông tin</string>
+    <string name="masp">Mã</string>
+    <string name="tensp">Tên</string>
+    <string name="confirm_delete">Xóa sản phẩm ?</string>
+    <string name="huy">Hủy</string>
+    <string name="xoa">Xóa</string>
+    <string name="ok">Ok</string>
 </resources>

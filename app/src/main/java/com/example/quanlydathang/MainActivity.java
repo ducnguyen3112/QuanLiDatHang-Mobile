@@ -6,10 +6,8 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.example.quanlydathang.activity.SanPhamActivity;
-import com.example.quanlydathang.database.CreateDatabase;
 import com.example.quanlydathang.ui.KhachHang.KhachHangActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         cvKH = findViewById(R.id.cvKhachHang);
         cvKH.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         handleClickCardViewSanPham();
     }
 

@@ -21,18 +21,19 @@
             android:name=".ui.KhachHang.AddKhachHangActivity"
             android:exported="false"
             android:parentActivityName=".ui.KhachHang.KhachHangActivity"/>
-        <activity
 
-            android:name=".activity.SanPhamActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar"/>
         <activity
-
             android:name=".activity.ThemSPActivity"
             android:exported="false"
-            android:parentActivityName=".activity.SanPhamActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:parentActivityName=".activity.SanPhamActivity"/>
+
+        <activity
+            android:name=".activity.SanPhamActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:parentActivityName=".MainActivity"/>
+
         <activity
             android:name=".LoginActivity"
             android:exported="true"

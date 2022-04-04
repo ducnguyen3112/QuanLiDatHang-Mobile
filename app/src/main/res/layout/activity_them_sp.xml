@@ -12,14 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#4CAF50"
-        app:title="@string/title_tb_themsp"/>
+        app:title="@string/title_tb_themsp" />
 
     <LinearLayout
 
-        android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <TextView
@@ -33,15 +33,15 @@
         <EditText
             android:id="@+id/editTextMaSP"
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <TextView
@@ -54,15 +54,15 @@
         <EditText
             android:id="@+id/editTextTenSP"
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <TextView
@@ -81,10 +81,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <TextView
@@ -97,14 +97,13 @@
         <EditText
             android:id="@+id/editTextDonGia"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
-        </EditText>
+            android:layout_height="50dp"></EditText>
     </LinearLayout>
+
     <Button
+        android:drawableLeft="@drawable/ic_baseline_add_circle_24"
         android:id="@+id/buttonThemSP"
-        android:layout_marginTop="20dp"
+        style="@style/customButton"
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Thêm sản phẩm"/>
+        android:text="@string/themsp" />
 </LinearLayout>

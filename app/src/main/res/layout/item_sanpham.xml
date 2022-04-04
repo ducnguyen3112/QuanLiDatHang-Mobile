@@ -10,6 +10,7 @@
     android:layout_width="match_parent"
     android:orientation="horizontal"
     android:layout_height="180dp">
+
     <LinearLayout
         android:layout_weight="9"
         android:layout_marginLeft="5dp"
@@ -19,40 +20,29 @@
         android:orientation="horizontal">
 
         <TextView
-            android:textAlignment="center"
+            style="@style/style_textview"
             android:id="@+id/textViewMaSP"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="MaSP"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:text="@string/maSP"
+            />
 
         <TextView
-            android:textAlignment="center"
+            style="@style/style_textview"
             android:id="@+id/textViewTenSP"
             android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:text="TenSP"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:text="@string/tenSP"/>
 
         <TextView
-            android:textAlignment="center"
+            style="@style/style_textview"
             android:id="@+id/textViewXuatXu"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:text="XuatXu"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:text="@string/xuatxu"/>
 
         <TextView
-            android:textAlignment="center"
+            style="@style/style_textview"
             android:id="@+id/textViewDonGia"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="DonGia"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:text="@string/dongia"/>
     </LinearLayout>
 
     <LinearLayout

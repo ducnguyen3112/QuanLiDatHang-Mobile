@@ -33,11 +33,10 @@ public class SanPhamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_san_pham);
 
-
         db = new DBSanPham(getApplicationContext());
         setControl();
-        /*db.QueryData("drop table SANPHAM");
-        db.insertData();*/
+        /*db.QueryData("drop table SANPHAM");*/
+        /*db.insertData();*/
         db.loadDb(list);
         adapter = new SanPhamAdapter(SanPhamActivity.this, list);
         adapter.notifyDataSetChanged();
@@ -71,7 +70,7 @@ public class SanPhamActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SanPhamActivity.this, ThemSPActivity.class);
-                intent.putExtra("isupdate", false);
+                /*intent.putExtra("isupdate", false);*/
                 startActivityForResult(intent, RESULT_PRODUCT_ACTIVITY);
             }
         });
