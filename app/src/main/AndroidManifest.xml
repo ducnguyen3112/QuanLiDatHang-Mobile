@@ -21,18 +21,31 @@
             android:name=".ui.KhachHang.AddKhachHangActivity"
             android:exported="false"
             android:parentActivityName=".ui.KhachHang.KhachHangActivity"/>
+
+        <activity
+            android:name=".activity.AddProductActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:parentActivityName=".activity.ProductActivity"/>
+
+        <activity
+            android:name=".activity.ProductActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:parentActivityName=".MainActivity"/>
+
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".DonDatHangActivity"
+            android:name=".activitydonhang.DonDatHangActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity

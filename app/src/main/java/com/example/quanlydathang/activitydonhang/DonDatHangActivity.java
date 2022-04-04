@@ -1,4 +1,4 @@
-package com.example.quanlydathang;
+package com.example.quanlydathang.activitydonhang;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -28,6 +28,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quanlydathang.adapter.DonDatHangAdapter;
+import com.example.quanlydathang.R;
 import com.example.quanlydathang.dao.DonHangDao;
 import com.example.quanlydathang.dao.KhachHangDao;
 import com.example.quanlydathang.dto.DonHangDto;
