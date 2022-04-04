@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         cvKH = findViewById(R.id.cvKhachHang);
         cvKH.setOnClickListener(new View.OnClickListener() {
             @Override
