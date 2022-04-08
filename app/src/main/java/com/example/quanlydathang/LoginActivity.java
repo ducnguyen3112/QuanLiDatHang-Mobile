@@ -1,7 +1,6 @@
 package com.example.quanlydathang;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quanlydathang.dao.UserDao;
 
 public class LoginActivity extends AppCompatActivity {
-    SQLiteDatabase database;
     private UserDao userDao;
     private Button btnLogin;
     private EditText etUsername;
@@ -32,31 +30,34 @@ public class LoginActivity extends AppCompatActivity {
         anhXa();
 
         userDao =new UserDao(this);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Boolean check=userDao.kiemTraDangNhap(
+        btnLogin.setOnClickListener(view -> {
+            Boolean check=false;
+            if (etUsername.getText().toString().isEmpty()){
+                Toast.makeText(LoginActivity.this
+                        ,"Không được để trống tên đăng nhập!",Toast.LENGTH_SHORT).show();
+                return;
+            }else if (etPasswd.getText().toString().isEmpty()){
+                Toast.makeText(LoginActivity.this
+                        ,"Không được để trống mật khẩu!",Toast.LENGTH_SHORT).show();
+                return;
+            }else {
+                check = userDao.kiemTraDangNhap(
                         etUsername.getText().toString().toLowerCase(),
                         etPasswd.getText().toString()
                 );
-                if (true){
-                    Toast.makeText(LoginActivity.this
-                            ,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(LoginActivity.this
-                            ,"Sai tên đăng nhập hoặc mật khẩu!",Toast.LENGTH_SHORT).show();
-                }
+            }
+            if (check){
+                Toast.makeText(LoginActivity.this
+                        ,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(LoginActivity.this
+                        ,"Sai tên đăng nhập hoặc mật khẩu!",Toast.LENGTH_SHORT).show();
+            }
 
-            }
         });
-        btnsendOTP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                llResendOTP.setVisibility(View.VISIBLE);
-            }
-        });
+        btnsendOTP.setOnClickListener(view -> llResendOTP.setVisibility(View.VISIBLE));
     }
     private void anhXa() {
         btnLogin = findViewById(R.id.btnLogin);

@@ -1,8 +1,10 @@
 package com.example.quanlydathang;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +15,7 @@ import com.example.quanlydathang.ui.KhachHang.KhachHangActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CardView cvDH,cvKH,cardViewSanPham;
+    private CardView cvDH,cvKH,cvThoat,cardViewSanPham;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,6 +39,27 @@ public class MainActivity extends AppCompatActivity {
         });
 
         handleClickCardViewSanPham();
+
+        cvThoat=findViewById(R.id.cvThoat);
+        cvThoat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Bạn muốn đăng xuất khỏi ứng dụng ?")
+                        .setPositiveButton("Đăng xuất", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.create().show();
+            }
+        });
     }
 
     private void handleClickCardViewSanPham() {

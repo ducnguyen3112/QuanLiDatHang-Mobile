@@ -1,11 +1,9 @@
 package com.example.quanlydathang.dao;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.quanlydathang.database.CreateDatabase;
 import com.example.quanlydathang.dto.DonHangDto;
@@ -28,10 +26,10 @@ public class DonHangDao {
     }
 
 
-    public List<DonHangDto> danhSachDonHang(){
+    public List<DonHangDto> danhSachDonHang(String orderBy){
         List<DonHangDto> ds=new ArrayList<>();
         String script="SELECT MADH,NGAYDH,TENKH,DONDATHANG.MAKH FROM "+ CreateDatabase.TB_DONDATHANG + ","
-                + CreateDatabase.TB_KHACHHANG + " WHERE DONDATHANG.MAKH=KHACHHANG.MAKH" ;
+                + CreateDatabase.TB_KHACHHANG + " WHERE DONDATHANG.MAKH=KHACHHANG.MAKH ORDER BY MADH " +orderBy ;
         Cursor cursor=database.rawQuery(script,null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
