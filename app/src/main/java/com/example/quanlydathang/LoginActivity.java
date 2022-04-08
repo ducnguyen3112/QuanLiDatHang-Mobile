@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,9 +17,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText etUsername;
     private EditText etPasswd;
-    private TextView tvresendOTP;
-    private LinearLayout llResendOTP;
-    private Button btnsendOTP;
+    private TextView tvLoginOTP;
+
 
 
     @Override
@@ -57,14 +55,20 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
-        btnsendOTP.setOnClickListener(view -> llResendOTP.setVisibility(View.VISIBLE));
+        tvLoginOTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SendOTPActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
     private void anhXa() {
         btnLogin = findViewById(R.id.btnLogin);
         etUsername=findViewById(R.id.etUser);
         etPasswd=findViewById(R.id.etPasswd);
-        tvresendOTP=findViewById(R.id.tvGuiLaiOTP);
-        llResendOTP=findViewById(R.id.llresendOTP);
-        btnsendOTP=findViewById(R.id.btnsendOTP);
+        tvLoginOTP=findViewById(R.id.tvLoginBangOTP);
+
     }
 }

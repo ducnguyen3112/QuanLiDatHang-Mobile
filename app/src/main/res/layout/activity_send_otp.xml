@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SendOTPActivity"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:src="@drawable/paper_airplane_icon"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng nhập bằng mã OTP"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#EEEEEE"
+        android:layout_marginTop="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chúng tôi sẽ gửi bạn một mã gồm 6 chữ số đến số điện thoại bạn đã đăng kí"
+        android:textColor="#EEEEEE"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nhập số điện thoại"
+        android:textColor="#EEEEEE"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
+
+        android:background="@drawable/rounded_corners">
+
+        <EditText
+            android:id="@+id/etNhapSDT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textColorHint="#1495d7"
+            android:textColor="#1495d7"
+            android:inputType="phone"
+            android:padding="5dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvGuiMaOTP"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="25sp"
+
+            />
+
+        <TextView
+
+            android:id="@+id/tvGuiMaOTP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gửi mã"
+            android:textColor="#1495d7"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="20dp"
+            android:textSize="20sp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

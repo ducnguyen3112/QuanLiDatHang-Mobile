@@ -1,0 +1,139 @@
+package com.example.quanlydathang;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.quanlydathang.dao.UserDao;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
+
+import java.util.concurrent.TimeUnit;
+
+public class SendOTPActivity extends AppCompatActivity {
+    private EditText etSDT;
+    private TextView tvSendOTP;
+    private UserDao userDao;
+    private FirebaseAuth mAuth;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_send_otp);
+        anhXa();
+        mAuth=FirebaseAuth.getInstance();
+        userDao=new UserDao(this);
+        tvSendOTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                guiMaOTP();
+            }
+        });
+    }
+
+    private void guiMaOTP() {
+        String sdt=etSDT.getText().toString().trim();
+        if (sdt.isEmpty()){
+            Toast.makeText(SendOTPActivity.this
+                    ,"Không được để trống tên đăng nhập!",Toast.LENGTH_SHORT).show();
+            return;
+        }if (!userDao.getSDT(sdt)){
+            Toast.makeText(SendOTPActivity.this
+                    ,"Số điện thoại không đúng hoặc chưa được đăng kí!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        sdt="+84"+ sdt.substring(1);
+        Log.e("SDT", "guiMaOTP: "+sdt,null );
+        verifyPhoneNumber(sdt);
+
+    }
+    public void verifyPhoneNumber(String phoneNumber){
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mAuth)
+                        .setPhoneNumber(phoneNumber)       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(this)                 // Activity (for callback binding)
+                        .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                            @Override
+                            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                                signInWithPhoneAuthCredential(phoneAuthCredential);
+                            }
+
+                            @Override
+                            public void onVerificationFailed(@NonNull FirebaseException e) {
+                                Toast.makeText(SendOTPActivity.this
+                                        ,"Xác thực không thành công!",Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            @Override
+                            public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                                super.onCodeSent(s, forceResendingToken);
+                                goToVerificationOTPActivity(phoneNumber,s);
+                            }
+                        })
+                        .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
+    }
+
+
+
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.e("OTPVerify", "signInWithCredential:success");
+
+                            FirebaseUser user = task.getResult().getUser();
+                            // Update UI
+                            goToMainActivity(user.getPhoneNumber());
+                        } else {
+                            // Sign in failed, display a message and update the UI
+                            Log.e("OTPVerify", "signInWithCredential:failure", task.getException());
+                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                // The verification code entered was invalid
+                                Toast.makeText(SendOTPActivity.this
+                                        ,"Mã OTP bạn vừa nhập không đúng!",Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void goToMainActivity(String phoneNumber) {
+        Intent intent=new Intent(this,MainActivity.class);
+        phoneNumber="0"+phoneNumber.substring(3);
+        Log.e("SendOTPAC", "number"+phoneNumber , null);
+        intent.putExtra("phoneNumber",phoneNumber);
+        startActivity(intent);
+    }
+    private void goToVerificationOTPActivity(String phoneNumber, String s) {
+        Intent intent=new Intent(this,VerificationOTPActivity.class);
+        intent.putExtra("phoneNumber",phoneNumber);
+        intent.putExtra("vertificationId",s);
+        startActivity(intent);
+    }
+    public void anhXa(){
+        etSDT=findViewById(R.id.etNhapSDT);
+        tvSendOTP=findViewById(R.id.tvGuiMaOTP);
+    }
+}

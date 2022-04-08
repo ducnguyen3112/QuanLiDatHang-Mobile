@@ -33,4 +33,25 @@ public class UserDao {
         }
         return false;
     }
+    public boolean getSDT(String sdt){
+        String script="SELECT "+ CreateDatabase.TB_USER_SDT+ " FROM "
+                +CreateDatabase.TB_USER +" WHERE " +CreateDatabase.TB_USER_SDT
+                + "="+ sdt;
+        Cursor cursor=database.rawQuery(script,null);
+        if (cursor.getCount()!=0){
+            return true;
+        }
+        return false;
+    }
+    public String getUserNameFromSDT(String sdt){
+        String script="SELECT "+ CreateDatabase.TB_USER_USERNAME+ " FROM "
+                +CreateDatabase.TB_USER +" WHERE " +CreateDatabase.TB_USER_SDT
+                + "="+ sdt;
+        Cursor cursor=database.rawQuery(script,null);
+        if (cursor.getCount()!=0){
+            return "";
+        }
+        cursor.moveToFirst();
+        return cursor.getString(0);
+    }
 }

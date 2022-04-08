@@ -8,20 +8,27 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.quanlydathang.activity.ProductActivity;
 import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
+import com.example.quanlydathang.dao.UserDao;
 import com.example.quanlydathang.ui.KhachHang.KhachHangActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private CardView cvDH,cvKH,cvThoat,cardViewSanPham;
+    UserDao userDao;
+    TextView tvUserName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         cvDH=findViewById(R.id.cvDonHang);
+        userDao=new UserDao(this);
+        getDataIntent();
+        tvUserName.setText("duc");
         cvDH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,4 +79,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+     private void getDataIntent(){
+        String sdt=getIntent().getStringExtra("phoneNumber");
+        String userName=userDao.getUserNameFromSDT(sdt);
+        tvUserName=findViewById(R.id.tvUserNameMain);
+        tvUserName.setText(userName);
+     }
 }

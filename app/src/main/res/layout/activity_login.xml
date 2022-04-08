@@ -35,51 +35,29 @@
         android:id="@+id/etPasswd"
         android:inputType="textPassword"
         android:hint="Enter your password"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:gravity="center">
-        <EditText
-            android:id="@+id/etOTP"
-            android:inputType="number"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:hint="Enter OTP CODE"
-            android:layout_weight="1"/>
-        <Button
-            style="@style/btnLogin"
-            android:id="@+id/btnsendOTP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="send OTP"
-            />
-    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/llresendOTP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:visibility="invisible"
         android:gravity="center">
         <TextView
             style="@style/resendOTP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Không nhận được mã OTP?"/>
+            android:text="Đăng nhập bằng mã OTP "/>
         <TextView
             style="@style/resendOTP"
-            android:id="@+id/tvGuiLaiOTP"
+            android:id="@+id/tvLoginBangOTP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textStyle="bold"
-            android:textColor="@color/title_color"
-            android:text="Gửi lại"/>
+            android:textColor="#D5E34E"
+            android:text="Tại đây"/>
     </LinearLayout>
-
 
     <Button
         android:text="SIGN IN"
@@ -88,6 +66,6 @@
         android:layout_marginTop="120dp"
         android:id="@+id/btnLogin"
         style="@style/btnLogin"
-
         android:textSize="20sp"/>
+
 </LinearLayout>
