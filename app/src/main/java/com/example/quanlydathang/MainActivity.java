@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         cvDH=findViewById(R.id.cvDonHang);
         userDao=new UserDao(this);
         getDataIntent();
-        tvUserName.setText("duc");
         cvDH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,22 +51,26 @@ public class MainActivity extends AppCompatActivity {
         cvThoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
-                builder.setMessage("Bạn muốn đăng xuất khỏi ứng dụng ?")
-                        .setPositiveButton("Đăng xuất", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
-                            }
-                        }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                builder.create().show();
+                xacNhapThoatDialog();
             }
         });
+    }
+
+    private void xacNhapThoatDialog() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("Bạn muốn đăng xuất khỏi ứng dụng ?")
+                .setPositiveButton("Đăng xuất", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
     }
 
     private void handleClickCardViewSanPham() {
@@ -81,8 +85,24 @@ public class MainActivity extends AppCompatActivity {
     }
      private void getDataIntent(){
         String sdt=getIntent().getStringExtra("phoneNumber");
-        String userName=userDao.getUserNameFromSDT(sdt);
+         Log.e("SDT", ""+sdt ,null );
+
+        String userNameLogin=getIntent().getStringExtra("userNameLogin");
+         Log.e("userNameLogin", ""+userNameLogin ,null );
+        String userName="";
+        if (sdt==null){
+            userName=userNameLogin;
+        }else if (userNameLogin==null){
+            userName =userDao.getUserNameFromSDT(sdt);
+        }
+
+         Log.e("loginusername", "getDataIntent: "+userName ,null );
         tvUserName=findViewById(R.id.tvUserNameMain);
         tvUserName.setText(userName);
      }
+
+    @Override
+    public void onBackPressed() {
+        xacNhapThoatDialog();
+    }
 }

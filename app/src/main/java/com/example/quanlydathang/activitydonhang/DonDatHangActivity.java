@@ -22,6 +22,7 @@ import com.example.quanlydathang.R;
 import com.example.quanlydathang.dao.DonHangDao;
 import com.example.quanlydathang.dao.KhachHangDao;
 import com.example.quanlydathang.dto.DonHangDto;
+import com.example.quanlydathang.utils.CustomToast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -58,8 +59,8 @@ public class DonDatHangActivity extends AppCompatActivity {
 
             donDatHangAdapter.btnThemDialog.setOnClickListener(view1 -> {
                 if (donDatHangAdapter.edNgayDHDialog.getText().toString().isEmpty()){
-                    Toast.makeText(DonDatHangActivity.this
-                            , "Không được bỏ trống ngày giờ!", Toast.LENGTH_SHORT).show();
+                    CustomToast.makeText(DonDatHangActivity.this, "Không được bỏ trống ngày giờ!",
+                            CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
 
 
                 }
@@ -70,8 +71,10 @@ public class DonDatHangActivity extends AppCompatActivity {
                  int id= (int)themDonHang(donHang);
                 dialog.cancel();
                 if (id!=0) {
-                    Toast.makeText(DonDatHangActivity.this
-                            , "Thêm đơn hàng thành công!", Toast.LENGTH_SHORT).show();
+
+                    CustomToast.makeText(DonDatHangActivity.this, "Thêm đơn hàng thành công!",
+                            CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
+
                 }
                 onResume();
 

@@ -9,9 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.quanlydathang.utils.CustomToast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -30,6 +32,7 @@ public class VerificationOTPActivity extends AppCompatActivity {
     private EditText etOtp;
     private Button btnLogin;
     private TextView tvGuiLaiOtp;
+    private ImageView ivBack;
     
     private String phoneNumber;
     private String verificationId;
@@ -57,6 +60,12 @@ public class VerificationOTPActivity extends AppCompatActivity {
                 guiLaiOTP();
             }
         });
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void guiLaiOTP() {
@@ -74,8 +83,9 @@ public class VerificationOTPActivity extends AppCompatActivity {
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(VerificationOTPActivity.this
-                                        ,"Xác thực không thành công!",Toast.LENGTH_SHORT).show();
+
+                                CustomToast.makeText(VerificationOTPActivity.this, "Xác thực không thành công!",
+                                        CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
                                 return;
                             }
 
@@ -116,8 +126,8 @@ public class VerificationOTPActivity extends AppCompatActivity {
                             Log.e("OTPVerify", "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
-                                Toast.makeText(VerificationOTPActivity.this
-                                        ,"Mã OTP bạn vừa nhập không đúng!",Toast.LENGTH_SHORT).show();
+                                CustomToast.makeText(VerificationOTPActivity.this, "Mã OTP bạn vừa nhập không chính xác!",
+                                        CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
                                 return;
                             }
                         }
@@ -134,5 +144,6 @@ public class VerificationOTPActivity extends AppCompatActivity {
         etOtp =findViewById(R.id.etNhapMaOTP);
         btnLogin=findViewById(R.id.btnLoginOTP);
         tvGuiLaiOtp=findViewById(R.id.tvGuiLaiOTP);
+        ivBack=findViewById(R.id.ivbackVerifyOtp);
     }
 }

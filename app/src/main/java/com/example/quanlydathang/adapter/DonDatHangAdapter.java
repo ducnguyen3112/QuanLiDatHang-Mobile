@@ -29,6 +29,7 @@ import com.example.quanlydathang.dao.DonHangDao;
 import com.example.quanlydathang.dao.KhachHangDao;
 import com.example.quanlydathang.dto.DonHangDto;
 import com.example.quanlydathang.dto.KhachHangDto;
+import com.example.quanlydathang.utils.CustomToast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -104,8 +105,9 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                        @Override
                        public void onClick(View view1) {
                            if (edNgayDHDialog.getText().toString().isEmpty()){
-                                Toast.makeText(context
-                                        , "Không được bỏ trống ngày giờ!", Toast.LENGTH_SHORT).show();
+
+                               CustomToast.makeText(context, "Không được bỏ trống ngày giờ!",
+                                       CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
                             }
                             DonHangDto donHang1 =new DonHangDto();
                             donHang1.setMaDH(Integer.valueOf(tvMaDHDialog.getText().toString()));
@@ -113,8 +115,9 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                             donHang1.setMaKH(getIdKHFromSpiner(kh));
                             donHangDao.suaDonHang(donHang1);
                             dialog.cancel();
-                            Toast.makeText(context
-                                    , "Sửa đơn đặt hàng thành công!", Toast.LENGTH_SHORT).show();
+
+                           CustomToast.makeText(context, "Sửa đơn đặt hàng thành công!",
+                                   CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
                             ((DonDatHangActivity)context).onResume();
                        }
                    });
@@ -176,12 +179,14 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                     if (donHangDao.xoaDonHang((int)id)){
                         donHangDao.xoaDonHang(id);
                         ((DonDatHangActivity)context).onResume();
-                        Toast.makeText(context
-                                , "Xóa đơn hàng thành công!", Toast.LENGTH_SHORT).show();
+
+                        CustomToast.makeText(context, "Xóa đơn hàng thành công!",
+                                CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
 
                     }else {
-                        Toast.makeText(context
-                                , "Lỗi!không thể xóa đơn hàng.", Toast.LENGTH_SHORT).show();
+
+                        CustomToast.makeText(context, "Lỗi! không thể xóa đơn hàng.",
+                                CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
                     }
                 })
                 .setNegativeButton("Hủy", (dialogInterface, i) -> {

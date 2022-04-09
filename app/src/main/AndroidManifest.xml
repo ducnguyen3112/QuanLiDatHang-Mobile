@@ -11,10 +11,12 @@
         android:theme="@style/Theme.Design.Light" >
         <activity
             android:name=".VerificationOTPActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".SendOTPActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".ui.KhachHang.KhachHangActivity"
             android:exported="false"

@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quanlydathang.dao.UserDao;
+import com.example.quanlydathang.utils.CustomToast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -28,6 +30,8 @@ import java.util.concurrent.TimeUnit;
 public class SendOTPActivity extends AppCompatActivity {
     private EditText etSDT;
     private TextView tvSendOTP;
+    private ImageView ivBack;
+
     private UserDao userDao;
     private FirebaseAuth mAuth;
 
@@ -44,17 +48,24 @@ public class SendOTPActivity extends AppCompatActivity {
                 guiMaOTP();
             }
         });
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void guiMaOTP() {
         String sdt=etSDT.getText().toString().trim();
         if (sdt.isEmpty()){
-            Toast.makeText(SendOTPActivity.this
-                    ,"Không được để trống tên đăng nhập!",Toast.LENGTH_SHORT).show();
+
+            CustomToast.makeText(SendOTPActivity.this, "Không được để trống tên đăng nhập!",
+                    CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
             return;
         }if (!userDao.getSDT(sdt)){
-            Toast.makeText(SendOTPActivity.this
-                    ,"Số điện thoại không đúng hoặc chưa được đăng kí!",Toast.LENGTH_SHORT).show();
+            CustomToast.makeText(SendOTPActivity.this, "Số điện thoại không đúng hoặc chưa được đăng kí!",
+                    CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
             return;
         }
         sdt="+84"+ sdt.substring(1);
@@ -76,8 +87,8 @@ public class SendOTPActivity extends AppCompatActivity {
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(SendOTPActivity.this
-                                        ,"Xác thực không thành công!",Toast.LENGTH_SHORT).show();
+                                CustomToast.makeText(SendOTPActivity.this, "Xác thực không thành công!",
+                                        CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
                                 return;
                             }
 
@@ -110,8 +121,8 @@ public class SendOTPActivity extends AppCompatActivity {
                             Log.e("OTPVerify", "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
-                                Toast.makeText(SendOTPActivity.this
-                                        ,"Mã OTP bạn vừa nhập không đúng!",Toast.LENGTH_SHORT).show();
+                                CustomToast.makeText(SendOTPActivity.this, "Mã OTP bạn vừa nhập không đúng!",
+                                        CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
                                 return;
                             }
                         }
@@ -135,5 +146,6 @@ public class SendOTPActivity extends AppCompatActivity {
     public void anhXa(){
         etSDT=findViewById(R.id.etNhapSDT);
         tvSendOTP=findViewById(R.id.tvGuiMaOTP);
+        ivBack=findViewById(R.id.ivBackSendOtp);
     }
 }

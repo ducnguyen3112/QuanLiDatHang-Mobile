@@ -4,8 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.quanlydathang.database.CreateDatabase;
+import com.example.quanlydathang.dto.Product;
 import com.example.quanlydathang.dto.UserDto;
 
 public class UserDao {
@@ -47,11 +49,15 @@ public class UserDao {
         String script="SELECT "+ CreateDatabase.TB_USER_USERNAME+ " FROM "
                 +CreateDatabase.TB_USER +" WHERE " +CreateDatabase.TB_USER_SDT
                 + "="+ sdt;
+        String userName="";
+        Log.e("script", ""+script,null );
         Cursor cursor=database.rawQuery(script,null);
-        if (cursor.getCount()!=0){
-            return "";
+        Log.e("TAG", "getUserNameFromSDT: "+cursor.getCount(),null );
+        if (cursor.getCount()==1){
+            cursor.moveToFirst();
+            userName= cursor.getString(0);
         }
-        cursor.moveToFirst();
-        return cursor.getString(0);
+        cursor.close();
+        return userName;
     }
 }
