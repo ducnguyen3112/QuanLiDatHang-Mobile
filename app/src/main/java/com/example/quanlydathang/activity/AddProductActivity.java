@@ -20,7 +20,7 @@ public class AddProductActivity extends AppCompatActivity {
     EditText editTextTenSP, editTextMaSP, editTextXuatXu, editTextDonGia;
     Button buttonThemSP;
     TextView textViewMaSP;
-    boolean isupdate;
+    boolean isUpdate;
     int maSP;
     Toolbar toolbar;
 
@@ -37,7 +37,7 @@ public class AddProductActivity extends AppCompatActivity {
             toolbar.setTitle("Sửa thông tin");
             ProductDao db = new ProductDao(getApplicationContext());
             editTextMaSP.setEnabled(false);
-            isupdate = true;
+            isUpdate = true;
             Product sanPham = db.getProduct(maSP);
             setInfo(sanPham);
             buttonThemSP.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_edit_24, 0, 0, 0);
@@ -103,7 +103,7 @@ public class AddProductActivity extends AppCompatActivity {
                 if (checkInput(tenSP, xuatXu, donGia) == true) {
                     ProductDao db = new ProductDao(getApplicationContext());
                     Product sanPham = new Product(tenSP, xuatXu, Integer.parseInt(donGia));
-                    if (isupdate == false) {
+                    if (isUpdate == false) {
                         try {
                             db.addProduct(sanPham);
                             CustomToast.makeText(AddProductActivity.this, "Thêm sản phẩm thành công", CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
@@ -112,7 +112,7 @@ public class AddProductActivity extends AppCompatActivity {
                             CustomToast.makeText(AddProductActivity.this, e.toString(), CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
                         }
                     }
-                    if (isupdate == true) {
+                    if (isUpdate == true) {
                         String maSP = editTextMaSP.getText().toString();
                         Product sp = new Product(Integer.parseInt(maSP),tenSP, xuatXu, Integer.parseInt(donGia));
                         db.updateProduct(sp);

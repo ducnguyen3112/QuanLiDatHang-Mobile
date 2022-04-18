@@ -68,8 +68,8 @@
 
         <Button
             android:id="@+id/btnthem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/DialogButton"
+
             android:text="Thêm"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -77,8 +77,7 @@
 
         <Button
             android:id="@+id/btnhuy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/DialogButton"
 
             android:text="Hủy"
             app:layout_constraintEnd_toEndOf="parent"

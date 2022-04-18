@@ -9,12 +9,16 @@
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/.xml" value="0.15677083333333333" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/fira_sans.xml" value="0.1" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/goldman.xml" value="0.1" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/oswald.xml" value="0.21794871794871795" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_add_khach_hang.xml" value="0.2" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_don_dat_hang.xml" value="0.264" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_donhang.xml" value="0.275" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_khach_hang.xml" value="0.1" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_login_with_phone_number.xml" value="0.264" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_main.xml" value="0.21784420289855072" />
-        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_send_otp.xml" value="0.23097826086956522" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_san_pham.xml" value="0.19114583333333332" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_send_otp.xml" value="0.2" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_update_khach_hang.xml" value="0.2595108695652174" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_verification_otp.xml" value="0.23097826086956522" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/custom_alert.xml" value="0.2595108695652174" />

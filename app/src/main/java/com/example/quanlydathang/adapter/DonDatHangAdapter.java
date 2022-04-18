@@ -9,6 +9,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,7 +19,6 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -108,6 +108,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
 
                                CustomToast.makeText(context, "Không được bỏ trống ngày giờ!",
                                        CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
+                               return;
                             }
                             DonHangDto donHang1 =new DonHangDto();
                             donHang1.setMaDH(Integer.valueOf(tvMaDHDialog.getText().toString()));
@@ -117,11 +118,12 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                             dialog.cancel();
 
                            CustomToast.makeText(context, "Sửa đơn đặt hàng thành công!",
-                                   CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
+                                   CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
                             ((DonDatHangActivity)context).onResume();
                        }
                    });
                    dialog.show();
+                   dialog.getWindow().setLayout((6*DonDatHangActivity.width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
 
                }else{
 
@@ -177,7 +179,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
         builder.setMessage("Bán muốn xóa đơn hàng: "+id+"?")
                 .setPositiveButton("Xóa", (dialogInterface, i) -> {
                     if (donHangDao.xoaDonHang((int)id)){
-                        donHangDao.xoaDonHang(id);
+
                         ((DonDatHangActivity)context).onResume();
 
                         CustomToast.makeText(context, "Xóa đơn hàng thành công!",

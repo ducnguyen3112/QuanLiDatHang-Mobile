@@ -74,25 +74,39 @@
             android:textColor="#1495d7"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvGuiMaOTP"
+            app:layout_constraintEnd_toStartOf="@+id/flGuiMa"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
 
             tools:ignore="TouchTargetSizeCheck" />
 
-        <TextView
-
-            android:id="@+id/tvGuiMaOTP"
+        <FrameLayout
+            android:id="@+id/flGuiMa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gửi mã"
-            android:textColor="#1495d7"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="20dp"
-            android:textSize="20sp"/>
+
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/tvGuiMaOTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="Gửi mã"
+                android:textColor="#1495d7"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ProgressBar
+                android:id="@+id/pbLoad"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

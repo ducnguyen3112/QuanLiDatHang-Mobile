@@ -62,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Đăng xuất", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
+                        Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+
                     }
                 }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
             @Override
@@ -104,5 +106,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         xacNhapThoatDialog();
+    }
+
+    @Override
+    protected void onResume() {
+        tvUserName.setText(LoginActivity.userNameLg);
+        super.onResume();
+
     }
 }

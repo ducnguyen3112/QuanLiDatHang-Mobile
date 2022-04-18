@@ -1,13 +1,14 @@
 package com.example.quanlydathang.activitydonhang;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -34,14 +35,16 @@ public class DonDatHangActivity extends AppCompatActivity {
     private RecyclerView rcvDDH;
     private DonDatHangAdapter donDatHangAdapter;
     private SearchView searchView;
-    private  KhachHangDao   khachHangDao;
+    public static int width;
+
 
     String kh = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_don_dat_hang);
-        khachHangDao=new KhachHangDao(this);
+        DisplayMetrics metrics=getResources().getDisplayMetrics();
+         width=metrics.widthPixels;
         FloatingActionButton floatButton = findViewById(R.id.fab);
         floatButton.setOnClickListener(view -> {
             Dialog dialog = donDatHangAdapter.getDialogDDH(this);
@@ -55,6 +58,7 @@ public class DonDatHangActivity extends AppCompatActivity {
             donDatHangAdapter.btnHuyDialog.setOnClickListener(view13 -> dialog.cancel());
             donDatHangAdapter.edNgayDHDialog.setOnFocusChangeListener((view12, b) -> donDatHangAdapter.showDateTimeDialog(donDatHangAdapter.edNgayDHDialog));
             dialog .show();
+            dialog.getWindow().setLayout((6*width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
 
 
             donDatHangAdapter.btnThemDialog.setOnClickListener(view1 -> {
@@ -137,7 +141,6 @@ public class DonDatHangActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 donDatHangAdapter.getFilter().filter(query);
                 return false;
-
             }
 
             @Override

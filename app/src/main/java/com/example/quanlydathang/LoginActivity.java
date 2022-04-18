@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,7 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvLoginOTP;
 
     boolean doubleBackToExitPressedOnce = false;
-
+    public static String userNameLg;
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
 
 
     @Override
@@ -35,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
         userDao =new UserDao(this);
         btnLogin.setOnClickListener(view -> {
+            btnLogin.startAnimation(buttonClick);
             Boolean check=false;
             if (etUsername.getText().toString().isEmpty()){
                 CustomToast.makeText(LoginActivity.this, "Không được để trống tên đăng nhập!",
@@ -55,7 +58,8 @@ public class LoginActivity extends AppCompatActivity {
                 CustomToast.makeText(LoginActivity.this, "Đăng nhập thành công!",
                         CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("userNameLogin",etUsername.getText().toString() );
+                userNameLg=etUsername.getText().toString();
+                intent.putExtra("userNameLogin",userNameLg );
                 startActivity(intent);
             }else{
 

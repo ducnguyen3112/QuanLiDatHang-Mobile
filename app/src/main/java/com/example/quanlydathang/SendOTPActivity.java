@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class SendOTPActivity extends AppCompatActivity {
     private EditText etSDT;
     private TextView tvSendOTP;
     private ImageView ivBack;
+    private ProgressBar pbLoad;
 
     private UserDao userDao;
     private FirebaseAuth mAuth;
@@ -60,14 +62,17 @@ public class SendOTPActivity extends AppCompatActivity {
         String sdt=etSDT.getText().toString().trim();
         if (sdt.isEmpty()){
 
-            CustomToast.makeText(SendOTPActivity.this, "Không được để trống tên đăng nhập!",
+            CustomToast.makeText(SendOTPActivity.this, "Không được để trống tên số điện thoại!",
                     CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
             return;
-        }if (!userDao.getSDT(sdt)){
+        }
+        if (!userDao.getSDT(sdt)){
             CustomToast.makeText(SendOTPActivity.this, "Số điện thoại không đúng hoặc chưa được đăng kí!",
                     CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
             return;
         }
+        tvSendOTP.setVisibility(View.INVISIBLE);
+        pbLoad.setVisibility(View.VISIBLE);
         sdt="+84"+ sdt.substring(1);
         Log.e("SDT", "guiMaOTP: "+sdt,null );
         verifyPhoneNumber(sdt);
@@ -82,19 +87,28 @@ public class SendOTPActivity extends AppCompatActivity {
                         .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                             @Override
                             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                                pbLoad.setVisibility(View.GONE);
+                                tvSendOTP.setVisibility(View.VISIBLE);
                                 signInWithPhoneAuthCredential(phoneAuthCredential);
                             }
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
+
                                 CustomToast.makeText(SendOTPActivity.this, "Xác thực không thành công!",
                                         CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
+                                pbLoad.setVisibility(View.GONE);
+                                tvSendOTP.setVisibility(View.VISIBLE);
+
                                 return;
                             }
 
                             @Override
                             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                                 super.onCodeSent(s, forceResendingToken);
+                                pbLoad.setVisibility(View.GONE);
+                                tvSendOTP.setVisibility(View.VISIBLE);
+
                                 goToVerificationOTPActivity(phoneNumber,s);
                             }
                         })
@@ -147,5 +161,6 @@ public class SendOTPActivity extends AppCompatActivity {
         etSDT=findViewById(R.id.etNhapSDT);
         tvSendOTP=findViewById(R.id.tvGuiMaOTP);
         ivBack=findViewById(R.id.ivBackSendOtp);
+        pbLoad=findViewById(R.id.pbLoad);
     }
 }

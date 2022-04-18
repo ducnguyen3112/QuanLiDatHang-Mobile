@@ -5,9 +5,7 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.Design.Light.NoActionBar"
     android:backgroundTintMode="add"
-    tools:context=".activitydonhang.DonDatHangActivity"
-
-    >
+    tools:context=".activitydonhang.DonDatHangActivity">
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
