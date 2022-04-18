@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.KhachHang.UpdateKhachHangActivity">
+    tools:context=".activity.KhachHang.UpdateKhachHangActivity">
 
     <TextView
         android:id="@+id/tvUpdateId"

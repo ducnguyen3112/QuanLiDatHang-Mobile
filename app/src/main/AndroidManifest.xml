@@ -18,17 +18,17 @@
             android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".ui.KhachHang.KhachHangActivity"
+            android:name=".activity.KhachHang.KhachHangActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".ui.KhachHang.UpdateKhachHangActivity"
+            android:name=".activity.KhachHang.UpdateKhachHangActivity"
             android:exported="false"
-            android:parentActivityName=".ui.KhachHang.KhachHangActivity" />
+            android:parentActivityName=".activity.KhachHang.KhachHangActivity" />
         <activity
-            android:name=".ui.KhachHang.AddKhachHangActivity"
+            android:name=".activity.KhachHang.AddKhachHangActivity"
             android:exported="false"
-            android:parentActivityName=".ui.KhachHang.KhachHangActivity" />
+            android:parentActivityName=".activity.KhachHang.KhachHangActivity" />
         <activity
             android:name=".activity.AddProductActivity"
             android:exported="false"
