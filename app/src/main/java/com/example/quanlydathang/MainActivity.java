@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.example.quanlydathang.activity.ProductActivity;
 import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
 import com.example.quanlydathang.dao.UserDao;
-import com.example.quanlydathang.ui.KhachHang.KhachHangActivity;
+import com.example.quanlydathang.activity.KhachHang.KhachHangActivity;
 
 public class MainActivity extends AppCompatActivity {
 

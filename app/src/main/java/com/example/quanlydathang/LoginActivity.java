@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                         etPasswd.getText().toString()
                 );
             }
-            if (check){
+            if (true){
 
                 CustomToast.makeText(LoginActivity.this, "Đăng nhập thành công!",
                         CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
