@@ -17,6 +17,7 @@
     <string name="confirm_delete">Xóa sản phẩm ?</string>
     <string name="huy">Hủy</string>
     <string name="xoa">Xóa</string>
+    <string name="search">Search here</string>
     <string name="ok">Ok</string>
     <string name="chiDanOTP">Chúng tôi sẽ gửi bạn một mã gồm 6 chữ số đến số điện thoại bạn đã đăng kí</string>
 </resources>
