@@ -43,6 +43,7 @@ public class DonDatHangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_don_dat_hang);
+        donHangDao = new DonHangDao(this);
         DisplayMetrics metrics=getResources().getDisplayMetrics();
          width=metrics.widthPixels;
         FloatingActionButton floatButton = findViewById(R.id.fab);
@@ -87,15 +88,18 @@ public class DonDatHangActivity extends AppCompatActivity {
         rcvDDH = findViewById(R.id.rcv_DDH);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rcvDDH.setLayoutManager(linearLayoutManager);
-        donHangDao = new DonHangDao(this);
-        donHangDtoList = donHangDao.danhSachDonHang("DESC");
+
+        //donHangDtoList = donHangDao.danhSachDonHang("DESC");
+        capNhatDulieuDH(); //tạm thêm để không lõi - linh
         if (donHangDtoList.isEmpty()) {
             Toast.makeText(DonDatHangActivity.this
                     , "Danh sách rỗng!", Toast.LENGTH_SHORT).show();
-        } else {
-            donDatHangAdapter = new DonDatHangAdapter(this,donHangDao.danhSachDonHang("DESC"));
-            rcvDDH.setAdapter(donDatHangAdapter);
         }
+//        else {
+////            donDatHangAdapter = new DonDatHangAdapter(this,donHangDao.danhSachDonHang("DESC"));
+////            rcvDDH.setAdapter(donDatHangAdapter);
+//            capNhatDulieuDH();
+//        }
 
    }
 

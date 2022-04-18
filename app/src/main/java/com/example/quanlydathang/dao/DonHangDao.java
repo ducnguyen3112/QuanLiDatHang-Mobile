@@ -48,6 +48,8 @@ public class DonHangDao {
         long check=database.delete(CreateDatabase.TB_DONDATHANG,
                 CreateDatabase.TB_DONDATHANG_MADH + "=" +id,null);
         if (check!=0){
+            database.delete(CreateDatabase.TB_TTDDH,
+                    CreateDatabase.TB_TTDDH_MADH + "=" +id,null);
             return true;
         }else {
             return false;

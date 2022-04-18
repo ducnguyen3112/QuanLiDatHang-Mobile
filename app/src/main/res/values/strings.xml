@@ -19,4 +19,8 @@
     <string name="xoa">Xóa</string>
     <string name="ok">Ok</string>
     <string name="chiDanOTP">Chúng tôi sẽ gửi bạn một mã gồm 6 chữ số đến số điện thoại bạn đã đăng kí</string>
+
+    <string name="thongtindondathang">THÔNG TIN ĐƠN ĐẶT HÀNG</string>
+    <string name="themsanpham">THÊM SẢN PHẨM</string>
+    <string name="capnhat">CẬP NHẬT</string>
 </resources>

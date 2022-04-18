@@ -6,6 +6,10 @@ public class KhachHangDto implements Serializable {
     private int id;
     private String name, address, phone;
 
+    //thêm contructor rỗng - linh
+    public KhachHangDto() {
+    }
+
     public KhachHangDto(int id, String name, String address, String phone) {
         this.id = id;
         this.name = name;

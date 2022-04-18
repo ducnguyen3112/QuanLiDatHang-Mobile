@@ -3,6 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_ttddh.xml" value="0.25416666666666665" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_ttddh_cap_nhat.xml" value="0.25416666666666665" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/custom_dialog.xml" value="0.25416666666666665" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/custom_toast.xml" value="0.25416666666666665" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/dialog_ttddh_suasoluong.xml" value="0.23854166666666668" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/dialog_ttddh_themsanpham.xml" value="0.25416666666666665" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/item_dondathang.xml" value="0.25416666666666665" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/item_khach_hang.xml" value="0.25416666666666665" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/item_sanpham.xml" value="0.25416666666666665" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/item_ttddh.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/bg.xml" value="0.1" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2425" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1" />
