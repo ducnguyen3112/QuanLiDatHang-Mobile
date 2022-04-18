@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.quanlydathang.R;
 import com.example.quanlydathang.dao.ProductDao;
 import com.example.quanlydathang.dto.Product;
+import com.example.quanlydathang.utils.Constants;
 import com.example.quanlydathang.utils.CustomToast;
 
 public class AddProductActivity extends AppCompatActivity {
@@ -20,36 +21,9 @@ public class AddProductActivity extends AppCompatActivity {
     EditText editTextTenSP, editTextMaSP, editTextXuatXu, editTextDonGia;
     Button buttonThemSP;
     TextView textViewMaSP;
-    boolean isUpdate;
+    boolean isupdate;
     int maSP;
     Toolbar toolbar;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_them_sp);
-        setControl();
-
-        Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
-        maSP = getIntent().getIntExtra("MASP", 0);
-
-        if (maSP != 0) {
-            toolbar.setTitle("Sửa thông tin");
-            ProductDao db = new ProductDao(getApplicationContext());
-            editTextMaSP.setEnabled(false);
-            isUpdate = true;
-            Product sanPham = db.getProduct(maSP);
-            setInfo(sanPham);
-            buttonThemSP.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_edit_24, 0, 0, 0);
-            buttonThemSP.setText("Sửa thông tin");
-        }
-        if (maSP == 0) {
-            textViewMaSP.setVisibility(View.INVISIBLE);
-            editTextMaSP.setVisibility(View.INVISIBLE);
-        }
-        handleClickButtonThemSP();
-        setActionBar();
-    }
 
     private void setActionBar() {
         setSupportActionBar(toolbar);
@@ -61,6 +35,15 @@ public class AddProductActivity extends AppCompatActivity {
                 startActivity(main);
             }
         });
+    }
+
+    private boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private boolean checkInput(String tenSP, String xuatXu, String donGia) {
@@ -84,13 +67,39 @@ public class AddProductActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean isNumeric(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+    private void setControl() {
+        textViewMaSP = findViewById(R.id.textViewMaSP);
+        toolbar = findViewById(R.id.toolbar);
+        editTextMaSP = findViewById(R.id.editTextMaSP);
+        editTextTenSP = findViewById(R.id.editTextTenSP);
+        editTextXuatXu = findViewById(R.id.editTextXuatXuSP);
+        editTextDonGia = findViewById(R.id.editTextDonGia);
+        buttonThemSP = findViewById(R.id.buttonThemSP);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_them_sp);
+        setControl();
+        Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
+        maSP = getIntent().getIntExtra("MASP", 0);
+        if (maSP != 0) {
+            toolbar.setTitle("Sửa thông tin");
+            ProductDao db = new ProductDao(getApplicationContext());
+            editTextMaSP.setEnabled(false);
+            isupdate = true;
+            Product product = db.getProduct(maSP);
+            setInfo(product);
+            buttonThemSP.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_edit_24, 0, 0, 0);
+            buttonThemSP.setText("Sửa thông tin");
         }
+        if (maSP == 0) {
+            textViewMaSP.setVisibility(View.INVISIBLE);
+            editTextMaSP.setVisibility(View.INVISIBLE);
+        }
+        handleClickButtonThemSP();
+        setActionBar();
     }
 
     private void handleClickButtonThemSP() {
@@ -102,42 +111,34 @@ public class AddProductActivity extends AppCompatActivity {
                 String donGia = editTextDonGia.getText().toString();
                 if (checkInput(tenSP, xuatXu, donGia) == true) {
                     ProductDao db = new ProductDao(getApplicationContext());
-                    Product sanPham = new Product(tenSP, xuatXu, Integer.parseInt(donGia));
-                    if (isUpdate == false) {
+                    Product product = new Product(tenSP, xuatXu, Integer.parseInt(donGia));
+                    if (isupdate == false) {
                         try {
-                            db.addProduct(sanPham);
+                            db.addProduct(product);
                             CustomToast.makeText(AddProductActivity.this, "Thêm sản phẩm thành công", CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
-                            finish();
+                            Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
+                            startActivityForResult(intent, Constants.RESULT_PRODUCT_ACTIVITY);
                         } catch (Exception e) {
                             CustomToast.makeText(AddProductActivity.this, e.toString(), CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
                         }
                     }
-                    if (isUpdate == true) {
+                    if (isupdate == true) {
                         String maSP = editTextMaSP.getText().toString();
-                        Product sp = new Product(Integer.parseInt(maSP),tenSP, xuatXu, Integer.parseInt(donGia));
+                        Product sp = new Product(Integer.parseInt(maSP), tenSP, xuatXu, Integer.parseInt(donGia));
                         db.updateProduct(sp);
                         CustomToast.makeText(AddProductActivity.this, "Sửa thông tin thành công!!", CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
-                        finish();
+                        Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
+                        startActivityForResult(intent, Constants.RESULT_PRODUCT_ACTIVITY);
                     }
                 }
             }
         });
     }
 
-    private void setControl() {
-        textViewMaSP = findViewById(R.id.textViewMaSP);
-        toolbar = findViewById(R.id.toolbar);
-        editTextMaSP = findViewById(R.id.editTextMaSP);
-        editTextTenSP = findViewById(R.id.editTextTenSP);
-        editTextXuatXu = findViewById(R.id.editTextXuatXuSP);
-        editTextDonGia = findViewById(R.id.editTextDonGia);
-        buttonThemSP = findViewById(R.id.buttonThemSP);
-    }
-
-    private void setInfo(Product sanPham) {
-        editTextMaSP.setText(sanPham.getMaSP() + "");
-        editTextTenSP.setText(sanPham.getTenSP());
-        editTextXuatXu.setText(sanPham.getXuatXu());
-        editTextDonGia.setText(String.valueOf(sanPham.getDonGia()));
+    private void setInfo(Product product) {
+        editTextMaSP.setText(product.getMaSP() + "");
+        editTextTenSP.setText(product.getTenSP());
+        editTextXuatXu.setText(product.getXuatXu());
+        editTextDonGia.setText(String.valueOf(product.getDonGia()));
     }
 }

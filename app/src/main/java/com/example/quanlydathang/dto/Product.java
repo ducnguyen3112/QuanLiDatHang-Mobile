@@ -5,6 +5,16 @@ public class Product {
     private String tenSP,xuatXu;
     private int maSP, donGia;
 
+    private int typeDisplay;
+
+    public int getTypeDisplay() {
+        return typeDisplay;
+    }
+
+    public void setTypeDisplay(int typeDisplay) {
+        this.typeDisplay = typeDisplay;
+    }
+
     public Product() {}
 
     public Product(String tenSP, String xuatXu, int donGia) {

@@ -12,7 +12,6 @@ import com.example.quanlydathang.dto.Product;
 import java.util.ArrayList;
 
 public class ProductDao {
-
     SQLiteDatabase database;
 
     public ProductDao(Context context) {
@@ -20,65 +19,92 @@ public class ProductDao {
         database = createDatabase.open();
     }
 
-    public void addProduct(Product sanPham) {
+    public void addProduct(Product product) {
         String sql = "insert into SANPHAM(TENSP,XUATXU,DONGIA) values(?,?,?)";
-        database.execSQL(sql, new Object[]{sanPham.getTenSP(), sanPham.getXuatXu(), sanPham.getDonGia()});
+        database.execSQL(sql, new Object[]{product.getTenSP(), product.getXuatXu(), product.getDonGia()});
     }
 
     public Product getProduct(int maSP) {
-        Product sanPham = null;
-        Cursor cursor = database.rawQuery("SELECT * from SANPHAM where MASP = ?", new String[]{maSP+""});
+        Product product = null;
+        Cursor cursor = database.rawQuery("SELECT * from SANPHAM where MASP = ?", new String[]{maSP + ""});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            int ma = cursor.getInt(0);
-            String ten = cursor.getString(1);
-            String xx = cursor.getString(2);
-            int dongia = cursor.getInt(3);
-            sanPham = new Product(ma, ten, xx, dongia);
+            product = new Product(cursor.getInt(0),cursor.getString(1),
+                    cursor.getString(2), cursor.getInt(3));
             cursor.moveToNext();
         }
         cursor.close();
-        return sanPham;
+        return product;
     }
 
-    public long updateProduct(Product sanPham) {
+    public long updateProduct(Product product) {
         ContentValues data = new ContentValues();
-        data.put("TENSP", sanPham.getTenSP());
-        data.put("XUATXU", sanPham.getXuatXu());
-        data.put("DONGIA", sanPham.getDonGia());
-        return database.update("SANPHAM", data, "MASP=" + sanPham.getMaSP(), null);
+        data.put("TENSP", product.getTenSP());
+        data.put("XUATXU", product.getXuatXu());
+        data.put("DONGIA", product.getDonGia());
+        return database.update("SANPHAM", data, "MASP=" + product.getMaSP(), null);
     }
 
     public long deleteProduct(int maSP) {
         return database.delete("SANPHAM", "MASP=" + maSP, null);
     }
 
-    public void loadDb(ArrayList<Product> list) {
+    public int countLoadDBAllTypeDisplay(ArrayList<Product> list,int typeDisplay) {
+        int count = 0;
         list.clear();
-        Cursor cursor = database.rawQuery("SELECT * from SANPHAM", null);
+        Cursor cursor = database.rawQuery("select * from SANPHAM", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            int maSP = cursor.getInt(0);
-            String tenSP = cursor.getString(1);
-            String xuatXu = cursor.getString(2);
-            int donGia = cursor.getInt(3);
-            Product sanPham = new Product(maSP, tenSP, xuatXu, donGia);
-            list.add(sanPham);
+            Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
+                    cursor.getInt(3));
+            product.setTypeDisplay(typeDisplay);
+            list.add(product);
+            ++count;
             cursor.moveToNext();
         }
-
-        cursor.close();
+        cursor.close();return count;
     }
-/*
-    public void insertData() {
-        QueryData("create table if not exists SANPHAM(MASP VARCHAR(255) PRIMARY KEY," +
-                "TENSP VARCHAR(255), XUATXU VARCHAR(255), DONGIA INTEGER)");
-        QueryData("insert into SANPHAM values('1','Tivi SamSung','Hàn Quốc',10500000)");
-        QueryData("insert into SANPHAM values('2','Máy giặt','Nhật',9000000)");
-        QueryData("insert into SANPHAM values('3','Máy lạnh','Nhật',7500000)");
-        QueryData("insert into SANPHAM values('4','Quạt','Việt Nam',300000)");
-        QueryData("insert into SANPHAM values('5','Bếp nướng','Nhật',5000000)");
-        QueryData("insert into SANPHAM values('6','Tủ lạnh','Hàn Quốc',12000000)");
+
+    public int totalItem() {
+        int count = 0;
+        Cursor cursor = database.rawQuery("select * from SANPHAM", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ++count;
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return count;
+    }
+
+    /*public int countLoadDB(ArrayList<Product> list, int page, int number) {
+        int count = 0;
+        String sql = "select * from SANPHAM limit  ('"+page+"' - 1) * '"+number+"' , '"+number+"'";
+        Cursor cursor = database.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
+                    cursor.getInt(3));
+            list.add(product);
+            ++count;
+            cursor.moveToNext();
+        }
+        cursor.close();return count;
     }*/
 
+    public int countLoadDBTypeDisplay(ArrayList<Product> list, int page, int number, int typeDisplay) {
+        int count = 0;
+        String sql = "select * from SANPHAM limit  ('"+page+"' - 1) * '"+number+"' , '"+number+"'";
+        Cursor cursor = database.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
+                    cursor.getInt(3));
+            product.setTypeDisplay(typeDisplay);
+            list.add(product);
+            ++count;
+            cursor.moveToNext();
+        }
+        cursor.close();return count;
+    }
 }
