@@ -15,100 +15,100 @@
         app:title="@string/title_tb_themsp" />
 
     <LinearLayout
-        android:layout_marginTop="50dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textViewMaSP"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="@string/maSP"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+        <LinearLayout
 
-        <EditText
-            android:id="@+id/editTextMaSP"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="@string/tenSP"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:layout_margin="10dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editTextTenSP"
+            <TextView
+                android:id="@+id/textViewMaSP"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/maSP"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextMaSP"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="@string/xuatxu"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editTextXuatXuSP"
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tenSP"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextTenSP"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-        </EditText>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="@string/dongia"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editTextDonGia"
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/xuatxu"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextXuatXuSP"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"></EditText>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
 
-    <Button
-        android:drawableLeft="@drawable/ic_baseline_add_circle_24"
-        android:id="@+id/buttonThemSP"
-        style="@style/customButton"
-        android:layout_gravity="center"
-        android:text="@string/themsp" />
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/dongia"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextDonGia"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"></EditText>
+        </LinearLayout>
+        <Button
+            android:id="@+id/buttonThemSP"
+            style="@style/customButton"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_baseline_add_circle_24"
+            android:text="@string/themsp" />
     </LinearLayout>
 </LinearLayout>

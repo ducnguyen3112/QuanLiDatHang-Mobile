@@ -35,7 +35,6 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.Khac
         this.list = list;
     }
 
-
     @NonNull
     @Override
     public KhachHangAdapter.KhachHangViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

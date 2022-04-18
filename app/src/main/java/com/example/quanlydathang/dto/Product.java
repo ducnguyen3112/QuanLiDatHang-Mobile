@@ -5,6 +5,8 @@ public class Product {
     private String tenSP,xuatXu;
     private int maSP, donGia;
 
+    private int typeDisplay;
+
     public Product() {}
 
     public Product(String tenSP, String xuatXu, int donGia) {
@@ -13,10 +15,10 @@ public class Product {
         this.donGia = donGia;
     }
 
-    public Product(int maSP, String tenSP, String xuatXu, int donGia) {
-        this.maSP = maSP;
+    public Product(int maSP,String tenSP, String xuatXu,int donGia) {
         this.tenSP = tenSP;
         this.xuatXu = xuatXu;
+        this.maSP = maSP;
         this.donGia = donGia;
     }
 
@@ -46,6 +48,14 @@ public class Product {
 
     public int getDonGia() {
         return donGia;
+    }
+
+    public int getTypeDisplay() {
+        return typeDisplay;
+    }
+
+    public void setTypeDisplay(int typeDisplay) {
+        this.typeDisplay = typeDisplay;
     }
 
     public void setDonGia(int donGia) {

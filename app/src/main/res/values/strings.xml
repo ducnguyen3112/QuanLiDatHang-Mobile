@@ -17,5 +17,8 @@
     <string name="confirm_delete">Xóa sản phẩm ?</string>
     <string name="huy">Hủy</string>
     <string name="xoa">Xóa</string>
+    <string name="image">Hình ảnh</string>
     <string name="ok">Ok</string>
+    <string name="search">Search here</string>
+    <string name="gridlayout">Grid Layout</string>
 </resources>
