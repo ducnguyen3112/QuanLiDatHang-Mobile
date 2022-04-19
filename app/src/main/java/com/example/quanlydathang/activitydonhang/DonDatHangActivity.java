@@ -88,21 +88,16 @@ public class DonDatHangActivity extends AppCompatActivity {
         rcvDDH = findViewById(R.id.rcv_DDH);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rcvDDH.setLayoutManager(linearLayoutManager);
-
-        //donHangDtoList = donHangDao.danhSachDonHang("DESC");
-        if (donHangDtoList.isEmpty()) {
-            Toast.makeText(DonDatHangActivity.this
-                    , "Danh sách rỗng!", Toast.LENGTH_SHORT).show();
-        } else {
-//            donDatHangAdapter = new DonDatHangAdapter(this,donHangDao.danhSachDonHang("DESC"));
-//            rcvDDH.setAdapter(donDatHangAdapter);
             capNhatDulieuDH();
-        }
-
    }
 
     private void capNhatDulieuDH() {
+
         donHangDtoList = donHangDao.danhSachDonHang("DESC");
+        if(donHangDtoList.isEmpty()){
+            CustomToast.makeText(DonDatHangActivity.this, "Danh sách trống!",
+                    CustomToast.LENGTH_LONG, CustomToast.CONFUSING).show();
+        }
         donDatHangAdapter = new DonDatHangAdapter(this,donHangDtoList);
         rcvDDH.setAdapter(donDatHangAdapter);
     }
