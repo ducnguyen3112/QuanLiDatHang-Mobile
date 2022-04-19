@@ -31,7 +31,6 @@ import com.example.quanlydathang.utils.CustomToast;
 import java.util.ArrayList;
 
 public class ProductActivity extends AppCompatActivity {
-    private LinearLayout titleLinearLayout;
     private Toolbar toolbar;
     private Button buttonAdd;
     private NestedScrollView nestedScrollView;
@@ -132,7 +131,6 @@ public class ProductActivity extends AppCompatActivity {
         buttonDelete = findViewById(R.id.buttonDelete);
         nestedScrollView = findViewById(R.id.nestedScrollView);
         progressBar = findViewById(R.id.progressBar);
-        titleLinearLayout = findViewById(R.id.titleLinearLayout);
         recyclerView = findViewById(R.id.recyclerView);
 
         gm = new GridLayoutManager(this, 2);
@@ -144,7 +142,6 @@ public class ProductActivity extends AppCompatActivity {
         dao = new ProductDao(getApplicationContext());
 
         currentTypeDisplay = Constants.LIST;
-        titleLinearLayout.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(lm);
 
         setTypeDisplayRecyclerView(Constants.LIST);
@@ -207,11 +204,9 @@ public class ProductActivity extends AppCompatActivity {
 
     private void onClickChangTypeDisplay() {
         if (currentTypeDisplay == Constants.GRID) {
-            titleLinearLayout.setVisibility(View.VISIBLE);
             setTypeDisplayRecyclerView(Constants.LIST);
             recyclerView.setLayoutManager(lm);
         } else if (currentTypeDisplay == Constants.LIST) {
-            titleLinearLayout.setVisibility(View.INVISIBLE);
             setTypeDisplayRecyclerView(Constants.GRID);
             recyclerView.setLayoutManager(gm);
         }
