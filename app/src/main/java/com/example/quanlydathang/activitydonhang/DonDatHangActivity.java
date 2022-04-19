@@ -97,6 +97,7 @@ public class DonDatHangActivity extends AppCompatActivity {
         if(donHangDtoList.isEmpty()){
             CustomToast.makeText(DonDatHangActivity.this, "Danh sách trống!",
                     CustomToast.LENGTH_LONG, CustomToast.CONFUSING).show();
+            return;
         }
         donDatHangAdapter = new DonDatHangAdapter(this,donHangDtoList);
         rcvDDH.setAdapter(donDatHangAdapter);
