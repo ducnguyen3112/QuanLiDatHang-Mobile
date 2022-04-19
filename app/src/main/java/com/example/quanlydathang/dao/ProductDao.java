@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 
 import com.example.quanlydathang.database.CreateDatabase;
 import com.example.quanlydathang.dto.KhachHangDto;
@@ -24,25 +25,38 @@ public class ProductDao {
         database.execSQL(sql, new Object[]{product.getTenSP(), product.getXuatXu(), product.getDonGia()});
     }
 
+    public void insertProduct(String ten,String xuatxu, Integer gia, byte[] hinh)
+    {
+        String sql="Insert into SANPHAM values (null,?,?,?,?)";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindString(1,ten);
+        statement.bindString(2,xuatxu);
+        statement.bindLong(3,gia);
+        statement.bindBlob(4,hinh);
+        statement.executeInsert();
+    }
+
     public Product getProduct(int maSP) {
         Product product = null;
         Cursor cursor = database.rawQuery("SELECT * from SANPHAM where MASP = ?", new String[]{maSP + ""});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             product = new Product(cursor.getInt(0),cursor.getString(1),
-                    cursor.getString(2), cursor.getInt(3));
+                    cursor.getString(2), cursor.getInt(3),cursor.getBlob(4));
             cursor.moveToNext();
         }
         cursor.close();
         return product;
     }
 
-    public long updateProduct(Product product) {
+    public long updateProduct(Integer ma,String ten,String xuatxu, Integer gia, byte[] hinh) {
         ContentValues data = new ContentValues();
-        data.put("TENSP", product.getTenSP());
-        data.put("XUATXU", product.getXuatXu());
-        data.put("DONGIA", product.getDonGia());
-        return database.update("SANPHAM", data, "MASP=" + product.getMaSP(), null);
+        data.put("TENSP", ten);
+        data.put("XUATXU", xuatxu);
+        data.put("DONGIA", gia);
+        data.put("HINHANH", hinh);
+        return database.update("SANPHAM", data, "MASP=" + ma, null);
     }
 
     public long deleteProduct(int maSP) {
@@ -56,7 +70,7 @@ public class ProductDao {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
-                    cursor.getInt(3));
+                    cursor.getInt(3),cursor.getBlob(4));
             product.setTypeDisplay(typeDisplay);
             list.add(product);
             ++count;
@@ -99,7 +113,7 @@ public class ProductDao {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
-                    cursor.getInt(3));
+                    cursor.getInt(3), cursor.getBlob(4));
             product.setTypeDisplay(typeDisplay);
             list.add(product);
             ++count;

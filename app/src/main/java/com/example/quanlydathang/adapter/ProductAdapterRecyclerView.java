@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,8 +46,9 @@ public class ProductAdapterRecyclerView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tenSP, maSP, xuatXu, donGia;
-        public ImageButton delete;
+        TextView tenSP, maSP, xuatXu, donGia;
+        ImageButton delete;
+        ImageView imageView;
         public MyViewHolder(@NonNull View view) {
             super(view);
             tenSP = view.findViewById(R.id.textViewTenSP);
@@ -52,6 +56,7 @@ public class ProductAdapterRecyclerView
             xuatXu = view.findViewById(R.id.textViewXuatXu);
             donGia = view.findViewById(R.id.textViewDonGia);
             delete = view.findViewById(R.id.buttonDelete);
+            imageView = view.findViewById(R.id.imageView);
         }
     }
 
@@ -104,6 +109,10 @@ public class ProductAdapterRecyclerView
         myViewHolder.xuatXu.setText(product.getXuatXu());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,##0");
         myViewHolder.donGia.setText(decimalFormat.format(product.getDonGia()));
+        if(product.getImage()!=null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(product.getImage(), 0, product.getImage().length);
+            myViewHolder.imageView.setImageBitmap(bitmap);
+        }
     }
 
     public void handleClickDelete(Product product , MyViewHolder myViewHolder) {

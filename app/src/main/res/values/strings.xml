@@ -19,5 +19,6 @@
     <string name="xoa">Xóa</string>
     <string name="search">Search here</string>
     <string name="ok">Ok</string>
+    <string name="image">Hình ảnh</string>
     <string name="chiDanOTP">Chúng tôi sẽ gửi bạn một mã gồm 6 chữ số đến số điện thoại bạn đã đăng kí</string>
 </resources>

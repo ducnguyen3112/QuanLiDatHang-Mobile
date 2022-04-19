@@ -1,20 +1,33 @@
 package com.example.quanlydathang.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quanlydathang.R;
 import com.example.quanlydathang.dao.ProductDao;
 import com.example.quanlydathang.dto.Product;
 import com.example.quanlydathang.utils.Constants;
 import com.example.quanlydathang.utils.CustomToast;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class AddProductActivity extends AppCompatActivity {
 
@@ -24,7 +37,7 @@ public class AddProductActivity extends AppCompatActivity {
     boolean isupdate;
     int maSP;
     Toolbar toolbar;
-
+    ImageView imageViewChonAnh, imageView, imageViewSelectFromFile;
     private void setActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -75,6 +88,66 @@ public class AddProductActivity extends AppCompatActivity {
         editTextXuatXu = findViewById(R.id.editTextXuatXuSP);
         editTextDonGia = findViewById(R.id.editTextDonGia);
         buttonThemSP = findViewById(R.id.buttonThemSP);
+
+        imageViewChonAnh = findViewById(R.id.imageViewChonAnh);
+        imageView = findViewById(R.id.imageView);
+
+        imageViewSelectFromFile = findViewById(R.id.imageViewSelectFromFile);
+    }
+
+    public void handleClickSelectImage(){
+        imageViewChonAnh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,Constants.REQUEST_CODE);
+            }
+        });
+    }
+
+    public void handleClickSelectFromImageFile(){
+        imageViewSelectFromFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(in, Constants.SelectFromImageFile);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==Constants.REQUEST_CODE && resultCode==RESULT_OK)
+        {
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            imageView.setVisibility(View.VISIBLE);
+            imageView.setImageBitmap(bitmap);
+        }
+        else if (requestCode == Constants.SelectFromImageFile && resultCode == RESULT_OK && data != null) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                imageView.setVisibility(View.VISIBLE);
+                imageView.setImageBitmap(selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                CustomToast.makeText(AddProductActivity.this, "Something went wrong!!",
+                        CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
+            }
+        }
+    }
+
+    public byte[] ConverttoArrayByte(ImageView img)
+    {
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
+        Bitmap bitmap=bitmapDrawable.getBitmap();
+
+        ByteArrayOutputStream stream=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
     }
 
     @Override
@@ -85,6 +158,7 @@ public class AddProductActivity extends AppCompatActivity {
         Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
         maSP = getIntent().getIntExtra("MASP", 0);
         if (maSP != 0) {
+            imageView.setVisibility(View.VISIBLE);
             toolbar.setTitle("Sửa thông tin");
             ProductDao db = new ProductDao(getApplicationContext());
             editTextMaSP.setEnabled(false);
@@ -95,11 +169,15 @@ public class AddProductActivity extends AppCompatActivity {
             buttonThemSP.setText("Sửa thông tin");
         }
         if (maSP == 0) {
+            imageView.setVisibility(View.INVISIBLE);
             textViewMaSP.setVisibility(View.INVISIBLE);
             editTextMaSP.setVisibility(View.INVISIBLE);
         }
+
         handleClickButtonThemSP();
         setActionBar();
+        handleClickSelectImage();
+        handleClickSelectFromImageFile();
     }
 
     private void handleClickButtonThemSP() {
@@ -114,7 +192,11 @@ public class AddProductActivity extends AppCompatActivity {
                     Product product = new Product(tenSP, xuatXu, Integer.parseInt(donGia));
                     if (isupdate == false) {
                         try {
-                            db.addProduct(product);
+                            /*db.addProduct(product);*/
+
+                            db.insertProduct(tenSP,xuatXu,
+                                    Integer.parseInt(donGia),ConverttoArrayByte(imageView));
+
                             CustomToast.makeText(AddProductActivity.this, "Thêm sản phẩm thành công", CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
                             Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
                             startActivityForResult(intent, Constants.RESULT_PRODUCT_ACTIVITY);
@@ -124,8 +206,9 @@ public class AddProductActivity extends AppCompatActivity {
                     }
                     if (isupdate == true) {
                         String maSP = editTextMaSP.getText().toString();
-                        Product sp = new Product(Integer.parseInt(maSP), tenSP, xuatXu, Integer.parseInt(donGia));
-                        db.updateProduct(sp);
+                        //Product sp = new Product(Integer.parseInt(maSP), tenSP, xuatXu, Integer.parseInt(donGia));
+                        db.updateProduct(Integer.parseInt(maSP),tenSP,xuatXu,
+                                Integer.parseInt(donGia),ConverttoArrayByte(imageView));
                         CustomToast.makeText(AddProductActivity.this, "Sửa thông tin thành công!!", CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
                         Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
                         startActivityForResult(intent, Constants.RESULT_PRODUCT_ACTIVITY);
@@ -140,5 +223,10 @@ public class AddProductActivity extends AppCompatActivity {
         editTextTenSP.setText(product.getTenSP());
         editTextXuatXu.setText(product.getXuatXu());
         editTextDonGia.setText(String.valueOf(product.getDonGia()));
+        if(product.getImage()!=null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(product.getImage(), 0, product.getImage().length);
+            imageView.setVisibility(View.VISIBLE);
+            imageView.setImageBitmap(bitmap);
+        }
     }
 }

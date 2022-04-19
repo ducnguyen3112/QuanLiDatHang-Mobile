@@ -15,100 +15,141 @@
         app:title="@string/title_tb_themsp" />
 
     <LinearLayout
-        android:layout_marginTop="50dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        <LinearLayout
 
-        <TextView
-            android:id="@+id/textViewMaSP"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="@string/maSP"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/editTextMaSP"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="@string/tenSP"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:layout_margin="10dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editTextTenSP"
+            <TextView
+                android:id="@+id/textViewMaSP"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/maSP"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextMaSP"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="@string/xuatxu"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editTextXuatXuSP"
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tenSP"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextTenSP"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-        </EditText>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="@string/dongia"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editTextDonGia"
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/xuatxu"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextXuatXuSP"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"></EditText>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
 
-    <Button
-        android:drawableLeft="@drawable/ic_baseline_add_circle_24"
-        android:id="@+id/buttonThemSP"
-        style="@style/customButton"
-        android:layout_gravity="center"
-        android:text="@string/themsp" />
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/dongia"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextDonGia"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"></EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/image"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageViewChonAnh"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="5"
+                    android:src="@drawable/ic_baseline_camera_enhance_24" />
+
+                <ImageView
+                    android:id="@+id/imageViewSelectFromFile"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="5"
+                    android:src="@drawable/ic_baseline_folder_24" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_add_circle_24" />
+
+        <Button
+            android:id="@+id/buttonThemSP"
+            style="@style/customButton"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_baseline_add_circle_24"
+            android:text="@string/themsp" />
     </LinearLayout>
 </LinearLayout>

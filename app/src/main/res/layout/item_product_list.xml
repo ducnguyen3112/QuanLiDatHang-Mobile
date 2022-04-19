@@ -1,56 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="135dp"
-    android:background="@color/white"
-    android:layout_weight="10"
+    android:layout_height="200dp"
     android:layout_marginTop="10dp"
+    android:layout_weight="10"
+    android:background="@color/white"
     android:orientation="horizontal">
+
     <LinearLayout
-        android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="10"
+        android:orientation="horizontal">
+
         <LinearLayout
-            android:layout_weight="9"
-            android:layout_marginLeft="5dp"
-            android:layout_width="match_parent"
+            android:layout_weight="4"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                style="@style/style_textview"
-                android:id="@+id/textViewMaSP"
-                android:layout_width="50dp"
-                android:text="@string/maSP"
-                />
-
-            <TextView
-                style="@style/style_textview"
-                android:id="@+id/textViewTenSP"
-                android:layout_width="110dp"
-                android:text="@string/tenSP"/>
-
-            <TextView
-                style="@style/style_textview"
-                android:id="@+id/textViewXuatXu"
-                android:layout_width="80dp"
-                android:text="@string/xuatxu"/>
-
-            <TextView
-                style="@style/style_textview"
-                android:id="@+id/textViewDonGia"
-                android:layout_width="100dp"
-                android:text="@string/dongia"/>
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:gravity="left"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewMaSP"
+                style="@style/style_textview"
+                android:layout_width="wrap_content"
+                android:minHeight="50dp"
+                android:gravity="left|center"
+                android:text="@string/maSP" />
+
+            <TextView
+                android:id="@+id/textViewTenSP"
+                style="@style/style_textview"
+                android:layout_width="wrap_content"
+                android:minHeight="50dp"
+                android:gravity="left|center"
+                android:text="@string/tenSP" />
+
+            <TextView
+                android:id="@+id/textViewXuatXu"
+                style="@style/style_textview"
+                android:layout_width="wrap_content"
+                android:minHeight="50dp"
+                android:gravity="left|center"
+                android:text="@string/xuatxu" />
+
+            <TextView
+                android:id="@+id/textViewDonGia"
+                style="@style/style_textview"
+                android:layout_width="wrap_content"
+                android:minHeight="50dp"
+                android:gravity="left|center"
+                android:text="@string/dongia" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center"
+            android:layout_gravity="right|center|bottom"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
             <ImageButton
@@ -59,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/pressed_button_delete"
-                android:src="@drawable/ic_baseline_delete_outline_24"/>
+                android:src="@drawable/ic_baseline_delete_outline_24" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

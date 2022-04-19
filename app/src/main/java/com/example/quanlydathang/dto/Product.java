@@ -4,8 +4,25 @@ public class Product {
 
     private String tenSP,xuatXu;
     private int maSP, donGia;
-
+    byte[] image;
     private int typeDisplay;
+
+    public Product() {}
+
+    public Product(String tenSP, String xuatXu, int donGia) {
+        this.tenSP = tenSP;
+        this.xuatXu = xuatXu;
+        this.donGia = donGia;
+    }
+
+    public Product(int maSP , String tenSP, String xuatXu, int donGia, byte[] image) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.xuatXu = xuatXu;
+        this.maSP = maSP;
+        this.donGia = donGia;
+        this.image = image;
+    }
 
     public int getTypeDisplay() {
         return typeDisplay;
@@ -15,12 +32,12 @@ public class Product {
         this.typeDisplay = typeDisplay;
     }
 
-    public Product() {}
+    public byte[] getImage() {
+        return image;
+    }
 
-    public Product(String tenSP, String xuatXu, int donGia) {
-        this.tenSP = tenSP;
-        this.xuatXu = xuatXu;
-        this.donGia = donGia;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public Product(int maSP, String tenSP, String xuatXu, int donGia) {
