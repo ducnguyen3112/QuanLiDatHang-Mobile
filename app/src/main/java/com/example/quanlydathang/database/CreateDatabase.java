@@ -20,6 +20,8 @@ public class CreateDatabase extends SQLiteOpenHelper {
     public static final String TB_KHACHHANG_TENKH = "TENKH";
     public static final String TB_KHACHHANG_DIACHI = "DIACHI";
     public static final String TB_KHACHHANG_SDT = "SDT";
+    public static final String TB_KHACHHANG_ANH = "ANH";
+
 
     public static final String TB_SANPHAM_MASP = "MASP";
     public static final String TB_SANPHAM_TENSP = "TENSP";
@@ -52,7 +54,8 @@ public class CreateDatabase extends SQLiteOpenHelper {
                 + TB_KHACHHANG_MAKH + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TB_KHACHHANG_TENKH + " TEXT, "
                 + TB_KHACHHANG_DIACHI + " TEXT, "
-                + TB_KHACHHANG_SDT + " TEXT )";
+                + TB_KHACHHANG_SDT + " TEXT, "
+                + TB_KHACHHANG_ANH + " BLOB)";;
 
         String tbSanPham = "CREATE TABLE " + TB_SANPHAM + "("
                 + TB_SANPHAM_MASP + " INTEGER PRIMARY KEY AUTOINCREMENT, "

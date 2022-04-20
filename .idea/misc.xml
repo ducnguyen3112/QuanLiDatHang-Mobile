@@ -50,6 +50,20 @@
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/item_sanpham.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/menu/menu_product.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/xml/file_paths.xml" value="0.1546875" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/drawable-v24/custom_button_3.xml" value="0.235" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/drawable-v24/custom_local_phone_icon.xml" value="0.1" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/drawable-v24/ic_baseline_local_phone_24_focused.xml" value="0.1105" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/drawable/custom_btn.xml" value="0.1715" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/drawable/custom_button.xml" value="0.155" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/drawable/custom_button_2.xml" value="0.1105" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/drawable/custom_edit_text.xml" value="0.1" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/drawable/custom_location_on_icon.xml" value="0.1" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/drawable/custom_person_icon.xml" value="0.1" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.1" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_add_khach_hang.xml" value="0.16" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_san_pham.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/PC/Desktop/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_update_khach_hang.xml" value="0.176" />
       </map>
     </option>
   </component>

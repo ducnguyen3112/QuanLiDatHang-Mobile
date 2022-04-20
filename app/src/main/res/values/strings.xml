@@ -21,4 +21,10 @@
     <string name="ok">Ok</string>
     <string name="image">Hình ảnh</string>
     <string name="chiDanOTP">Chúng tôi sẽ gửi bạn một mã gồm 6 chữ số đến số điện thoại bạn đã đăng kí</string>
+    <string name="tenKH">Tên khách hàng</string>
+    <string name="diaChi">Địa chỉ</string>
+    <string name="SDT">Số điện thoai</string>
+    <string name="them">Thêm</string>
+    <string name="chon">Chon</string>
+    <string name="capNhat">Cập nhật</string>
 </resources>
