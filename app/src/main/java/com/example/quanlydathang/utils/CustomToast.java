@@ -17,8 +17,8 @@ public class CustomToast extends Toast {
     public static int ERROR = 3;
     public static int CONFUSING = 4;
 
-    private static long SHORT = 4000;
-    private static long LONG = 7000;
+    private static long SHORT = 1000;
+    private static long LONG = 1500;
 
     public CustomToast(Context context) {
         super(context);

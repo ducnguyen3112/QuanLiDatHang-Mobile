@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +21,13 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlydathang.R;
+import com.example.quanlydathang.activity.TTDDH_Activity;
 import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
 import com.example.quanlydathang.dao.DonHangDao;
 import com.example.quanlydathang.dao.KhachHangDao;
@@ -124,15 +128,23 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                    });
                    dialog.show();
                    dialog.getWindow().setLayout((6*DonDatHangActivity.width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
-
-               }else{
-
                }
-
+               else {
+                   //truyền thông tin và start activity TTDDH - linh
+                   Intent intent = new Intent(context, TTDDH_Activity.class);
+                   Bundle bundle = new Bundle();
+                   bundle.putInt("maDH",donHang.getMaDH());
+                   bundle.putString("ngayDH",donHang.getNgayDH());
+                   bundle.putInt("maKH",donHang.getMaKH());
+                   bundle.putString("tenKH",donHang.getTenKH());
+                   intent.putExtras(bundle);
+                   context.startActivity(intent);
+               }
            });
            builder.show();
        });
     }
+
     public void showDateTimeDialog(EditText edNgayDH) {
         final Calendar calendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener dateSetListener
@@ -160,6 +172,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                 , calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 
     }
+
     public  Dialog  getDialogDDH(Context context) {
         Dialog dialog = new Dialog(context);
         dialog.setTitle("Hộp thoại xử lý");
@@ -174,6 +187,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
         edNgayDHDialog.setInputType(InputType.TYPE_NULL);
         return dialog;
     }
+
     public void deleteDialog(int id){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setMessage("Bán muốn xóa đơn hàng: "+id+"?")
@@ -196,6 +210,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                 });
         builder.create().show();
     }
+
     public List<String> dsMaVaHoTenKH(){
         List<String> ds=new ArrayList<>();
         List<KhachHangDto> dsKH= khachHangDao.getListKH();
@@ -205,6 +220,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
         }
         return ds;
     }
+
     public int getIdKHFromSpiner(String str){
         String[] words=str.split("-");
         if (!str.isEmpty()){
@@ -212,6 +228,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
         }
         return 0;
     }
+
     public void xuKienSpinner() {
         spKHDialog.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -283,7 +300,5 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
             tvNgayDH=itemView.findViewById(R.id.tvNgayDH);
             ibDelete=itemView.findViewById(R.id.ib_delete);
         }
-
-
     }
 }

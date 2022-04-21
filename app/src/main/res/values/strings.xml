@@ -27,4 +27,8 @@
     <string name="them">Thêm</string>
     <string name="chon">Chon</string>
     <string name="capNhat">Cập nhật</string>
+
+    <string name="thongtindondathang">THÔNG TIN ĐƠN ĐẶT HÀNG</string>
+    <string name="themsanpham">THÊM SẢN PHẨM</string>
+    <string name="capnhat">CẬP NHẬT</string>
 </resources>

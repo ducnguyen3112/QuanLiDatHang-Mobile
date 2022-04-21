@@ -7,6 +7,10 @@ public class KhachHangDto implements Serializable {
     private String name, address, phone;
     private byte[] image;
 
+    //thêm contructor rỗng - linh
+    public KhachHangDto() {
+    }
+
     public KhachHangDto(int id, String name, String address, String phone) {
         this.id = id;
         this.name = name;

@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class CreateDatabase extends SQLiteOpenHelper {
 
-    public static final String DB_NAME = "QuanLyDonHang";
+    public static final String DB_NAME = "QLDH";
 
     public static final String TB_KHACHHANG = "KHACHHANG";
     public static final String TB_SANPHAM = "SANPHAM";
@@ -78,7 +78,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
         String tbUSER = "CREATE TABLE " + TB_USER + "("
                 + TB_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TB_USER_USERNAME + " TEXT, "
-                + TB_USER_SDT + " SDT, "
+                + TB_USER_SDT + " TEXT, "
                 + TB_USER_PASSWD + " TEXT )";
         sqLiteDatabase.execSQL(tbKhachHang);
         sqLiteDatabase.execSQL(tbSanPham);

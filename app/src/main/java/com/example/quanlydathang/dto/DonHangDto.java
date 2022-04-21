@@ -15,6 +15,13 @@ public class DonHangDto {
         this.tenKH = tenKH;
     }
 
+    public DonHangDto(int maDH, String ngayDH, int maKH, String tenKH) {
+        this.maDH = maDH;
+        this.ngayDH = ngayDH;
+        this.maKH = maKH;
+        this.tenKH = tenKH;
+    }
+
     public int getMaDH() {
         return maDH;
     }
@@ -44,5 +51,16 @@ public class DonHangDto {
 
     public void setMaKH(int maKH) {
         this.maKH = maKH;
+    }
+
+    @Override
+    public String toString(){
+        return "DonHangDTO={" +
+                "maDH=" + maDH +
+                ", ngayDH=" + ngayDH +
+                ", maKH=" + maKH +
+                ", tenKH=" + tenKH +
+                "}";
+
     }
 }
