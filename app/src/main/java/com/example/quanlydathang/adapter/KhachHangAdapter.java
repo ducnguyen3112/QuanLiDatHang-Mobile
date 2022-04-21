@@ -61,7 +61,7 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.Khac
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, UpdateKhachHangActivity.class);
-                intent.putExtra("KH", dto);
+                intent.putExtra("idKH", String.valueOf(dto.getId()));
                 context.startActivity(intent);
             }
         });

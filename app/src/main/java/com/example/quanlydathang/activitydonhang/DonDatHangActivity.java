@@ -88,19 +88,7 @@ public class DonDatHangActivity extends AppCompatActivity {
         rcvDDH = findViewById(R.id.rcv_DDH);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rcvDDH.setLayoutManager(linearLayoutManager);
-
-        //donHangDtoList = donHangDao.danhSachDonHang("DESC");
-        capNhatDulieuDH(); //tạm thêm để không lõi - linh
-        if (donHangDtoList.isEmpty()) {
-            Toast.makeText(DonDatHangActivity.this
-                    , "Danh sách rỗng!", Toast.LENGTH_SHORT).show();
-        }
-//        else {
-////            donDatHangAdapter = new DonDatHangAdapter(this,donHangDao.danhSachDonHang("DESC"));
-////            rcvDDH.setAdapter(donDatHangAdapter);
-//            capNhatDulieuDH();
-//        }
-
+            capNhatDulieuDH();
    }
 
     private void capNhatDulieuDH() {

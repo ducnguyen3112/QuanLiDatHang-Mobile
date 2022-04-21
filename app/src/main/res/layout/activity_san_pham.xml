@@ -7,50 +7,52 @@
     android:orientation="vertical"
     tools:context=".activity.ProductActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#4CAF50"
-        app:title="@string/title_tb_sp"/>
-
-    <Button
-        android:drawableLeft="@drawable/ic_baseline_add_circle_24"
-        android:id="@+id/buttonAdd"
-        android:text="@string/themsp"
-        android:layout_gravity="right"
-        style="@style/customButton"/>
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="left"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/style_textview"
-            android:layout_width="50dp"
-            android:text="@string/masp"/>
-
-        <TextView
-            android:layout_width="110dp"
-            android:text="@string/tensp"
-            style="@style/style_textview" />
-
-        <TextView
-            style="@style/style_textview"
-            android:layout_width="80dp"
-            android:text="@string/xuatxu"/>
-
-        <TextView
-            style="@style/style_textview"
-            android:layout_width="100dp"
-            android:text="@string/dongia"/>
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#4CAF50"
+            app:title="@string/title_tb_sp" />
+
+        <Button
+            android:id="@+id/buttonAdd"
+            style="@style/customButton"
+            android:layout_gravity="end"
+            android:drawableStart="@drawable/ic_baseline_add_circle_24"
+            android:text="@string/themsp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:nestedScrollingEnabled="false" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 </LinearLayout>
