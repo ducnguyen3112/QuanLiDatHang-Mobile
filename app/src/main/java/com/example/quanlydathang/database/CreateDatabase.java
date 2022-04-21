@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class CreateDatabase extends SQLiteOpenHelper {
 
-    public static final String DB_NAME = "QuanLyDonHang";
+    public static final String DB_NAME = "QLDH";
 
     public static final String TB_KHACHHANG = "KHACHHANG";
     public static final String TB_SANPHAM = "SANPHAM";
