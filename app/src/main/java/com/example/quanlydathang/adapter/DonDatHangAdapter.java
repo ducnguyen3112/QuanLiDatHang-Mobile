@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
@@ -22,7 +21,6 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,8 +52,12 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
     public  Spinner spKHDialog ;
     public  Button btnThemDialog ;
     public   Button btnHuyDialog ;
+    public KHSpinnerAdapter khSpinnerAdapter;
+
     private KhachHangDao khachHangDao;
-    String kh="";
+    public  List<KhachHangDto> khachHangDtos;
+
+    public static int kh=0;
 
     public DonDatHangAdapter(Context context, List<DonHangDto> donHangDtoList) {
         this.context=context;
@@ -63,6 +65,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
         this.donHangDtoListOld = donHangDtoList;
         donHangDao=new DonHangDao(context);
         khachHangDao =new KhachHangDao(context);
+        khachHangDtos=khachHangDao.getListKH();
     }
 
     @NonNull
@@ -84,7 +87,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
         holder.tvKH.setText(donHang.getTenKH());
         holder.tvNgayDH.setText(donHang.getNgayDH());
         holder.ibDelete.setOnClickListener(view -> {
-           deleteDialog(id );
+           deleteDialog(id);
         });
        holder.itemView.setOnClickListener(view -> {
            String[] items={"Sửa","Xem chi tiết"};
@@ -94,16 +97,10 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                    Dialog dialog = getDialogDDH(context);
                    tvMaDHDialog.setVisibility(View.VISIBLE);
                     int maDhDialog=donHang.getMaDH();
+                    edNgayDHDialog.setText(donHang.getNgayDH());
                     tvTieuDeDialog.setText("Sửa đơn hàng");
                     tvMaDHDialog.setText(maDhDialog+"");
                     btnThemDialog.setText("Cập nhập");
-
-                   List<String> listKH=dsMaVaHoTenKH();
-                   ArrayAdapter<String> arrayAdapter=new ArrayAdapter<>(context
-                            , androidx.appcompat.R.layout.support_simple_spinner_dropdown_item
-                           , listKH);
-                   xuKienSpinner();
-                   spKHDialog.setAdapter(arrayAdapter);
                     btnHuyDialog.setOnClickListener(view1 -> dialog.cancel());
                     edNgayDHDialog.setOnFocusChangeListener((view1, b) -> showDateTimeDialog(edNgayDHDialog));
                    btnThemDialog.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +115,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                             DonHangDto donHang1 =new DonHangDto();
                             donHang1.setMaDH(Integer.valueOf(tvMaDHDialog.getText().toString()));
                             donHang1.setNgayDH(edNgayDHDialog.getText().toString());
-                            donHang1.setMaKH(getIdKHFromSpiner(kh));
+                            donHang1.setMaKH(kh);
                             donHangDao.suaDonHang(donHang1);
                             dialog.cancel();
 
@@ -186,6 +183,10 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
         btnThemDialog = dialog.findViewById(R.id.btnthem);
         btnHuyDialog = dialog.findViewById(R.id.btnhuy);
         edNgayDHDialog.setInputType(InputType.TYPE_NULL);
+        khSpinnerAdapter =new KHSpinnerAdapter(context,khachHangDtos);
+        spKHDialog.setAdapter(khSpinnerAdapter);
+        spKHDialog.setDropDownVerticalOffset(150);
+        spinnerListener();
         return dialog;
     }
 
@@ -221,25 +222,18 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
         }
         return ds;
     }
+    public void spinnerListener(){
+        khachHangDao=new KhachHangDao(context);
 
-    public int getIdKHFromSpiner(String str){
-        String[] words=str.split("-");
-        if (!str.isEmpty()){
-            return Integer.valueOf(words[0].trim());
-        }
-        return 0;
-    }
-
-    public void xuKienSpinner() {
         spKHDialog.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                kh=spKHDialog.getSelectedItem().toString();
+               kh= khachHangDtos.get(i).getId();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                kh="";
+               kh=0;
             }
         });
     }
@@ -286,7 +280,6 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
             }
         };
     }
-
     public class DDHViewHolder extends RecyclerView.ViewHolder{
 
         private TextView tvMaDH;

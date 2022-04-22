@@ -7,13 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -32,16 +27,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 public class DonDatHangActivity extends AppCompatActivity {
-
     private DonHangDao donHangDao;
+    private KhachHangDao    khachHangDao;
     private List<DonHangDto> donHangDtoList;
     private RecyclerView rcvDDH;
     private DonDatHangAdapter donDatHangAdapter;
     private SearchView searchView;
     public static int width;
 
-
-    String kh = "";
+    int kh=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +46,6 @@ public class DonDatHangActivity extends AppCompatActivity {
         FloatingActionButton floatButton = findViewById(R.id.fab);
         floatButton.setOnClickListener(view -> {
             Dialog dialog = donDatHangAdapter.getDialogDDH(this);
-            List<String> listKH=donDatHangAdapter.dsMaVaHoTenKH();
-            ArrayAdapter<String> arrayAdapter=new ArrayAdapter<>(this
-                    , androidx.appcompat.R.layout.support_simple_spinner_dropdown_item
-                    , listKH);
-            donDatHangAdapter.spKHDialog.setAdapter(arrayAdapter);
-            xuKienSpinner();
-
             donDatHangAdapter.btnHuyDialog.setOnClickListener(view13 -> dialog.cancel());
             donDatHangAdapter.edNgayDHDialog.setOnFocusChangeListener((view12, b) -> donDatHangAdapter.showDateTimeDialog(donDatHangAdapter.edNgayDHDialog));
             dialog .show();
@@ -69,14 +56,10 @@ public class DonDatHangActivity extends AppCompatActivity {
                 if (donDatHangAdapter.edNgayDHDialog.getText().toString().isEmpty()){
                     CustomToast.makeText(DonDatHangActivity.this, "Không được bỏ trống ngày giờ!",
                             CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
-
-
                 }
-                DonHangDto donHang=new DonHangDto(donDatHangAdapter.edNgayDHDialog.getText().toString(),donDatHangAdapter.getIdKHFromSpiner(kh),null);
-                Log.e("time", donDatHangAdapter.edNgayDHDialog.getText().toString(),null );
-                Log.e("hk", donDatHangAdapter.getIdKHFromSpiner(kh)+"",null );
-
+                DonHangDto donHang=new DonHangDto(donDatHangAdapter.edNgayDHDialog.getText().toString(),DonDatHangAdapter.kh,null);
                  int id= (int)themDonHang(donHang);
+
                 dialog.cancel();
                 if (id!=0) {
                     CustomToast.makeText(DonDatHangActivity.this, "Thêm đơn hàng thành công!",
@@ -86,7 +69,6 @@ public class DonDatHangActivity extends AppCompatActivity {
                     startTTDDH(donHang);
                 }
                 onResume();
-
             });
         });
         rcvDDH = findViewById(R.id.rcv_DDH);
@@ -94,29 +76,11 @@ public class DonDatHangActivity extends AppCompatActivity {
         rcvDDH.setLayoutManager(linearLayoutManager);
             capNhatDulieuDH();
    }
-
     private void capNhatDulieuDH() {
         donHangDtoList = donHangDao.danhSachDonHang("DESC");
         donDatHangAdapter = new DonDatHangAdapter(this,donHangDtoList);
         rcvDDH.setAdapter(donDatHangAdapter);
     }
-
-    private void xuKienSpinner() {
-        donDatHangAdapter.spKHDialog.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                kh=donDatHangAdapter.spKHDialog.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                kh="";
-            }
-        });
-    }
-
-
-
 
 
     private long themDonHang(DonHangDto donHangDto) {

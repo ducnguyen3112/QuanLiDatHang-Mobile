@@ -28,6 +28,7 @@
         <activity
             android:name=".activity.KhachHang.KhachHangActivity"
             android:exported="false"
+            android:label="Khách hàng"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".activity.KhachHang.UpdateKhachHangActivity"
@@ -60,6 +61,7 @@
         <activity
             android:name=".activitydonhang.DonDatHangActivity"
             android:exported="false"
+            android:label="Đơn hàng"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
