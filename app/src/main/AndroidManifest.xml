@@ -13,6 +13,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light" >
+         <activity
+             android:name=".activity.ViewPDFActivity"
+             android:exported="false"
+             android:theme="@style/Theme.Design.Light.NoActionBar" />
+         <activity
+             android:name=".activity.PDFDonHangActivity"
+             android:exported="false"
+             android:theme="@style/Theme.Design.Light.NoActionBar" />
+         <activity
+             android:name=".activity.AddProductActivity"
+             android:exported="false"
+             android:parentActivityName=".activity.ProductActivity"
+             android:theme="@style/Theme.Design.Light.NoActionBar" />
+         <activity
+             android:name=".activity.ProductActivity"
+             android:exported="false"
+             android:parentActivityName=".MainActivity"
+             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".activity.TTDDH_Activity"
             android:exported="false"
@@ -39,17 +57,7 @@
             android:name=".activity.KhachHang.AddKhachHangActivity"
             android:exported="false"
             android:parentActivityName=".activity.KhachHang.KhachHangActivity" />
-        <activity
-            android:name=".activity.AddProductActivity"
-            android:exported="false"
-            android:parentActivityName=".activity.ProductActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
-        <activity
-            android:name=".activity.ProductActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
-        <activity
+         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.Light.NoActionBar" >

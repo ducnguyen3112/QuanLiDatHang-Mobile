@@ -11,6 +11,12 @@ public class KhachHangDto implements Serializable {
     public KhachHangDto() {
     }
 
+    public KhachHangDto(String name, String address, String phone) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+    }
+
     public KhachHangDto(int id, String name, String address, String phone) {
         this.id = id;
         this.name = name;

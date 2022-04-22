@@ -42,6 +42,7 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
     private List<TTDDH_DTO> ttddh_dtoListOld;
     private TTDDH_DAO ttddh_dao;
     private DonHangDao donHangDao;
+    private Product productDao;
 
     public Spinner spinnerSP_dialogThemSP;
     public EditText etSoLuong_dialogThemSP;
@@ -159,7 +160,6 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
     public class TTDDHViewHolder extends RecyclerView.ViewHolder{
         private TextView tvTenSP, tvSL, tvDonGia;
         private ImageButton ibSuaSL, ibXoaSP;
-        public ImageView ivAnhSP;
 
         public TTDDHViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -168,7 +168,6 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
             tvDonGia = itemView.findViewById(R.id.tvDonGia_itemTTDDH);
             ibSuaSL = itemView.findViewById(R.id.ibSuaSL_itemTTDDH);
             ibXoaSP = itemView.findViewById(R.id.ibXoaSP_itemTTDDH);
-            ivAnhSP = itemView.findViewById(R.id.ivAnhSP_itemTTDDH);
         }
     }
 

@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import androidx.appcompat.widget.SearchView;
 import com.example.quanlydathang.MainActivity;
@@ -232,7 +231,6 @@ public class ProductActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ProductActivity.this, AddProductActivity.class);
                 intent.putExtra("MASP", 0);
-                /*startActivityForResult(intent, Constants.RESULT_PRODUCT_ACTIVITY);*/
                 startActivity(intent);
             }
         });
