@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -19,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlydathang.R;
@@ -104,11 +102,11 @@ public class ProductAdapterRecyclerView
     }
 
     private void setInfo(Product product, MyViewHolder myViewHolder) {
-        myViewHolder.maSP.setText(product.getMaSP() + "");
-        myViewHolder.tenSP.setText(product.getTenSP());
-        myViewHolder.xuatXu.setText(product.getXuatXu());
+        myViewHolder.maSP.setText  ("Mã     : "+product.getMaSP() + "");
+        myViewHolder.tenSP.setText (""+product.getTenSP());
+        myViewHolder.xuatXu.setText("Xuất xứ: "+product.getXuatXu());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,##0");
-        myViewHolder.donGia.setText(decimalFormat.format(product.getDonGia()));
+        myViewHolder.donGia.setText("Giá    : "+decimalFormat.format(product.getDonGia())+" đ");
         if(product.getImage()!=null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(product.getImage(), 0, product.getImage().length);
             myViewHolder.imageView.setImageBitmap(bitmap);
