@@ -13,9 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.quanlydathang.activity.AddProductActivity;
 import com.example.quanlydathang.dao.UserDao;
-import com.example.quanlydathang.database.CreateDatabase;
 import com.example.quanlydathang.utils.CustomToast;
 
 public class LoginActivity extends AppCompatActivity {

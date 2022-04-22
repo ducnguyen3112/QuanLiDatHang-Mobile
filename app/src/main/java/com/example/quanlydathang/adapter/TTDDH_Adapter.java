@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlydathang.R;
 import com.example.quanlydathang.activity.TTDDH_Activity;
 import com.example.quanlydathang.dao.DonHangDao;
-import com.example.quanlydathang.dao.ProductDao;
 import com.example.quanlydathang.dao.TTDDH_DAO;
 import com.example.quanlydathang.dto.Product;
 import com.example.quanlydathang.dto.TTDDH_DTO;

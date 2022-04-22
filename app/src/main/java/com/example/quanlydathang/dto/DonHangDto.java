@@ -9,7 +9,13 @@ public class DonHangDto {
     public DonHangDto() {
     }
 
-    public DonHangDto( String ngayDH, int maKH, String tenKH) {
+    public DonHangDto(int maDH, String ngayDH, int maKH) {
+        this.maDH = maDH;
+        this.ngayDH = ngayDH;
+        this.maKH = maKH;
+    }
+
+    public DonHangDto(String ngayDH, int maKH, String tenKH) {
         this.ngayDH = ngayDH;
         this.maKH = maKH;
         this.tenKH = tenKH;
