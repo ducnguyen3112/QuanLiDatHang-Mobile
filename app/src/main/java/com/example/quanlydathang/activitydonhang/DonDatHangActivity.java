@@ -119,7 +119,8 @@ public class DonDatHangActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
-        super.onResume();
         capNhatDulieuDH();
+        super.onResume();
+
     }
 }

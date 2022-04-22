@@ -8,6 +8,7 @@
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/bg_spinner.xml" value="0.1" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2425" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/rounded_corners.xml" value="0.1745" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/.xml" value="0.15677083333333333" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/fira_sans.xml" value="0.1" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/font/goldman.xml" value="0.1" />
@@ -19,8 +20,10 @@
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_login_with_phone_number.xml" value="0.264" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_main.xml" value="0.21784420289855072" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_pdf_donhang.xml" value="0.165625" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_san_pham.xml" value="0.19114583333333332" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_send_otp.xml" value="0.2" />
+        <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_them_sp.xml" value="0.165625" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_update_khach_hang.xml" value="0.2595108695652174" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/activity_verification_otp.xml" value="0.23097826086956522" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/layout/custom_alert.xml" value="0.2595108695652174" />
@@ -37,7 +40,6 @@
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable-v24/custom_button_pressed.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/confusing_shape.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/custom_button.xml" value="0.1" />
-        <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/custom_edit_text.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/custom_toast.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/error_shape.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/ic_baseline_grid_on_24.xml" value="0.1" />
@@ -46,15 +48,12 @@
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/drawable/warning_shape.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/font/oswald.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_don_dat_hang.xml" value="0.1" />
-        <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_pdf_donhang.xml" value="0.1" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_san_pham.xml" value="0.1" />
-        <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_them_sp.xml" value="0.25" />
-        <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_view_pdfactivity.xml" value="0.13632246376811594" />
+        <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_them_sp.xml" value="0.18" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/custom_alert.xml" value="0.22" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/custom_dialog.xml" value="0.22" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/custom_toast.xml" value="0.22" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/item_dondathang.xml" value="0.1" />
-        <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/item_pdf_donhang.xml" value="0.20416666666666666" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/item_product_grid.xml" value="0.18" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/item_product_list.xml" value="0.18854166666666666" />
         <entry key="..\:/QuanLiDatHang-Mobile/app/src/main/res/layout/item_sanpham.xml" value="0.1" />

@@ -131,7 +131,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                    dialog.show();
                    dialog.getWindow().setLayout((6*DonDatHangActivity.width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
                }
-               if (i==2){
+               else if (i==2){
                    Intent intent = new Intent(context, PDFDonHangActivity.class);
                    intent.putExtra("id",donHang.getMaDH());
                    ((Activity)context).startActivity(intent);

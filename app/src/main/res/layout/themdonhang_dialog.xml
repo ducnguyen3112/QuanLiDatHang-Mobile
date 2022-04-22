@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
     android:orientation="vertical"
+    android:layout_margin="10dp"
     android:gravity="center">
 
     <TextView
         android:id="@+id/tvTieuDeDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="THÊM ĐƠN HÀNG"
         android:textSize="30sp"
         android:textColor="@color/title_color"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

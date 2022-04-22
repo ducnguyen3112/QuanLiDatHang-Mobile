@@ -23,6 +23,7 @@
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_marginBottom">28dp</item>
         <item name="android:textSize">22sp</item>
+        <item name="background">@drawable/custom_edit_text</item>
     </style>
     <style name="btnLogin">
 
