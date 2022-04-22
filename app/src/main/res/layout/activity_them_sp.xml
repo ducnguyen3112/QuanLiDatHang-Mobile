@@ -11,7 +11,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#4CAF50"
         app:title="@string/title_tb_themsp" />
 
     <LinearLayout
@@ -36,6 +35,8 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:padding="10dp"
+                android:background="@drawable/custom_edit_text"
                 android:id="@+id/editTextMaSP"
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
@@ -57,6 +58,8 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:padding="10dp"
+                android:background="@drawable/custom_edit_text"
                 android:id="@+id/editTextTenSP"
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
@@ -78,6 +81,8 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:padding="10dp"
+                android:background="@drawable/custom_edit_text"
                 android:id="@+id/editTextXuatXuSP"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
@@ -99,6 +104,8 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:padding="10dp"
+                android:background="@drawable/custom_edit_text"
                 android:id="@+id/editTextDonGia"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"></EditText>
