@@ -7,186 +7,165 @@
     tools:context=".activity.TTDDH_Activity"
     >
 
-    <TextView
-        android:id="@+id/tvTittle_ttddh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:text="@string/thongtindondathang"
-        style="@style/heading1"
-        android:background="#a5e65c"
-        />
-
     <LinearLayout
         android:id="@+id/llThongTin_ttddh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/tvTittle_ttddh"
-        android:layout_marginTop="10dp"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black"
-            />
+            android:background="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:orientation="horizontal"
             android:gravity="center"
-            >
+            android:orientation="horizontal">
+
             <TextView
+                style="@style/heading3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mã đơn hàng"
-                style="@style/heading3"
-                />
+                android:text="Mã đơn hàng" />
+
             <TextView
                 android:id="@+id/tvMaDH_ttddh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
                 style="@style/data"
-                />
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ngày đặt hàng"
+                android:text="1" />
+
+            <TextView
                 style="@style/heading3"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày đặt hàng" />
+
             <TextView
                 android:id="@+id/tvNgayDH_ttddh"
+                style="@style/data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="19/04/2022 12:12"
-                style="@style/data"
-                />
+                android:text="19/04/2022 12:12" />
         </LinearLayout>
 
         <View
             android:layout_width="200dp"
             android:layout_height="1dp"
-            android:background="@color/black"
-            />
+            android:background="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:orientation="horizontal"
             android:gravity="center"
-            >
+            android:orientation="horizontal">
+
             <TextView
+                style="@style/heading3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tên khách hàng"
-                style="@style/heading3"
-                />
+                android:text="Tên khách hàng" />
+
             <TextView
                 android:id="@+id/tvTenKH_ttddh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tom Hidlleson"
                 style="@style/data"
-                />
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SĐT"
-                style="@style/heading3"
-                />
-            <TextView
-                android:id="@+id/tvSDT_ttddh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0369369369"
-                style="@style/data"
-                />
+                android:text="Tom Hidlleson" />
+
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:orientation="horizontal"
             android:gravity="center"
-            >
+            android:orientation="horizontal">
+
             <TextView
+                style="@style/heading3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Địa chỉ"
+                android:text="SĐT" />
+
+            <TextView
+                android:id="@+id/tvSDT_ttddh"
+                style="@style/data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0369369369" />
+
+            <TextView
                 style="@style/heading3"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Địa chỉ" />
+
             <TextView
                 android:id="@+id/tvDiaChi_ttddh"
+                style="@style/data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="90 Man Thiện"
-                style="@style/data"
-                />
+                android:text="90 Man Thiện" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black"
-            />
+            android:background="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="right"
-            >
+            android:orientation="horizontal">
 
 
             <TextView
+                style="@style/heading3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tổng giá trị đơn hàng"
-                style="@style/heading3"
-                />
+                android:text="Tổng giá trị đơn hàng" />
 
             <TextView
                 android:id="@+id/tvTongTien_ttddh"
+                style="@style/data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10000"
-                style="@style/data"
-                />
+                android:text="10.000" />
         </LinearLayout>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_ttddh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="410dp"
+        android:layout_height="411dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llThongTin_ttddh"
-        android:layout_marginTop="20dp"
-        />
+        app:layout_constraintTop_toBottomOf="@id/llThongTin_ttddh" />
 
     <Button
         android:id="@+id/btnThemSP_ttddh"
+        style="@style/customButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:text="@string/themsanpham"
-        style="@style/customButton"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rcv_ttddh" />
 
     <Button
         android:id="@+id/btnCapNhat_ttddh"
+        style="@style/customButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:text="@string/capnhat"
-        style="@style/customButton"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rcv_ttddh" />
 </androidx.constraintlayout.widget.ConstraintLayout>

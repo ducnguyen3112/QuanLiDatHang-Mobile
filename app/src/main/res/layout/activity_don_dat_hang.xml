@@ -10,9 +10,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        style="@style/custom_floatingButton"
-       />
-
+        style="@style/custom_floatingButton" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_DDH"

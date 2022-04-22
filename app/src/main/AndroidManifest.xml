@@ -34,6 +34,7 @@
         <activity
             android:name=".activity.TTDDH_Activity"
             android:exported="false"
+            android:label="THÔNG TIN ĐƠN ĐẶT HÀNG"
             android:parentActivityName=".activitydonhang.DonDatHangActivity" />
         <activity
             android:name=".VerificationOTPActivity"
