@@ -13,4 +13,7 @@
     <color name="indigo">#6B41D6</color>
     <color name="grey_blue">#5B7E82</color>
     <color name="gray">#817877</color>
+    <color name="dropdownBackColor">#D96098</color>
+    <color name="spinnerColor">#325288</color>
+
 </resources>
