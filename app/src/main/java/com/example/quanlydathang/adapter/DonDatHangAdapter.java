@@ -97,6 +97,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                    Dialog dialog = getDialogDDH(context);
                    tvMaDHDialog.setVisibility(View.VISIBLE);
                     int maDhDialog=donHang.getMaDH();
+                    spKHDialog.setSelection(getIndexKH(donHang.getMaKH()));
                     edNgayDHDialog.setText(donHang.getNgayDH());
                     tvTieuDeDialog.setText("Sửa đơn hàng");
                     tvMaDHDialog.setText(maDhDialog+"");
@@ -213,14 +214,15 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
         builder.create().show();
     }
 
-    public List<String> dsMaVaHoTenKH(){
-        List<String> ds=new ArrayList<>();
-        List<KhachHangDto> dsKH= khachHangDao.getListKH();
-        for (KhachHangDto item :
-                dsKH) {
-            ds.add(item.getId()+" - "+item.getName());
+    public int getIndexKH(int maKH){
+        int i=0;
+        for ( KhachHangDto kh:khachHangDtos) {
+            if (kh.getId()==maKH){
+                return i;
+            }
+            i++;
         }
-        return ds;
+        return -1;
     }
     public void spinnerListener(){
         khachHangDao=new KhachHangDao(context);
@@ -280,6 +282,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
             }
         };
     }
+
     public class DDHViewHolder extends RecyclerView.ViewHolder{
 
         private TextView tvMaDH;

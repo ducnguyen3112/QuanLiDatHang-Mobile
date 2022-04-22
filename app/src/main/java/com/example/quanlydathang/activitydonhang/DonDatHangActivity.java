@@ -28,7 +28,7 @@ import java.util.List;
 
 public class DonDatHangActivity extends AppCompatActivity {
     private DonHangDao donHangDao;
-    private KhachHangDao    khachHangDao;
+    private KhachHangDao khachHangDao;
     private List<DonHangDto> donHangDtoList;
     private RecyclerView rcvDDH;
     private DonDatHangAdapter donDatHangAdapter;
@@ -132,7 +132,6 @@ public class DonDatHangActivity extends AppCompatActivity {
         builder.setMessage("Thêm sản phẩm vào đơn hàng vừa tạo?")
                 .setPositiveButton("Đồng Ý", (dialogInterface, i) -> {
                     //
-                    Log.e("donHangDto", donHangDto.getMaKH()+"");
                     donHangDto.setTenKH(donDatHangAdapter.timTenKH(donHangDto.getMaKH()));
                     Intent intent = new Intent(this, TTDDH_Activity.class);
                     Bundle bundle = new Bundle();

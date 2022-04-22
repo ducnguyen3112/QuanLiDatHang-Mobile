@@ -3,12 +3,18 @@ package com.example.quanlydathang.adapter;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -18,32 +24,38 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlydathang.R;
 import com.example.quanlydathang.activity.TTDDH_Activity;
 import com.example.quanlydathang.dao.DonHangDao;
+import com.example.quanlydathang.dao.KhachHangDao;
 import com.example.quanlydathang.dao.ProductDao;
 import com.example.quanlydathang.dao.TTDDH_DAO;
 import com.example.quanlydathang.dto.Product;
 import com.example.quanlydathang.dto.TTDDH_DTO;
 import com.example.quanlydathang.utils.CustomToast;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewHolder> {
+public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewHolder> implements Filterable {
     private Context context;
     private List<TTDDH_DTO> ttddh_dtoList;
+    private List<TTDDH_DTO> ttddh_dtoListOld;
     private TTDDH_DAO ttddh_dao;
     private DonHangDao donHangDao;
-    private Product productDao;
 
     public Spinner spinnerSP_dialogThemSP;
     public EditText etSoLuong_dialogThemSP;
     public Button btnHuy_dialogThemSP;
     public Button btnThem_dialogThemSP;
+    public SPSpinnerAdapter spSpinnerAdapter;
+    public List<Product> listProduct;
+//    private ProductDao productDao;
 
     private EditText etSL_dialogSuaSL;
     private Button btnHuy_dialogSuaSL;
     private Button btnDongY_dialogSuaSL;
 
-    public int sum = 0;
+    public static int sp = 0;
 
     public TTDDH_Adapter(Context context, List<TTDDH_DTO> ds, int maDH) {
         this.context=context;
@@ -55,6 +67,8 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
                 this.ttddh_dtoList.add(item);
             }
         }
+        this.ttddh_dtoListOld = ttddh_dtoList;
+        listProduct = ttddh_dao.getListProducts();
     }
 
     @NonNull
@@ -75,6 +89,10 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
         holder.tvTenSP.setText(product.getTenSP());
         holder.tvSL.setText(ttddh_dto.getSL()+"");
         holder.tvDonGia.setText(product.getDonGia()+" USD");
+        if(product.getImage()!=null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(product.getImage(), 0, product.getImage().length);
+            holder.ivAnhSP.setImageBitmap(bitmap);
+        }
 
         holder.ibXoaSP.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -141,6 +159,7 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
     public class TTDDHViewHolder extends RecyclerView.ViewHolder{
         private TextView tvTenSP, tvSL, tvDonGia;
         private ImageButton ibSuaSL, ibXoaSP;
+        public ImageView ivAnhSP;
 
         public TTDDHViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -149,6 +168,7 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
             tvDonGia = itemView.findViewById(R.id.tvDonGia_itemTTDDH);
             ibSuaSL = itemView.findViewById(R.id.ibSuaSL_itemTTDDH);
             ibXoaSP = itemView.findViewById(R.id.ibXoaSP_itemTTDDH);
+            ivAnhSP = itemView.findViewById(R.id.ivAnhSP_itemTTDDH);
         }
     }
 
@@ -163,6 +183,11 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
         btnHuy_dialogThemSP = dialog.findViewById(R.id.btnHuy_dialodThemSP);
         btnThem_dialogThemSP = dialog.findViewById(R.id.btnThem_dialodThemSP);
 
+        spSpinnerAdapter = new SPSpinnerAdapter(context,listProduct);
+        spinnerSP_dialogThemSP.setAdapter(spSpinnerAdapter);
+        spinnerSP_dialogThemSP.setDropDownVerticalOffset(150);
+
+        spinnerListener();
         return dialog;
     }
 
@@ -189,15 +214,65 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
         return dialog;
     }
 
-    public int TongTien() {
+    public String TongTien() {
         if(ttddh_dtoList==null) {
-            return 0;
+            return "0";
         }
         int sum = 0;
         for(TTDDH_DTO ttddh_dto : ttddh_dtoList) {
             Product product = ttddh_dao.TimSanPham(ttddh_dto.getMaSP());
             sum += ttddh_dto.getSL()*product.getDonGia();
         }
-        return sum;
+        return NumberFormat.getNumberInstance(Locale.US).format(sum);
+    }
+
+    public void spinnerListener(){
+        spinnerSP_dialogThemSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                sp = listProduct.get(i).getMaSP();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                sp = 0;
+            }
+        });
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String s = charSequence.toString();
+                if(s.isEmpty()) {
+                    ttddh_dtoList = ttddh_dtoListOld;
+                }
+                else {
+                    List<TTDDH_DTO> list = new ArrayList<>();
+                    for(TTDDH_DTO ttddh_dto : ttddh_dtoListOld) {
+                        Product product = ttddh_dao.TimSanPham(ttddh_dto.getMaSP());
+
+                        if(product.getTenSP().toLowerCase().contains(s.toLowerCase())) {
+                            list.add(ttddh_dto);
+                        }
+                    }
+                    ttddh_dtoList = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = ttddh_dtoList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                ttddh_dtoList = (List<TTDDH_DTO>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+    public int selectedProductID() {
+        return sp;
     }
 }

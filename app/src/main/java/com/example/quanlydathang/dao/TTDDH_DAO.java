@@ -103,6 +103,7 @@ public class TTDDH_DAO {
             product.setTenSP(cursor.getString(1));
             product.setXuatXu(cursor.getString(2));
             product.setDonGia(Integer.parseInt(cursor.getString(3)));
+            product.setImage(cursor.getBlob(4));
             cursor.moveToNext();
         }
 
@@ -122,6 +123,7 @@ public class TTDDH_DAO {
             product.setTenSP(cursor.getString(1));
             product.setXuatXu(cursor.getString(2));
             product.setDonGia(Integer.parseInt(cursor.getString(3)));
+            product.setImage(cursor.getBlob(4));
 
             list.add(product);
             cursor.moveToNext();

@@ -36,9 +36,11 @@
         <Spinner
             android:id="@+id/spinnerSP_dialogThemSP"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:layout_height="40dp"
+
             tools:ignore="SpeakableTextPresentCheck"
+            android:popupBackground="@color/dropdownBackColor"
+            android:background="@drawable/bg_spinner"
             />
 
         <TextView
