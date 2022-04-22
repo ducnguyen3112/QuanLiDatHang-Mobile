@@ -137,7 +137,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                    ((Activity)context).startActivity(intent);
                }
                else {
-                   //truyền thông tin và start activity TTDDH - linh
+                   //truyền thông tin và start activity TTDDH để cập nhật - linh
                    Intent intent = new Intent(context, TTDDH_Activity.class);
                    Bundle bundle = new Bundle();
                    bundle.putInt("maDH",donHang.getMaDH());
@@ -305,5 +305,12 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
             tvNgayDH=itemView.findViewById(R.id.tvNgayDH);
             ibDelete=itemView.findViewById(R.id.ib_delete);
         }
+    }
+
+    //tim KH - linh
+    public String timTenKH(int id) {
+        KhachHangDto khachHangDto = khachHangDao.getKHById(id);
+        Log.e("khachHangDto", khachHangDto.getName()+"");
+        return khachHangDto.getName();
     }
 }

@@ -2,10 +2,13 @@ package com.example.quanlydathang.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -14,11 +17,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -55,6 +60,9 @@ public class TTDDH_Activity extends AppCompatActivity {
     private TextView tvMaDH, tvNgayDH, tvTenKH, tvSDT, tvDiaChi, tvTongTien;
     private Button  btnThemSP, btnCapNhat;
 
+
+    private SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,13 +92,14 @@ public class TTDDH_Activity extends AppCompatActivity {
 
         btnThemSP.setOnClickListener(view -> {
             Dialog dialog = ttddh_adapter.getDialogThemSP_TTDDH(this);
-            List<String> dsMaVaTenSP = ttddh_adapter.dsMaVaTenSP();
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this
-                    , androidx.appcompat.R.layout.support_simple_spinner_dropdown_item
-                    , dsMaVaTenSP );
-            ttddh_adapter.spinnerSP_dialogThemSP.setAdapter(arrayAdapter);
-            suKienSpinner();
-            Log.e("selectedProductID",selectedID+"");
+
+//            List<String> dsMaVaTenSP = ttddh_adapter.dsMaVaTenSP();
+//            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this
+//                    , androidx.appcompat.R.layout.support_simple_spinner_dropdown_item
+//                    , dsMaVaTenSP );
+//            ttddh_adapter.spinnerSP_dialogThemSP.setAdapter(arrayAdapter);
+//            suKienSpinner();
+//            Log.e("selectedProductID",selectedID+"");
 
             dialog.show();
 
@@ -106,7 +115,7 @@ public class TTDDH_Activity extends AppCompatActivity {
                 else {
                     TTDDH_DTO ttddh_dto = new TTDDH_DTO();
                     ttddh_dto.setMaDH(mDonHangDto.getMaDH());
-                    ttddh_dto.setMaSP(selectedID);
+                    ttddh_dto.setMaSP(ttddh_adapter.selectedProductID());
                     ttddh_dto.setSL(Integer.parseInt(ttddh_adapter.etSoLuong_dialogThemSP.getText().toString()));
 
                     int id = (int) ttddh_dao.them_ttddh_dao(ttddh_dto);
@@ -174,12 +183,45 @@ public class TTDDH_Activity extends AppCompatActivity {
         ttddh_dtoList = ttddh_dao.ttddh_dtoList();
         ttddh_adapter = new TTDDH_Adapter(this,ttddh_dtoList,mDonHangDto.getMaDH());
         rcvTTDDH.setAdapter(ttddh_adapter);
-        tvTongTien.setText(NumberFormat.getNumberInstance(Locale.US).format(ttddh_adapter.TongTien()) + " USD");
+        tvTongTien.setText((ttddh_adapter.TongTien()) + " USD");
     }
 
     @Override
     public void onResume() {
         super.onResume();
         capNhatDuLieuTTDDH();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                ttddh_adapter.getFilter().filter(query);
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ttddh_adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (!searchView.isIconified()) {
+            searchView.setIconified(true);
+            return;
+        }
     }
 }
