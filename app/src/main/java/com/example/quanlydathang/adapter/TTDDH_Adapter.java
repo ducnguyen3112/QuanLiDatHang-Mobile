@@ -160,6 +160,7 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
     public class TTDDHViewHolder extends RecyclerView.ViewHolder{
         private TextView tvTenSP, tvSL, tvDonGia;
         private ImageButton ibSuaSL, ibXoaSP;
+        private ImageView ivAnhSP;
 
         public TTDDHViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -168,6 +169,7 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
             tvDonGia = itemView.findViewById(R.id.tvDonGia_itemTTDDH);
             ibSuaSL = itemView.findViewById(R.id.ibSuaSL_itemTTDDH);
             ibXoaSP = itemView.findViewById(R.id.ibXoaSP_itemTTDDH);
+            ivAnhSP = itemView.findViewById(R.id.ivAnhSP_itemTTDDH);
         }
     }
 
