@@ -90,10 +90,10 @@ public class DonDatHangActivity extends AppCompatActivity {
         rcvDDH.setLayoutManager(linearLayoutManager);
 
         //donHangDtoList = donHangDao.danhSachDonHang("DESC");
-        if (donHangDtoList.isEmpty()) {
+        /*if (donHangDtoList.isEmpty()) {
             Toast.makeText(DonDatHangActivity.this
                     , "Danh sách rỗng!", Toast.LENGTH_SHORT).show();
-        } else {
+        } else */{
 //            donDatHangAdapter = new DonDatHangAdapter(this,donHangDao.danhSachDonHang("DESC"));
 //            rcvDDH.setAdapter(donDatHangAdapter);
             capNhatDulieuDH();

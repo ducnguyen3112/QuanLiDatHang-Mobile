@@ -15,7 +15,6 @@ public class CustomToast extends Toast {
     public static int SUCCESS = 1;
     public static int WARNING = 2;
     public static int ERROR = 3;
-    public static int CONFUSING = 4;
 
     private static long SHORT = 4000;
     private static long LONG = 7000;

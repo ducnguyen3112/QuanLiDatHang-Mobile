@@ -1,10 +1,12 @@
 package com.example.quanlydathang.adapter;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlydathang.R;
+import com.example.quanlydathang.activity.PDFDonHangActivity;
 import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
 import com.example.quanlydathang.dao.DonHangDao;
 import com.example.quanlydathang.dao.KhachHangDao;
@@ -82,7 +85,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
            deleteDialog(id );
         });
        holder.itemView.setOnClickListener(view -> {
-           String[] items={"Sửa","Xem chi tiết"};
+           String[] items={"Sửa","Xem chi tiết", "In thông tin đơn hàng"};
            AlertDialog.Builder builder=new AlertDialog.Builder(context);
            builder.setItems(items, (dialogInterface, i) -> {
                if (i==0){
@@ -124,9 +127,11 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                    });
                    dialog.show();
                    dialog.getWindow().setLayout((6*DonDatHangActivity.width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
-
-               }else{
-
+               }
+               if (i==2){
+                   Intent intent = new Intent(context, PDFDonHangActivity.class);
+                   intent.putExtra("id",donHang.getMaDH());
+                   ((Activity)context).startActivity(intent);
                }
 
            });

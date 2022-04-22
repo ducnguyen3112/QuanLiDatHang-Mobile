@@ -38,6 +38,7 @@ public class AddProductActivity extends AppCompatActivity {
     int maSP;
     Toolbar toolbar;
     ImageView imageViewChonAnh, imageView, imageViewSelectFromFile;
+
     private void setActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -76,6 +77,10 @@ public class AddProductActivity extends AppCompatActivity {
             CustomToast.makeText(AddProductActivity.this, "Định dạng đơn giá nhập vào chưa hợp lệ!!",
                     CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
             return false;
+        } else if (Integer.parseInt(donGia) <= 0) {
+            CustomToast.makeText(AddProductActivity.this, "Đơn giá > 0 !!",
+                    CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
+            return false;
         }
         return true;
     }
@@ -95,17 +100,17 @@ public class AddProductActivity extends AppCompatActivity {
         imageViewSelectFromFile = findViewById(R.id.imageViewSelectFromFile);
     }
 
-    public void handleClickSelectImage(){
+    public void handleClickSelectImage() {
         imageViewChonAnh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,Constants.REQUEST_CODE);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, Constants.REQUEST_CODE);
             }
         });
     }
 
-    public void handleClickSelectFromImageFile(){
+    public void handleClickSelectFromImageFile() {
         imageViewSelectFromFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,13 +124,11 @@ public class AddProductActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==Constants.REQUEST_CODE && resultCode==RESULT_OK)
-        {
+        if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setVisibility(View.VISIBLE);
             imageView.setImageBitmap(bitmap);
-        }
-        else if (requestCode == Constants.SelectFromImageFile && resultCode == RESULT_OK && data != null) {
+        } else if (requestCode == Constants.SelectFromImageFile && resultCode == RESULT_OK && data != null) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
@@ -140,12 +143,11 @@ public class AddProductActivity extends AppCompatActivity {
         }
     }
 
-    public byte[] ConverttoArrayByte(ImageView img)
-    {
+    public byte[] ConverttoArrayByte(ImageView img) {
         BitmapDrawable bitmapDrawable = (BitmapDrawable) img.getDrawable();
-        Bitmap bitmap=bitmapDrawable.getBitmap();
+        Bitmap bitmap = bitmapDrawable.getBitmap();
 
-        ByteArrayOutputStream stream=new ByteArrayOutputStream();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
     }
@@ -155,7 +157,7 @@ public class AddProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_sp);
         setControl();
-        Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
+//        Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
         maSP = getIntent().getIntExtra("MASP", 0);
         if (maSP != 0) {
             imageView.setVisibility(View.VISIBLE);
@@ -189,13 +191,10 @@ public class AddProductActivity extends AppCompatActivity {
                 String donGia = editTextDonGia.getText().toString();
                 if (checkInput(tenSP, xuatXu, donGia) == true) {
                     ProductDao db = new ProductDao(getApplicationContext());
-                    Product product = new Product(tenSP, xuatXu, Integer.parseInt(donGia));
                     if (isupdate == false) {
                         try {
-                            /*db.addProduct(product);*/
-
-                            db.insertProduct(tenSP,xuatXu,
-                                    Integer.parseInt(donGia),ConverttoArrayByte(imageView));
+                            db.insertProduct(tenSP, xuatXu,
+                                    Integer.parseInt(donGia), ConverttoArrayByte(imageView));
 
                             CustomToast.makeText(AddProductActivity.this, "Thêm sản phẩm thành công", CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
                             Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
@@ -206,9 +205,8 @@ public class AddProductActivity extends AppCompatActivity {
                     }
                     if (isupdate == true) {
                         String maSP = editTextMaSP.getText().toString();
-                        //Product sp = new Product(Integer.parseInt(maSP), tenSP, xuatXu, Integer.parseInt(donGia));
-                        db.updateProduct(Integer.parseInt(maSP),tenSP,xuatXu,
-                                Integer.parseInt(donGia),ConverttoArrayByte(imageView));
+                        db.updateProduct(Integer.parseInt(maSP), tenSP, xuatXu,
+                                Integer.parseInt(donGia), ConverttoArrayByte(imageView));
                         CustomToast.makeText(AddProductActivity.this, "Sửa thông tin thành công!!", CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
                         Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
                         startActivityForResult(intent, Constants.RESULT_PRODUCT_ACTIVITY);
@@ -223,7 +221,7 @@ public class AddProductActivity extends AppCompatActivity {
         editTextTenSP.setText(product.getTenSP());
         editTextXuatXu.setText(product.getXuatXu());
         editTextDonGia.setText(String.valueOf(product.getDonGia()));
-        if(product.getImage()!=null) {
+        if (product.getImage() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(product.getImage(), 0, product.getImage().length);
             imageView.setVisibility(View.VISIBLE);
             imageView.setImageBitmap(bitmap);
