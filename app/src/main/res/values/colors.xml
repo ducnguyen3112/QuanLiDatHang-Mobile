@@ -15,5 +15,6 @@
     <color name="gray">#817877</color>
     <color name="dropdownBackColor">#D96098</color>
     <color name="spinnerColor">#325288</color>
+    <color name="dialogBackColor">#0091C2</color>
 
 </resources>

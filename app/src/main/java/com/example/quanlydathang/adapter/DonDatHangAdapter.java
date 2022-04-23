@@ -7,6 +7,8 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -27,13 +29,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlydathang.R;
-import com.example.quanlydathang.activity.PDFDonHangActivity;
 import com.example.quanlydathang.activity.TTDDH_Activity;
 import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
 import com.example.quanlydathang.dao.DonHangDao;
 import com.example.quanlydathang.dao.KhachHangDao;
 import com.example.quanlydathang.dto.DonHangDto;
 import com.example.quanlydathang.dto.KhachHangDto;
+import com.example.quanlydathang.utils.CustomAlertDialog;
 import com.example.quanlydathang.utils.CustomToast;
 
 import java.text.SimpleDateFormat;
@@ -93,7 +95,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
         });
        holder.itemView.setOnClickListener(view -> {
            /*String[] items={"Sửa","Xem chi tiết"};*/
-           String[] items={"Sửa","Xem chi tiết", "In thông tin đơn hàng"};
+           String[] items={"Sửa","Xem chi tiết"};
            AlertDialog.Builder builder=new AlertDialog.Builder(context);
            builder.setItems(items, (dialogInterface, i) -> {
                if (i==0){
@@ -129,13 +131,10 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
                        }
                    });
                    dialog.show();
+                   dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                    dialog.getWindow().setLayout((6*DonDatHangActivity.width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
                }
-               else if (i==2){
-                   Intent intent = new Intent(context, PDFDonHangActivity.class);
-                   intent.putExtra("id",donHang.getMaDH());
-                   ((Activity)context).startActivity(intent);
-               }
+
                else {
                    //truyền thông tin và start activity TTDDH để cập nhật - linh
                    Intent intent = new Intent(context, TTDDH_Activity.class);
@@ -187,6 +186,7 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
         dialog.setContentView(R.layout.themdonhang_dialog);
         tvTieuDeDialog=dialog.findViewById(R.id.tvTieuDeDialog);
         tvMaDHDialog=dialog.findViewById(R.id.tvIdDonHangDialog);
+        tvMaDHDialog.setVisibility(View.GONE);
         edNgayDHDialog = dialog.findViewById(R.id.etNgayDH);
         spKHDialog = dialog.findViewById(R.id.spKH);
         btnThemDialog = dialog.findViewById(R.id.btnthem);
@@ -200,26 +200,38 @@ public class DonDatHangAdapter extends RecyclerView.Adapter<DonDatHangAdapter.DD
     }
 
     public void deleteDialog(int id){
-        AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        builder.setMessage("Bán muốn xóa đơn hàng: "+id+"?")
-                .setPositiveButton("Xóa", (dialogInterface, i) -> {
-                    if (donHangDao.xoaDonHang((int)id)){
+        CustomAlertDialog alertDialog= new CustomAlertDialog(context);
 
-                        ((DonDatHangActivity)context).onResume();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.getWindow().setLayout((7* DonDatHangActivity.width)/8, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.show();
+        alertDialog.btnPositive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (donHangDao.xoaDonHang((int)id)){
 
-                        CustomToast.makeText(context, "Xóa đơn hàng thành công!",
-                                CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
+                    ((DonDatHangActivity)context).onResume();
 
-                    }else {
+                    CustomToast.makeText(context, "Xóa đơn hàng thành công!",
+                            CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
+                    alertDialog.cancel();
 
-                        CustomToast.makeText(context, "Lỗi! không thể xóa đơn hàng.",
-                                CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
-                    }
-                })
-                .setNegativeButton("Hủy", (dialogInterface, i) -> {
+                }else {
 
-                });
-        builder.create().show();
+                    CustomToast.makeText(context, "Lỗi! không thể xóa đơn hàng.",
+                            CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
+                }
+            }
+        });
+        alertDialog.btnNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.cancel();
+            }
+        });
+        alertDialog.setMessage("Bạn muốn xóa đơn hàng: "+id+" ?");
+        alertDialog.setBtnPositive("Xóa");
+        alertDialog.setBtnNegative("Hủy");
     }
 
     public int getIndexKH(int maKH){

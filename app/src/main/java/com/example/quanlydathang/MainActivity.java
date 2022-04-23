@@ -6,15 +6,20 @@ import androidx.cardview.widget.CardView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.quanlydathang.activity.ProductActivity;
 import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
 import com.example.quanlydathang.dao.UserDao;
 import com.example.quanlydathang.activity.KhachHang.KhachHangActivity;
+import com.example.quanlydathang.utils.CustomAlertDialog;
+import com.example.quanlydathang.utils.CustomToast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,22 +62,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void xacNhapThoatDialog() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
-        builder.setMessage("Bạn muốn đăng xuất khỏi ứng dụng ?")
-                .setPositiveButton("Đăng xuất", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent=new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
+        CustomAlertDialog alertDialog = new CustomAlertDialog(MainActivity.this);
 
-                    }
-                }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.getWindow().setLayout((7 * DonDatHangActivity.width) / 8, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.show();
+        alertDialog.setMessage("Bạn muốn đăng xuất khỏi ứng dụng ?");
+        alertDialog.setBtnPositive("Đăng xuất");
+        alertDialog.setBtnNegative("Hủy");
+        alertDialog.btnPositive.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
-        builder.create().show();
+        alertDialog.btnNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.cancel();
+            }
+        });
+
     }
 
     private void handleClickCardViewSanPham() {

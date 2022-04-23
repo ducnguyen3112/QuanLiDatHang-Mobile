@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Menu;
@@ -28,7 +30,6 @@ import java.util.List;
 
 public class DonDatHangActivity extends AppCompatActivity {
     private DonHangDao donHangDao;
-    private KhachHangDao khachHangDao;
     private List<DonHangDto> donHangDtoList;
     private RecyclerView rcvDDH;
     private DonDatHangAdapter donDatHangAdapter;
@@ -48,7 +49,8 @@ public class DonDatHangActivity extends AppCompatActivity {
             Dialog dialog = donDatHangAdapter.getDialogDDH(this);
             donDatHangAdapter.btnHuyDialog.setOnClickListener(view13 -> dialog.cancel());
             donDatHangAdapter.edNgayDHDialog.setOnFocusChangeListener((view12, b) -> donDatHangAdapter.showDateTimeDialog(donDatHangAdapter.edNgayDHDialog));
-            dialog .show();
+            dialog.show();
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().setLayout((6*width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
 
 
@@ -56,6 +58,7 @@ public class DonDatHangActivity extends AppCompatActivity {
                 if (donDatHangAdapter.edNgayDHDialog.getText().toString().isEmpty()){
                     CustomToast.makeText(DonDatHangActivity.this, "Không được bỏ trống ngày giờ!",
                             CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
+                    return;
                 }
                 DonHangDto donHang=new DonHangDto(donDatHangAdapter.edNgayDHDialog.getText().toString(),DonDatHangAdapter.kh,null);
                  int id= (int)themDonHang(donHang);
