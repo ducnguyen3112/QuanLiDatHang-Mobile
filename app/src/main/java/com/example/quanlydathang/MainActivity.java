@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 
 import com.example.quanlydathang.activity.ProductActivity;
@@ -21,11 +22,14 @@ import com.example.quanlydathang.activity.KhachHang.KhachHangActivity;
 import com.example.quanlydathang.utils.CustomAlertDialog;
 import com.example.quanlydathang.utils.CustomToast;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private CardView cvDH,cvKH,cvThoat,cardViewSanPham;
     UserDao userDao;
     TextView tvUserName;
+
+    private AlphaAnimation cardViewClick = new AlphaAnimation(1F, 0.8F);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         cvDH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cvDH.startAnimation(cardViewClick);
                 Intent intent=new Intent(MainActivity.this, DonDatHangActivity.class);
                 startActivity(intent);
             }
@@ -45,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         cvKH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cvKH.startAnimation(cardViewClick);
                 Intent intent=new Intent(MainActivity.this, KhachHangActivity.class);
                 startActivity(intent);
             }
@@ -56,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         cvThoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cvThoat.startAnimation(cardViewClick);
                 xacNhapThoatDialog();
             }
         });
@@ -91,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         cardViewSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cardViewSanPham.startAnimation(cardViewClick);
                 Intent intent = new Intent(MainActivity.this, ProductActivity.class);
                 startActivity(intent);
             }

@@ -87,18 +87,18 @@
             style="@style/DialogButton"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:background="@drawable/rounded_corners_button_solid"
+            android:background="@drawable/ripple_effect_raised"
             android:text="Thêm"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnhuy"
             style="@style/DialogButton"
-            android:background="@drawable/rounded_corners_button_border"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@id/btnthem"
+            android:background="@drawable/ripple_effect_outline"
             android:text="Hủy"
             android:textColor="@color/dialogBackColor"
-            android:layout_toEndOf="@id/btnthem"
-            android:layout_marginStart="30dp"
             app:layout_constraintTop_toTopOf="parent" />
 
 

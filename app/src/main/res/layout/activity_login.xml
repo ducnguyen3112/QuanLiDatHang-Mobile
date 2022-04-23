@@ -66,7 +66,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:text="SIGN IN"
-        android:textSize="20sp"
-         />
+        android:textSize="20sp" />
 
 </LinearLayout>
