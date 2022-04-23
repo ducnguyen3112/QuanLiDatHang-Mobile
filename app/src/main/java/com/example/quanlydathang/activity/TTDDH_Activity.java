@@ -10,11 +10,16 @@ import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.pdf.PdfDocument;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -26,6 +31,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quanlydathang.R;
 import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
@@ -35,14 +41,41 @@ import com.example.quanlydathang.dto.DonHangDto;
 import com.example.quanlydathang.dto.KhachHangDto;
 import com.example.quanlydathang.dto.Product;
 import com.example.quanlydathang.dto.TTDDH_DTO;
+import com.example.quanlydathang.utils.Constants;
 import com.example.quanlydathang.utils.CustomToast;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.property.TextAlignment;
 
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.annotation.Documented;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 public class TTDDH_Activity extends AppCompatActivity {
     public static int width;
@@ -60,8 +93,12 @@ public class TTDDH_Activity extends AppCompatActivity {
     private TextView tvMaDH, tvNgayDH, tvTenKH, tvSDT, tvDiaChi, tvTongTien;
     private Button  btnThemSP, btnCapNhat;
 
-
     private SearchView searchView;
+
+    private EditText etMail_dialogSendMail;
+    private Button btnHuy_dialogSendMail, btnGui_dialogSendMail;
+
+    private String mPDFPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,21 +122,18 @@ public class TTDDH_Activity extends AppCompatActivity {
         setControl();
 
         btnCapNhat.setOnClickListener(view -> {
-            CustomToast.makeText(TTDDH_Activity.this,"Cập nhật đơn hàng thành công!"
-                    , CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
-            finish();
+            try {
+                createPDF();
+                CustomToast.makeText(this,"Xuất file PDF thành công!", Toast.LENGTH_SHORT,CustomToast.SUCCESS).show();
+                sendMail();
+            }
+            catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         btnThemSP.setOnClickListener(view -> {
             Dialog dialog = ttddh_adapter.getDialogThemSP_TTDDH(this);
-
-//            List<String> dsMaVaTenSP = ttddh_adapter.dsMaVaTenSP();
-//            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this
-//                    , androidx.appcompat.R.layout.support_simple_spinner_dropdown_item
-//                    , dsMaVaTenSP );
-//            ttddh_adapter.spinnerSP_dialogThemSP.setAdapter(arrayAdapter);
-//            suKienSpinner();
-//            Log.e("selectedProductID",selectedID+"");
 
             dialog.show();
 
@@ -157,28 +191,6 @@ public class TTDDH_Activity extends AppCompatActivity {
         tvTongTien.setText("-");
     }
 
-    private void suKienSpinner() {
-
-        ttddh_adapter.spinnerSP_dialogThemSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String str = ttddh_adapter.spinnerSP_dialogThemSP.getSelectedItem().toString();
-                Log.e("TAG", ""+str ,null );
-                String[] words=str.split("-");
-                if (!str.isEmpty()){
-                    selectedID = Integer.valueOf(words[0].trim());
-                }
-                else {
-                    selectedID = 0;
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                selectedID = 1;
-            }
-        });
-    }
-
     private void capNhatDuLieuTTDDH() {
         ttddh_dtoList = ttddh_dao.ttddh_dtoList();
         ttddh_adapter = new TTDDH_Adapter(this,ttddh_dtoList,mDonHangDto.getMaDH());
@@ -224,4 +236,184 @@ public class TTDDH_Activity extends AppCompatActivity {
             return;
         }
     }
+
+    public void createPDF() throws FileNotFoundException {
+        String pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+
+        String child = "ChiTietDonDatHang-" + mDonHangDto.getMaDH() + ".pdf";
+        File file = new File(pdfPath,child);
+        OutputStream outputStream = new FileOutputStream(file);
+
+        PdfWriter writer = new PdfWriter(file);
+        PdfDocument pdfDocument = new PdfDocument(writer);
+        Document document = new Document(pdfDocument);
+
+//        tableListProducts.addCell(new Cell().add(new Paragraph("")));
+
+        //tittle
+        Text textTittle = new Text("CHI TIET DON DAT HANG").setFontSize(28).setBold();
+        Paragraph paraTittle = new Paragraph();
+        paraTittle.add(textTittle).setTextAlignment(TextAlignment.CENTER);
+        document.add(paraTittle);
+        document.add(new Paragraph("\n\n"));
+
+        //table thong tin don dat hang
+        float columnWidthTTDDH[] = {100,150,100,120,120};
+        Table tableTTDDH = new Table(columnWidthTTDDH);
+        //1
+        tableTTDDH.addCell(new Cell().add(new Paragraph("Khach hang:")));
+        tableTTDDH.addCell(new Cell().add(new Paragraph(mDonHangDto.getTenKH())));
+        tableTTDDH.addCell(new Cell().add(new Paragraph("")));
+        tableTTDDH.addCell(new Cell().add(new Paragraph("Ma don hang:")));
+        tableTTDDH.addCell(new Cell().add(new Paragraph(mDonHangDto.getMaDH()+"")));
+        //2
+        tableTTDDH.addCell(new Cell().add(new Paragraph("SDT:")));
+        tableTTDDH.addCell(new Cell().add(new Paragraph(mKhachHangDto.getPhone())));
+        tableTTDDH.addCell(new Cell().add(new Paragraph("")));
+        tableTTDDH.addCell(new Cell().add(new Paragraph("Ngay dat hang:")));
+        tableTTDDH.addCell(new Cell().add(new Paragraph(mDonHangDto.getNgayDH())));
+        //3
+        tableTTDDH.addCell(new Cell().add(new Paragraph("Dia chi:")));
+        tableTTDDH.addCell(new Cell().add(new Paragraph(mKhachHangDto.getAddress())));
+        tableTTDDH.addCell(new Cell().add(new Paragraph("")));
+        tableTTDDH.addCell(new Cell().add(new Paragraph("Tong gia tri:")));
+        tableTTDDH.addCell(new Cell().add(new Paragraph(ttddh_adapter.TongTien() + " USD")));
+        //
+        document.add(tableTTDDH);
+        document.add(new Paragraph("\n\n"));
+
+
+        //table danh sach san pham
+        float columnWidthListProducts[] = {40,90,290,90,90,100};
+        Table tableListProducts = new Table(columnWidthListProducts);
+        //0
+        tableListProducts.addCell(new Cell().add(new Paragraph("STT")).setTextAlignment(TextAlignment.CENTER));
+        tableListProducts.addCell(new Cell().add(new Paragraph("Hinh anh")).setTextAlignment(TextAlignment.CENTER));
+        tableListProducts.addCell(new Cell().add(new Paragraph("Ten san pham")).setTextAlignment(TextAlignment.CENTER));
+        tableListProducts.addCell(new Cell().add(new Paragraph("Don gia")).setTextAlignment(TextAlignment.CENTER));
+        tableListProducts.addCell(new Cell().add(new Paragraph("So luong")).setTextAlignment(TextAlignment.CENTER));
+        tableListProducts.addCell(new Cell().add(new Paragraph("Thanh tien")).setTextAlignment(TextAlignment.CENTER));
+        //1-n
+        int stt = 1;
+        for(TTDDH_DTO ttddh_dto : ttddh_adapter.getTtddh_dtoListOld()) {
+            Product product = ttddh_dao.TimSanPham(ttddh_dto.getMaSP());
+
+            tableListProducts.addCell(new Cell().add(new Paragraph(stt+"")).setTextAlignment(TextAlignment.CENTER));
+
+            Bitmap bitmap;
+            if(product.getImage()!=null) {
+                bitmap = BitmapFactory.decodeByteArray(product.getImage(), 0, product.getImage().length);
+
+            }
+            else {
+                Drawable drawable = getDrawable(R.drawable.ic_product);
+                bitmap = ((BitmapDrawable)drawable).getBitmap();
+            }
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
+            byte[] bitmapData = stream.toByteArray();
+            ImageData imageData = ImageDataFactory.create(bitmapData);
+            Image image = new Image(imageData);
+            image.setWidth(80).setHeight(80);
+            tableListProducts.addCell(new Cell().add(image));
+
+            tableListProducts.addCell(new Cell().add(new Paragraph(product.getTenSP()+"")));
+            tableListProducts.addCell(new Cell().add(new Paragraph(product.getDonGia()+"")).setTextAlignment(TextAlignment.CENTER));
+            tableListProducts.addCell(new Cell().add(new Paragraph(ttddh_dto.getSL()+"")).setTextAlignment(TextAlignment.CENTER));
+            tableListProducts.addCell(new Cell().add(new Paragraph((product.getDonGia()*ttddh_dto.getSL())+"")).setTextAlignment(TextAlignment.CENTER));
+
+            stt++;
+        }
+        //
+        document.add(tableListProducts);
+
+        //
+        Text tongCong = new Text("Tong cong: ").setFontSize(14).setItalic();
+        Text tongTien = new Text(ttddh_adapter.TongTien()+" USD").setFontSize(14).setBold();
+        document.add(new Paragraph().add(tongCong).add(tongTien).setTextAlignment(TextAlignment.RIGHT));
+
+        //
+        mPDFPath = file.getPath();
+        document.close();
+    }
+
+    private void sendMail() {
+        //
+        Dialog dialog = getDialogSendMail();
+        dialog.show();
+
+        btnHuy_dialogSendMail.setOnClickListener(view -> {
+            dialog.cancel();
+        });
+
+        btnGui_dialogSendMail.setOnClickListener(view -> {
+            final String username = Constants.emailName;
+            final String password = Constants.emailPws;
+            String toMail = etMail_dialogSendMail.getText().toString();
+            if(toMail.isEmpty()) {
+                CustomToast.makeText(this,"Vui lòng nhập địa chỉ mail",CustomToast.LENGTH_SHORT,CustomToast.WARNING).show();
+            }
+            else {
+                Properties properties = new Properties();
+                properties.put("mail.smtp.auth","true");
+                properties.put("mail.smtp.starttls.enable","true");
+                properties.put("mail.smtp.host","smtp.gmail.com");
+                properties.put("mail.smtp.port","587");
+
+                Session session = Session.getInstance(properties,
+                        new Authenticator() {
+                            @Override
+                            protected PasswordAuthentication getPasswordAuthentication() {
+                                return new PasswordAuthentication(username,password);
+                            }
+                        });
+                try {
+                    Message message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress(username));
+                    message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(toMail));
+                    message.setSubject("Gửi chi tiết đơn đặt hàng qua gmail");
+
+                    Multipart emailContent = new MimeMultipart();
+
+                    MimeBodyPart textBodyPart = new MimeBodyPart();
+                    textBodyPart.setText("Vũ Ngọc Linh");
+
+                    MimeBodyPart pdfAttachment = new MimeBodyPart();
+                    pdfAttachment.attachFile(mPDFPath);
+
+                    emailContent.addBodyPart(textBodyPart);
+                    emailContent.addBodyPart(pdfAttachment);
+
+                    message.setContent(emailContent);
+
+                    //
+                    Transport.send(message);
+                    CustomToast.makeText(this,"Gửi mail thành công!",CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
+                }
+                catch (MessagingException | IOException e) {
+                    throw new RuntimeException();
+                }
+            }
+            dialog.cancel();
+        });
+        StrictMode.ThreadPolicy threadPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(threadPolicy);
+    }
+
+    private Dialog getDialogSendMail() {
+        Dialog dialog = new Dialog(this);
+        dialog.setCancelable(false);
+
+        dialog.setContentView(R.layout.dialog_ttddh_sendmail);
+        etMail_dialogSendMail = dialog.findViewById(R.id.etMail_dialogTTDDH_sendMail);
+        btnHuy_dialogSendMail = dialog.findViewById(R.id.btnHuy_dialogTTDDH_sendMail);
+        btnGui_dialogSendMail = dialog.findViewById(R.id.btnGui_dialogTTDDH_sendMail);
+
+        return dialog;
+    }
 }
+
+
+
+
+// ??
