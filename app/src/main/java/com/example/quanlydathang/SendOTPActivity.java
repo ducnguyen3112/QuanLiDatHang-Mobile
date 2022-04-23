@@ -66,7 +66,9 @@ public class SendOTPActivity extends AppCompatActivity {
                     CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
             return;
         }
-        if (userDao.getUserNameFromSDT(sdt)==null){
+        Log.e("sdt", "guiMaOTP: "+userDao.getUserNameFromSDT(sdt) );
+        if (userDao.getUserNameFromSDT(sdt).isEmpty()){
+
             CustomToast.makeText(SendOTPActivity.this, "Số điện thoại không đúng hoặc chưa được đăng kí!",
                     CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
             return;
