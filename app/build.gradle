@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.quanlydathang"
-        minSdk 21
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -22,6 +22,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'com/itextpdf/io/font/cmap_info.txt'
+        exclude 'com/itextpdf/io/font/cmap/*'
+        exclude 'META-INF/NOTICE.md'
+        exclude 'META-INF/LICENSE.md'
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -47,5 +55,12 @@ dependencies {
     implementation ("com.itextpdf:itextpdf:5.5.13.1")
     implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
     implementation 'org.apache.commons:commons-lang3:3.4'
+
+    //lib pdf - linh
+    implementation 'com.itextpdf:itext7-core:7.1.3'
+
+    //lib send mail - linh
+    implementation 'com.sun.mail:android-mail:1.6.6'
+    implementation 'com.sun.mail:android-activation:1.6.6'
 
 }
