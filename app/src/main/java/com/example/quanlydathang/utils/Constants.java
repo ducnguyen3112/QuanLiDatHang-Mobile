@@ -12,4 +12,7 @@ public class Constants {
 
     public static final int CREATE_FILE = 6;
     public static final int OPEN_REQUEST_CODE = 7;
+
+    public static final String emailName = "n18dccn105@student.ptithcm.edu.vn";
+    public static final String emailPws = "ngoclinh656";
 }

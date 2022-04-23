@@ -276,4 +276,8 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
     public int selectedProductID() {
         return sp;
     }
+
+    public List<TTDDH_DTO> getTtddh_dtoListOld() {
+        return ttddh_dtoListOld;
+    }
 }
