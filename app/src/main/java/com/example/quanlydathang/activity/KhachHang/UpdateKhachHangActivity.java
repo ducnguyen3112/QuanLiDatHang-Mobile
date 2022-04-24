@@ -181,6 +181,10 @@ public class UpdateKhachHangActivity extends AppCompatActivity {
             CustomToast.makeText(UpdateKhachHangActivity.this, "Số điện thoại tối đa 11 số",
                     CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
             return false;
+        } else if (phoneKh.length() < 10) {
+            CustomToast.makeText(UpdateKhachHangActivity.this, "Số điện thoại tối thiểu 10 số",
+                    CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
+            return false;
         }
         return true;
     }

@@ -132,8 +132,8 @@ public class AddKhachHangActivity extends AppCompatActivity {
     boolean validationKH() {
         String nameKh, addressKh, phoneKh;
         nameKh = edtAddNameKH.getText().toString().trim();
-        addressKh = edtAddNameKH.getText().toString().trim();
-        phoneKh = edtAddNameKH.getText().toString().trim();
+        addressKh = edtAddAddressKH.getText().toString().trim();
+        phoneKh = edtAddPhoneKH.getText().toString().trim();
 
         if (nameKh.isEmpty()) {
             CustomToast.makeText(AddKhachHangActivity.this, "Không được để trống trường tên",
@@ -157,6 +157,10 @@ public class AddKhachHangActivity extends AppCompatActivity {
             return false;
         } else if (phoneKh.length() > 12) {
             CustomToast.makeText(AddKhachHangActivity.this, "Số điện thoại tối đa 11 số",
+                    CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
+            return false;
+        }else if (phoneKh.length() < 10) {
+            CustomToast.makeText(AddKhachHangActivity.this, "Số điện thoại tối thiểu 10 số",
                     CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
             return false;
         }
