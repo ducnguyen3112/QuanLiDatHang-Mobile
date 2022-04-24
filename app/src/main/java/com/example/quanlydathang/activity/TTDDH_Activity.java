@@ -1,6 +1,5 @@
 package com.example.quanlydathang.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,29 +11,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quanlydathang.R;
-import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
 import com.example.quanlydathang.adapter.TTDDH_Adapter;
 import com.example.quanlydathang.dao.TTDDH_DAO;
 import com.example.quanlydathang.dto.DonHangDto;
@@ -62,15 +54,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.annotation.Documented;
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -79,7 +65,6 @@ import javax.mail.internet.MimeMultipart;
 
 public class TTDDH_Activity extends AppCompatActivity {
     public static int width;
-    private static int selectedID;
 
     private DonHangDto mDonHangDto;
     private KhachHangDto mKhachHangDto;
@@ -104,9 +89,6 @@ public class TTDDH_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ttddh);
-        DisplayMetrics metrics=getResources().getDisplayMetrics();
-        width = metrics.widthPixels;
-        ttddh_dao = new TTDDH_DAO(this);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -114,6 +96,11 @@ public class TTDDH_Activity extends AppCompatActivity {
             CustomToast.makeText(TTDDH_Activity.this,"Không lấy được dữ liệu đơn hàng!", CustomToast.LENGTH_LONG,CustomToast.ERROR).show();
             finish();
         }
+
+        DisplayMetrics metrics=getResources().getDisplayMetrics();
+        width = metrics.widthPixels;
+
+        ttddh_dao = new TTDDH_DAO(this);
 
         mDonHangDto = new DonHangDto(bundle.getInt("maDH"), bundle.getString("ngayDH"), bundle.getInt("maKH"), bundle.getString("tenKH"));
 //        CustomToast.makeText(TTDDH_Activity.this,mDonHangDto.toString(),CustomToast.LENGTH_LONG, CustomToast.CONFUSING).show();
@@ -128,6 +115,7 @@ public class TTDDH_Activity extends AppCompatActivity {
                 sendMail();
             }
             catch (FileNotFoundException e) {
+                CustomToast.makeText(this,"Xuất file PDF thất bại!",CustomToast.LENGTH_SHORT,CustomToast.ERROR).show();
                 e.printStackTrace();
             }
         });
@@ -136,6 +124,8 @@ public class TTDDH_Activity extends AppCompatActivity {
             Dialog dialog = ttddh_adapter.getDialogThemSP_TTDDH(this);
 
             dialog.show();
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().setLayout((6*width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
 
             ttddh_adapter.btnHuy_dialogThemSP.setOnClickListener(view01 -> {
                 dialog.cancel();
@@ -340,7 +330,10 @@ public class TTDDH_Activity extends AppCompatActivity {
     private void sendMail() {
         //
         Dialog dialog = getDialogSendMail();
+
         dialog.show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().setLayout((6*width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
 
         btnHuy_dialogSendMail.setOnClickListener(view -> {
             dialog.cancel();
@@ -376,7 +369,10 @@ public class TTDDH_Activity extends AppCompatActivity {
                     Multipart emailContent = new MimeMultipart();
 
                     MimeBodyPart textBodyPart = new MimeBodyPart();
-                    textBodyPart.setText("Vũ Ngọc Linh");
+                    textBodyPart.setText(" Mã đơn hàng: " + mDonHangDto.getMaDH()
+                            + "\n Tên khách hàng: " + mDonHangDto.getTenKH()
+                            + "\n Ngày đặt: " + mDonHangDto.getNgayDH()
+                            + "\n Tổng giá trị đơn hàng: " + ttddh_adapter.TongTien() + " USD");
 
                     MimeBodyPart pdfAttachment = new MimeBodyPart();
                     pdfAttachment.attachFile(mPDFPath);
@@ -391,6 +387,7 @@ public class TTDDH_Activity extends AppCompatActivity {
                     CustomToast.makeText(this,"Gửi mail thành công!",CustomToast.LENGTH_SHORT,CustomToast.SUCCESS).show();
                 }
                 catch (MessagingException | IOException e) {
+                    CustomToast.makeText(this,"Gửi mail thất bại!",CustomToast.LENGTH_SHORT,CustomToast.ERROR).show();
                     throw new RuntimeException();
                 }
             }
