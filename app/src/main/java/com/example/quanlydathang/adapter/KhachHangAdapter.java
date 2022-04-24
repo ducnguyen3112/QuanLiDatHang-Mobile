@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlydathang.dao.KhachHangDao;
 import com.example.quanlydathang.dto.KhachHangDto;
 import com.example.quanlydathang.activity.KhachHang.UpdateKhachHangActivity;
+import com.example.quanlydathang.utils.CustomToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,9 +85,11 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.Khac
                 KhachHangDao khachHangDao = new KhachHangDao(context);
                 long result = khachHangDao.deleteKH(id);
                 if(result == -1){
-                    Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();
+                    CustomToast.makeText(context, "Xoá thất bại",
+                            CustomToast.LENGTH_SHORT, CustomToast.ERROR).show();
                 }else{
-                    Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
+                    CustomToast.makeText(context, "Xoá thành công",
+                            CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
                 }
                 list = khachHangDao.getListKH();
                 notifyDataSetChanged();
