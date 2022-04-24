@@ -1,58 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
-    android:layout_height="170dp"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
+    android:background="@drawable/rounded_corners_dialog"
     >
 
     <TextView
-        android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="#148F77"
-        android:text="Nhập số lượng mới"
+        android:background="@drawable/rounded_corners_dialog_title"
+        android:padding="5dp"
+        android:text="NHẬP SỐ LƯỢNG MỚI"
         android:textSize="20sp"
-        android:textColor="#5e3b50"
+        android:textColor="@color/white"
         android:textStyle="bold"
-        android:paddingVertical="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         />
 
     <EditText
         android:id="@+id/etSL_dialogSuaSL_ttddh"
-        android:layout_width="128dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-
+        android:gravity="center"
+        android:background="@drawable/custom_edit_text"
+        android:padding="5dp"
+        android:layout_marginTop="30dp"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        android:textSize="20sp"
         />
 
-    <Button
-        android:id="@+id/btnHuy_dialogSuaSL_ttddh"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:backgroundTint="#EAED7C"
-        android:text="Hủy"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        >
 
-    <Button
-        android:id="@+id/btnDongY_dialogSuaSL_ttddh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#5FE851"
-        android:text="Đồng ý"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnDongY_dialogSuaSL_ttddh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_effect_raised"
+            android:text="Đồng ý"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/btnHuy_dialogSuaSL_ttddh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_effect_outline"
+            android:layout_marginStart="20dp"
+            android:text="Hủy"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+</LinearLayout>
