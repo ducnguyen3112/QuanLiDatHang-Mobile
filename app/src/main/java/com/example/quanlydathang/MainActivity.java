@@ -1,10 +1,8 @@
 package com.example.quanlydathang;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -20,8 +18,6 @@ import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
 import com.example.quanlydathang.dao.UserDao;
 import com.example.quanlydathang.activity.KhachHang.KhachHangActivity;
 import com.example.quanlydathang.utils.CustomAlertDialog;
-import com.example.quanlydathang.utils.CustomToast;
-
 
 public class MainActivity extends AppCompatActivity {
 
