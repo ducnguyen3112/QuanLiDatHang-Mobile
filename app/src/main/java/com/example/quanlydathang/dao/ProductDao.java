@@ -7,10 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
 import com.example.quanlydathang.database.CreateDatabase;
-import com.example.quanlydathang.dto.ChiTietDonHang;
 import com.example.quanlydathang.dto.DonHangDto;
 import com.example.quanlydathang.dto.KhachHangDto;
-import com.example.quanlydathang.dto.PDFDonHang;
 import com.example.quanlydathang.dto.Product;
 
 import java.util.ArrayList;
@@ -108,25 +106,6 @@ public class ProductDao {
         Cursor cursor = database.rawQuery("select * from SANPHAM", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            ++count;
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return count;
-    }
-
-    public int getDonHangInfo(ArrayList<PDFDonHang> list,int maHD) {
-        int count = 0;
-        String sql = "select * from TTDDH, sanpham where TTDDH.MASP = SANPHAM.MASP  and TTDDH.MADH ='" + maHD + "'";
-        Cursor cursor = database.rawQuery(sql, null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            ChiTietDonHang chiTietDonHang = new ChiTietDonHang(cursor.getInt(0),cursor.getInt(1),
-                    cursor.getInt(2));
-            Product product = new Product(cursor.getInt(3), cursor.getString(4), cursor.getString(5),
-                    cursor.getInt(6), cursor.getBlob(7));
-            PDFDonHang pdfDonHang = new PDFDonHang(chiTietDonHang,product);
-            list.add(pdfDonHang);
             ++count;
             cursor.moveToNext();
         }

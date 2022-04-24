@@ -1,46 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="150dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/rounded_corners_dialog"
     >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/rounded_corners_dialog_title"
+        android:padding="10dp"
         android:text="Vui lòng nhập mail để nhận file"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:padding="10dp"
+        android:textSize="22sp"
+        android:textColor="@color/white"
         />
 
     <EditText
         android:id="@+id/etMail_dialogTTDDH_sendMail"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/custom_edit_text"
+        android:padding="10dp"
+        android:layout_marginTop="25dp"
         android:text="ahrix157@gmail.com"
         android:textSize="20sp"
-        android:padding="10dp"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
         >
 
         <Button
-            android:id="@+id/btnHuy_dialogTTDDH_sendMail"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnGui_dialogTTDDH_sendMail"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Để sau"
+            android:background="@drawable/ripple_effect_raised"
+            android:text="GỬI"
+            android:textSize="16sp"
+            android:textStyle="bold"
             />
 
         <Button
-            android:id="@+id/btnGui_dialogTTDDH_sendMail"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnHuy_dialogTTDDH_sendMail"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Gửi" />
+            android:background="@drawable/ripple_effect_outline"
+            android:layout_marginStart="50dp"
+            android:text="ĐỂ SAU"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
     </LinearLayout>
 </LinearLayout>

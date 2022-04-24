@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -22,9 +24,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlydathang.R;
 import com.example.quanlydathang.activity.AddProductActivity;
+import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
 import com.example.quanlydathang.dao.ProductDao;
 import com.example.quanlydathang.dto.Product;
 import com.example.quanlydathang.utils.Constants;
+import com.example.quanlydathang.utils.CustomAlertDialog;
+import com.example.quanlydathang.utils.CustomToast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -47,6 +52,7 @@ public class ProductAdapterRecyclerView
         TextView tenSP, maSP, xuatXu, donGia;
         ImageButton delete;
         ImageView imageView;
+
         public MyViewHolder(@NonNull View view) {
             super(view);
             tenSP = view.findViewById(R.id.textViewTenSP);
@@ -67,14 +73,14 @@ public class ProductAdapterRecyclerView
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_list, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_list, parent, false);
 
-        switch (viewType){
+        switch (viewType) {
             case Constants.GRID:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_grid, parent,false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_grid, parent, false);
                 break;
             case Constants.LIST:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_list, parent,false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_list, parent, false);
                 break;
         }
         return new MyViewHolder(view);
@@ -83,8 +89,8 @@ public class ProductAdapterRecyclerView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Product product = list.get(position);
-        setInfo(product,holder);
-        handleClickDelete(product,holder);
+        setInfo(product, holder);
+        handleClickDelete(product, holder);
         handleClickUpdate(product, holder.itemView);
     }
 
@@ -102,22 +108,22 @@ public class ProductAdapterRecyclerView
     }
 
     private void setInfo(Product product, MyViewHolder myViewHolder) {
-        myViewHolder.maSP.setText  ("Mã     : "+product.getMaSP() + "");
-        myViewHolder.tenSP.setText (""+product.getTenSP());
-        myViewHolder.xuatXu.setText("Xuất xứ: "+product.getXuatXu());
+        myViewHolder.maSP.setText("" + product.getMaSP());
+        myViewHolder.tenSP.setText("" + product.getTenSP());
+        myViewHolder.xuatXu.setText("" + product.getXuatXu());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,##0");
-        myViewHolder.donGia.setText("Giá    : "+decimalFormat.format(product.getDonGia())+" đ");
-        if(product.getImage()!=null) {
+        myViewHolder.donGia.setText("" + decimalFormat.format(product.getDonGia()) + " đ");
+        if (product.getImage() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(product.getImage(), 0, product.getImage().length);
             myViewHolder.imageView.setImageBitmap(bitmap);
         }
     }
 
-    public void handleClickDelete(Product product , MyViewHolder myViewHolder) {
+    public void handleClickDelete(Product product, MyViewHolder myViewHolder) {
         myViewHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog(product, "Xóa sản phẩm ?");
+                showDialog(product);
             }
         });
     }
@@ -134,31 +140,34 @@ public class ProductAdapterRecyclerView
         });
     }
 
-    public void showDialog(Product product, String msg) {
-        Dialog dialog = new Dialog(context);
-        dialog.setCancelable(false);
-        dialog.setContentView(R.layout.custom_dialog);
-        TextView text = (TextView) dialog.findViewById(R.id.title);
-        text.setText(msg);
-        Button buttonHuy = (Button) dialog.findViewById(R.id.buttonHuy);
-        buttonHuy.setOnClickListener(new View.OnClickListener() {
+    public void showDialog(Product product) {
+        CustomAlertDialog alertDialog = new CustomAlertDialog(context);
+
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.getWindow().setLayout((7 * DonDatHangActivity.width) / 8, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.show();
+        alertDialog.btnPositive.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        Button buttonDongY = (Button) dialog.findViewById(R.id.buttonDongY);
-        buttonDongY.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 ProductDao db = new ProductDao(context.getApplicationContext());
                 db.deleteProduct(product.getMaSP());
-                db.countLoadDBAllTypeDisplay(list,product.getTypeDisplay());
+                db.countLoadDBAllTypeDisplay(list, product.getTypeDisplay());
                 notifyDataSetChanged();
-                dialog.dismiss();
+
+                CustomToast.makeText(context, "Xóa sản phẩm thành công!",
+                        CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
+                alertDialog.cancel();
             }
         });
-        dialog.show();
+        alertDialog.btnNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.cancel();
+            }
+        });
+        alertDialog.setMessage("Xóa sản phẩm ?");
+        alertDialog.setBtnPositive("Xóa");
+        alertDialog.setBtnNegative("Hủy");
     }
 
     @Override

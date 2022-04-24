@@ -5,9 +5,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,12 +28,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlydathang.R;
 import com.example.quanlydathang.activity.TTDDH_Activity;
+import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
 import com.example.quanlydathang.dao.DonHangDao;
 import com.example.quanlydathang.dao.KhachHangDao;
 import com.example.quanlydathang.dao.ProductDao;
 import com.example.quanlydathang.dao.TTDDH_DAO;
 import com.example.quanlydathang.dto.Product;
 import com.example.quanlydathang.dto.TTDDH_DTO;
+import com.example.quanlydathang.utils.CustomAlertDialog;
 import com.example.quanlydathang.utils.CustomToast;
 
 import java.text.NumberFormat;
@@ -50,7 +57,6 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
     public Button btnThem_dialogThemSP;
     public SPSpinnerAdapter spSpinnerAdapter;
     public List<Product> listProduct;
-//    private ProductDao productDao;
 
     private EditText etSL_dialogSuaSL;
     private Button btnHuy_dialogSuaSL;
@@ -86,6 +92,7 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
         if(ttddh_dto == null) {
             return;
         }
+
         Product product = ttddh_dao.TimSanPham(ttddh_dto.getMaSP());
         holder.tvTenSP.setText(product.getTenSP());
         holder.tvSL.setText(ttddh_dto.getSL()+"");
@@ -96,30 +103,68 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
         }
 
         holder.ibXoaSP.setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("Xóa sản phẩm " + product.getTenSP() + " khỏi đơn hàng?")
-                    .setPositiveButton("Xóa", (dialogInterface, i) -> {
-                        //
-                        boolean boo = ttddh_dao.xoa_ttddh_dao(ttddh_dto);
-                        if(boo) {
-                            ((TTDDH_Activity)context).onResume();
-                            CustomToast.makeText(context, "Xóa thành công",
-                                    CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//
+//            builder.setMessage("Xóa sản phẩm " + product.getTenSP() + " khỏi đơn hàng?")
+//                    .setPositiveButton("Xóa", (dialogInterface, i) -> {
+//                        //
+//                        boolean boo = ttddh_dao.xoa_ttddh_dao(ttddh_dto);
+//                        if(boo) {
+//                            ((TTDDH_Activity)context).onResume();
+//                            CustomToast.makeText(context, "Xóa thành công",
+//                                    CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
+//                        }
+//                        else {
+//                            CustomToast.makeText(context, "Xóa thất bại!",
+//                                    CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
+//                        }
+//                    })
+//                    .setNegativeButton("Hủy", (dialogInterface, i) -> {
+//                        //
+//                    });
+//            builder.create().show();
+
+            CustomAlertDialog alertDialog = new CustomAlertDialog(context);
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            alertDialog.getWindow().setLayout((7* DonDatHangActivity.width)/8, WindowManager.LayoutParams.WRAP_CONTENT);
+            alertDialog.show();
+
+            Log.e("product.getTenSP()",product.getTenSP());
+            alertDialog.setMessage("Xóa sản phẩm " + product.getTenSP() + " khỏi đơn hàng?");
+            alertDialog.setBtnPositive("Xóa");
+            alertDialog.setBtnNegative("Hủy");
+
+            alertDialog.btnPositive.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    boolean boo = ttddh_dao.xoa_ttddh_dao(ttddh_dto);
+                    if(boo) {
+                        ((TTDDH_Activity)context).onResume();
+                        CustomToast.makeText(context, "Xóa thành công",
+                                CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
                         }
-                        else {
-                            CustomToast.makeText(context, "Xóa thất bại!",
-                                    CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
-                        }
-                    })
-                    .setNegativeButton("Hủy", (dialogInterface, i) -> {
-                        //
-                    });
-            builder.create().show();
+                    else {
+                        CustomToast.makeText(context, "Xóa thất bại!",
+                                CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
+                    }
+                    alertDialog.cancel();
+                }
+            });
+
+            alertDialog.btnNegative.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.cancel();
+                }
+            });
         });
 
         holder.ibSuaSL.setOnClickListener(view -> {
             Dialog dialog = getDialogSuaSL_TTDDH(context);
+
             dialog.show();
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().setLayout((6* DonDatHangActivity.width)/7, WindowManager.LayoutParams.WRAP_CONTENT);
 
             btnHuy_dialogSuaSL.setOnClickListener(view01 -> {
                 dialog.cancel();

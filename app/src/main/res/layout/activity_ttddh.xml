@@ -14,69 +14,80 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black" />
+            android:background="@color/black"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <TextView
                 style="@style/heading3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mã đơn hàng" />
+                android:text="Mã đơn hàng"
+                />
 
             <TextView
                 android:id="@+id/tvMaDH_ttddh"
                 style="@style/data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1" />
+                android:text="1"
+                />
 
             <TextView
                 style="@style/heading3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ngày đặt hàng" />
+                android:text="Ngày đặt hàng"
+                />
 
             <TextView
                 android:id="@+id/tvNgayDH_ttddh"
                 style="@style/data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="19/04/2022 12:12" />
+                android:text="19/04/2022 12:12"
+                />
         </LinearLayout>
 
         <View
             android:layout_width="200dp"
             android:layout_height="1dp"
-            android:background="@color/black" />
+            android:background="@color/black"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <TextView
                 style="@style/heading3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tên khách hàng" />
+                android:text="Tên khách hàng"
+                />
 
             <TextView
                 android:id="@+id/tvTenKH_ttddh"
                 style="@style/data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tom Hidlleson" />
+                android:text="Tom Hidlleson"
+                />
 
 
         </LinearLayout>
@@ -85,59 +96,68 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <TextView
                 style="@style/heading3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SĐT" />
+                android:text="SĐT"
+                />
 
             <TextView
                 android:id="@+id/tvSDT_ttddh"
                 style="@style/data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0369369369" />
+                android:text="0369369369"
+                />
 
             <TextView
                 style="@style/heading3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Địa chỉ" />
+                android:text="Địa chỉ"
+                />
 
             <TextView
                 android:id="@+id/tvDiaChi_ttddh"
                 style="@style/data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="90 Man Thiện" />
+                android:text="90 Man Thiện"
+                />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black" />
+            android:background="@color/black"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
 
             <TextView
                 style="@style/heading3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tổng giá trị đơn hàng" />
+                android:text="Tổng giá trị đơn hàng"
+                />
 
             <TextView
                 android:id="@+id/tvTongTien_ttddh"
                 style="@style/data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10.000" />
+                android:text="10.000"
+                />
         </LinearLayout>
     </LinearLayout>
 
@@ -147,25 +167,36 @@
         android:layout_height="411dp"
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llThongTin_ttddh" />
+        app:layout_constraintTop_toBottomOf="@id/llThongTin_ttddh"
+        />
 
     <Button
         android:id="@+id/btnThemSP_ttddh"
-        style="@style/customButton"
-        android:layout_width="wrap_content"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/ripple_effect_raised"
+        android:padding="10dp"
+        android:layout_marginStart="30dp"
         android:text="@string/themsanpham"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rcv_ttddh" />
+        app:layout_constraintTop_toBottomOf="@+id/rcv_ttddh"
+        />
 
     <Button
         android:id="@+id/btnCapNhat_ttddh"
-        style="@style/customButton"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/ripple_effect_outline"
+        android:padding="10dp"
+        android:layout_marginEnd="30dp"
         android:text="@string/capnhat"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rcv_ttddh" />
+        app:layout_constraintTop_toBottomOf="@+id/rcv_ttddh"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

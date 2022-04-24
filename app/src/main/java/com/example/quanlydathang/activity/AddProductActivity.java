@@ -30,7 +30,7 @@ import java.io.InputStream;
 public class AddProductActivity extends AppCompatActivity {
 
     EditText editTextTenSP, editTextMaSP, editTextXuatXu, editTextDonGia;
-    Button buttonThemSP;
+    Button buttonThemSP,btnhuy;
     TextView textViewMaSP;
     boolean isupdate;
     int maSP;
@@ -91,6 +91,7 @@ public class AddProductActivity extends AppCompatActivity {
         editTextXuatXu = findViewById(R.id.editTextXuatXuSP);
         editTextDonGia = findViewById(R.id.editTextDonGia);
         buttonThemSP = findViewById(R.id.buttonThemSP);
+        btnhuy = findViewById(R.id.btnhuy);
 
         imageViewChonAnh = findViewById(R.id.imageViewChonAnh);
         imageView = findViewById(R.id.imageView);
@@ -178,6 +179,17 @@ public class AddProductActivity extends AppCompatActivity {
         setActionBar();
         handleClickSelectImage();
         handleClickSelectFromImageFile();
+        handleClickButtonHuy();
+    }
+
+    private void handleClickButtonHuy() {
+        btnhuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
+                startActivityForResult(intent, Constants.RESULT_PRODUCT_ACTIVITY);
+            }
+        });
     }
 
     private void handleClickButtonThemSP() {
