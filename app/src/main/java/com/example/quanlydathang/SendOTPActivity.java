@@ -60,18 +60,19 @@ public class SendOTPActivity extends AppCompatActivity {
 
     private void guiMaOTP() {
         String sdt=etSDT.getText().toString().trim();
-        Log.e("sq", "guiMaOTP: "+sdt,null );
         if (sdt.isEmpty()){
 
             CustomToast.makeText(SendOTPActivity.this, "Không được để trống tên số điện thoại!",
                     CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
             return;
         }
-//        if (!userDao.getSDT(sdt)){
-//            CustomToast.makeText(SendOTPActivity.this, "Số điện thoại không đúng hoặc chưa được đăng kí!",
-//                    CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
-//            return;
-//        }
+        Log.e("sdt", "guiMaOTP: "+userDao.getUserNameFromSDT(sdt) );
+        if (userDao.getUserNameFromSDT(sdt).isEmpty()){
+
+            CustomToast.makeText(SendOTPActivity.this, "Số điện thoại không đúng hoặc chưa được đăng kí!",
+                    CustomToast.LENGTH_LONG, CustomToast.WARNING).show();
+            return;
+        }
         tvSendOTP.setVisibility(View.INVISIBLE);
         pbLoad.setVisibility(View.VISIBLE);
         sdt="+84"+ sdt.substring(1);

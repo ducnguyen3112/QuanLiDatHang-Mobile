@@ -38,8 +38,8 @@ public class UserDao {
     public boolean getSDT(String sdt){
         String script="SELECT "+ CreateDatabase.TB_USER_USERNAME+ " FROM "
                 +CreateDatabase.TB_USER +" WHERE " +CreateDatabase.TB_USER_SDT
-                + "="+ sdt;
-        Log.e("TAG", "getSDT: "+script);
+                + "= '"+ sdt+"'";
+        Log.e("sdt", "getSDT: "+script );
         Cursor cursor=database.rawQuery(script,null);
         if (cursor.getCount()!=0){
             return true;
