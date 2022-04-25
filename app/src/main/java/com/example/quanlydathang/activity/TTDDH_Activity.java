@@ -20,6 +20,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.util.DisplayMetrics;
 import android.view.Menu;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,12 +29,14 @@ import android.widget.Toast;
 
 import com.example.quanlydathang.R;
 import com.example.quanlydathang.adapter.TTDDH_Adapter;
+import com.example.quanlydathang.dao.DonHangDao;
 import com.example.quanlydathang.dao.TTDDH_DAO;
 import com.example.quanlydathang.dto.DonHangDto;
 import com.example.quanlydathang.dto.KhachHangDto;
 import com.example.quanlydathang.dto.Product;
 import com.example.quanlydathang.dto.TTDDH_DTO;
 import com.example.quanlydathang.utils.Constants;
+import com.example.quanlydathang.utils.CustomAlertDialog;
 import com.example.quanlydathang.utils.CustomToast;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
@@ -68,7 +71,6 @@ public class TTDDH_Activity extends AppCompatActivity {
 
     private DonHangDto mDonHangDto;
     private KhachHangDto mKhachHangDto;
-    private Product mProductDto;
 
     private TTDDH_DAO ttddh_dao;
     private List<TTDDH_DTO> ttddh_dtoList;
@@ -109,14 +111,19 @@ public class TTDDH_Activity extends AppCompatActivity {
         setControl();
 
         btnCapNhat.setOnClickListener(view -> {
-            try {
-                createPDF();
-                CustomToast.makeText(this,"Xuất file PDF thành công!", Toast.LENGTH_SHORT,CustomToast.SUCCESS).show();
-                sendMail();
+            if(ttddh_adapter.getTtddh_dtoListOld().isEmpty()) {
+                CustomToast.makeText(this,"Đơn hàng rỗng!",CustomToast.LENGTH_SHORT,CustomToast.WARNING).show();
             }
-            catch (FileNotFoundException e) {
-                CustomToast.makeText(this,"Xuất file PDF thất bại!",CustomToast.LENGTH_SHORT,CustomToast.ERROR).show();
-                e.printStackTrace();
+            else {
+                try {
+                    createPDF();
+                    CustomToast.makeText(this,"Xuất file PDF thành công!", Toast.LENGTH_SHORT,CustomToast.SUCCESS).show();
+                    sendMail();
+                }
+                catch (FileNotFoundException e) {
+                    CustomToast.makeText(this,"Xuất file PDF thất bại!",CustomToast.LENGTH_SHORT,CustomToast.ERROR).show();
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -220,10 +227,15 @@ public class TTDDH_Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if (!searchView.isIconified()) {
+        if(!searchView.isIconified()) {
             searchView.setIconified(true);
             return;
+        }
+        else if(ttddh_adapter.getTtddh_dtoListOld().isEmpty()) {
+            xacNhanThoatTTDDH_Activity();
+        }
+        else {
+            super.onBackPressed();
         }
     }
 
@@ -407,6 +419,35 @@ public class TTDDH_Activity extends AppCompatActivity {
         btnGui_dialogSendMail = dialog.findViewById(R.id.btnGui_dialogTTDDH_sendMail);
 
         return dialog;
+    }
+
+    private void xacNhanThoatTTDDH_Activity() {
+        CustomAlertDialog alertDialog = new CustomAlertDialog(this);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.getWindow().setLayout((7*width)/8, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.show();
+
+        alertDialog.setMessage("Đơn hàng rỗng! Nếu thoát đơn hàng sẽ bị xóa?");
+        alertDialog.setBtnPositive("Xóa và Thoát");
+        alertDialog.setBtnNegative("Ở lại");
+
+        alertDialog.btnPositive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DonHangDao donHangDao = new DonHangDao(TTDDH_Activity.this);
+                donHangDao.xoaDonHang(mDonHangDto.getMaDH());
+                alertDialog.cancel();
+                CustomToast.makeText(TTDDH_Activity.this,"Đơn hàng đã bị xóa do không có sản phẩm!",CustomToast.LENGTH_LONG,CustomToast.WARNING).show();
+                finish();
+            }
+        });
+
+        alertDialog.btnNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.cancel();
+            }
+        });
     }
 }
 

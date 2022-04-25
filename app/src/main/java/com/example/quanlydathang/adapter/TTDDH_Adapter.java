@@ -103,27 +103,6 @@ public class TTDDH_Adapter extends RecyclerView.Adapter<TTDDH_Adapter.TTDDHViewH
         }
 
         holder.ibXoaSP.setOnClickListener(view -> {
-//            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//
-//            builder.setMessage("Xóa sản phẩm " + product.getTenSP() + " khỏi đơn hàng?")
-//                    .setPositiveButton("Xóa", (dialogInterface, i) -> {
-//                        //
-//                        boolean boo = ttddh_dao.xoa_ttddh_dao(ttddh_dto);
-//                        if(boo) {
-//                            ((TTDDH_Activity)context).onResume();
-//                            CustomToast.makeText(context, "Xóa thành công",
-//                                    CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
-//                        }
-//                        else {
-//                            CustomToast.makeText(context, "Xóa thất bại!",
-//                                    CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
-//                        }
-//                    })
-//                    .setNegativeButton("Hủy", (dialogInterface, i) -> {
-//                        //
-//                    });
-//            builder.create().show();
-
             CustomAlertDialog alertDialog = new CustomAlertDialog(context);
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             alertDialog.getWindow().setLayout((7* DonDatHangActivity.width)/8, WindowManager.LayoutParams.WRAP_CONTENT);

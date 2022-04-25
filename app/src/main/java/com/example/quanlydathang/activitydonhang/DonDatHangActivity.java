@@ -1,6 +1,5 @@
 package com.example.quanlydathang.activitydonhang;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
@@ -21,7 +20,6 @@ import com.example.quanlydathang.activity.TTDDH_Activity;
 import com.example.quanlydathang.adapter.DonDatHangAdapter;
 import com.example.quanlydathang.R;
 import com.example.quanlydathang.dao.DonHangDao;
-import com.example.quanlydathang.dao.KhachHangDao;
 import com.example.quanlydathang.dto.DonHangDto;
 import com.example.quanlydathang.utils.CustomToast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -66,7 +64,7 @@ public class DonDatHangActivity extends AppCompatActivity {
                 dialog.cancel();
                 if (id!=0) {
                     CustomToast.makeText(DonDatHangActivity.this, "Thêm đơn hàng thành công!",
-                            CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
+                            CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
                     //chuyển sang  TTDDH_Activity để thêm sản phẩm - linh
                     donHang.setMaDH(id);
                     startTTDDH(donHang);
@@ -132,23 +130,15 @@ public class DonDatHangActivity extends AppCompatActivity {
     }
 
     private void startTTDDH(DonHangDto donHangDto) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Thêm sản phẩm vào đơn hàng vừa tạo?")
-                .setPositiveButton("Đồng Ý", (dialogInterface, i) -> {
-                    //
-                    donHangDto.setTenKH(donDatHangAdapter.timTenKH(donHangDto.getMaKH()));
-                    Intent intent = new Intent(this, TTDDH_Activity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("maDH",donHangDto.getMaDH());
-                    bundle.putString("ngayDH",donHangDto.getNgayDH());
-                    bundle.putInt("maKH",donHangDto.getMaKH());
-                    bundle.putString("tenKH",donHangDto.getTenKH());
-                    intent.putExtras(bundle);
-                    this.startActivity(intent);
-                })
-                .setNegativeButton("Để sau", (dialogInterface, i) -> {
-                    //
-                });
-        builder.create().show();
+        //
+        donHangDto.setTenKH(donDatHangAdapter.timTenKH(donHangDto.getMaKH()));
+        Intent intent = new Intent(this, TTDDH_Activity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("maDH",donHangDto.getMaDH());
+        bundle.putString("ngayDH",donHangDto.getNgayDH());
+        bundle.putInt("maKH",donHangDto.getMaKH());
+        bundle.putString("tenKH",donHangDto.getTenKH());
+        intent.putExtras(bundle);
+        this.startActivity(intent);
     }
 }
