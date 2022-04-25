@@ -14,6 +14,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.View;
 
@@ -24,11 +25,14 @@ public class KhachHangActivity extends AppCompatActivity {
     private KhachHangAdapter khachHangAdapter;
     private KhachHangDao khachHangDao;
     private SearchView searchView;
+    public static int width;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_khach_hang);
+        DisplayMetrics metrics=getResources().getDisplayMetrics();
+        width=metrics.widthPixels;
         setControl();
         setEvent();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

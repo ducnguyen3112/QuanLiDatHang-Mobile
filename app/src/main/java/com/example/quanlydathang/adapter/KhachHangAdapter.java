@@ -3,9 +3,12 @@ package com.example.quanlydathang.adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -18,9 +21,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quanlydathang.activity.KhachHang.KhachHangActivity;
+import com.example.quanlydathang.activitydonhang.DonDatHangActivity;
 import com.example.quanlydathang.dao.KhachHangDao;
 import com.example.quanlydathang.dto.KhachHangDto;
 import com.example.quanlydathang.activity.KhachHang.UpdateKhachHangActivity;
+import com.example.quanlydathang.utils.CustomAlertDialog;
 import com.example.quanlydathang.utils.CustomToast;
 
 import java.util.ArrayList;
@@ -31,7 +37,6 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.Khac
     private Context context;
     private List<KhachHangDto> list;
     private List<KhachHangDto> listOld;
-
 
     public KhachHangAdapter(Context context, List<KhachHangDto> list) {
         this.context = context;
@@ -76,12 +81,13 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.Khac
     }
 
     void confirmDialog(int id){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Thông báo");
-        builder.setMessage("Bạn có chắc chắn muốn xóa khách hàng này ?");
-        builder.setPositiveButton("Xác Nhận", new DialogInterface.OnClickListener() {
+        CustomAlertDialog alertDialog= new CustomAlertDialog(context);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.getWindow().setLayout((7* KhachHangActivity.width)/8, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.show();
+        alertDialog.btnPositive.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(View view) {
                 KhachHangDao khachHangDao = new KhachHangDao(context);
                 long result = khachHangDao.deleteKH(id);
                 if(result == -1){
@@ -93,15 +99,19 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.Khac
                 }
                 list = khachHangDao.getListKH();
                 notifyDataSetChanged();
-            }
-        });
-        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+                alertDialog.cancel();
 
             }
         });
-        builder.create().show();
+        alertDialog.btnNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.cancel();
+            }
+        });
+        alertDialog.setMessage("Bạn muốn xóa khách hàng: "+id+" ?");
+        alertDialog.setBtnPositive("Xóa");
+        alertDialog.setBtnNegative("Hủy");
     }
 
     @Override

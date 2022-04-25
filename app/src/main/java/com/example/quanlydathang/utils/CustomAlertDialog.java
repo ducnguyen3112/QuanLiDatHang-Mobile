@@ -26,7 +26,6 @@ public class CustomAlertDialog extends Dialog  {
 
     public CustomAlertDialog(@NonNull Context context) {
         super(context);
-
     }
 
     @Override
