@@ -150,13 +150,17 @@ public class TTDDH_Activity extends AppCompatActivity {
                     ttddh_dto.setSL(Integer.parseInt(ttddh_adapter.etSoLuong_dialogThemSP.getText().toString()));
 
                     int id = (int) ttddh_dao.them_ttddh_dao(ttddh_dto);
-                    if(id!=-1) {
+                    if(id>0) {
                         CustomToast.makeText(TTDDH_Activity.this, "Thêm TTDDH thành công!",
-                                CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
+                                CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
+                    }
+                    else if(id==-1) {
+                        CustomToast.makeText(TTDDH_Activity.this, "Đơn hàng đã có sản phẩm này!",
+                                CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
                     }
                     else {
-                        CustomToast.makeText(TTDDH_Activity.this, "Thêm TTDDH thất bại!",
-                                CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
+                        CustomToast.makeText(TTDDH_Activity.this, id+"",
+                                CustomToast.LENGTH_SHORT, CustomToast.ERROR).show();
                     }
                     dialog.cancel();
                     onResume();
