@@ -76,12 +76,9 @@
 
                 <TextView
                     android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/customTextViewMain"
                     android:layout_below="@id/imageView3"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/goldman"
                     android:text="Khách hàng"
                     android:textSize="20sp" />
 
@@ -112,12 +109,8 @@
 
                 <TextView
                     android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_below="@id/imageView5"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/goldman"
+                    style="@style/customTextViewMain"
                     android:text="Sản phẩm"
                     android:textSize="20sp" />
 
@@ -156,12 +149,9 @@
 
                 <TextView
                     android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
                     android:layout_below="@id/imageView6"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/goldman"
+                    style="@style/customTextViewMain"
                     android:text="Đơn hàng"
                     android:textSize="20sp" />
 
@@ -191,12 +181,9 @@
 
                 <TextView
                     android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
                     android:layout_below="@id/imageView4"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/goldman"
+                    style="@style/customTextViewMain"
                     android:text="Đăng xuất"
                     android:textSize="20sp" />
 

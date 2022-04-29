@@ -46,10 +46,12 @@
         <activity
             android:name=".activity.KhachHang.UpdateKhachHangActivity"
             android:exported="false"
+            android:label="Cập Nhật Khách hàng"
             android:parentActivityName=".activity.KhachHang.KhachHangActivity" />
         <activity
             android:name=".activity.KhachHang.AddKhachHangActivity"
             android:exported="false"
+            android:label="Thêm Khách hàng"
             android:parentActivityName=".activity.KhachHang.KhachHangActivity" />
          <activity
             android:name=".LoginActivity"

@@ -3,9 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/drawable/ripple_effect_outline.xml" value="0.1" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_add_khach_hang.xml" value="0.2324074074074074" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_khach_hang.xml" value="0.2324074074074074" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_main.xml" value="0.1875" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_ttddh.xml" value="0.25025641025641027" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/activity_update_khach_hang.xml" value="0.2324074074074074" />
         <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/dialog_ttddh_sendmail.xml" value="0.25025641025641027" />
         <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/dialog_ttddh_suasoluong.xml" value="0.25025641025641027" />
         <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/dialog_ttddh_themsanpham.xml" value="0.25025641025641027" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/item_kh_spinner.xml" value="0.2324074074074074" />
+        <entry key="..\:/PTIT/SENIOR-Part2/LapTrinhMobile/QuanLiDatHang-Mobile/app/src/main/res/layout/themdonhang_dialog.xml" value="0.15092592592592594" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/arrow_down.xml" value="0.1" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/bg.xml" value="0.1" />
         <entry key="..\:/Projects/Quanlydathang/app/src/main/res/drawable/bg_spinner.xml" value="0.1" />

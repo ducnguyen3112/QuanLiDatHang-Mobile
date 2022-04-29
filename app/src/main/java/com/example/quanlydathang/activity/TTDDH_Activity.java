@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
@@ -150,13 +151,17 @@ public class TTDDH_Activity extends AppCompatActivity {
                     ttddh_dto.setSL(Integer.parseInt(ttddh_adapter.etSoLuong_dialogThemSP.getText().toString()));
 
                     int id = (int) ttddh_dao.them_ttddh_dao(ttddh_dto);
-                    if(id!=-1) {
+                    if(id>0) {
                         CustomToast.makeText(TTDDH_Activity.this, "Thêm TTDDH thành công!",
-                                CustomToast.LENGTH_LONG, CustomToast.SUCCESS).show();
+                                CustomToast.LENGTH_SHORT, CustomToast.SUCCESS).show();
+                    }
+                    else if(id==-1) {
+                        CustomToast.makeText(TTDDH_Activity.this, "Đơn hàng đã có sản phẩm này!",
+                                CustomToast.LENGTH_SHORT, CustomToast.WARNING).show();
                     }
                     else {
-                        CustomToast.makeText(TTDDH_Activity.this, "Thêm TTDDH thất bại!",
-                                CustomToast.LENGTH_LONG, CustomToast.ERROR).show();
+                        CustomToast.makeText(TTDDH_Activity.this, id+"",
+                                CustomToast.LENGTH_SHORT, CustomToast.ERROR).show();
                     }
                     dialog.cancel();
                     onResume();
@@ -364,6 +369,9 @@ public class TTDDH_Activity extends AppCompatActivity {
                 properties.put("mail.smtp.starttls.enable","true");
                 properties.put("mail.smtp.host","smtp.gmail.com");
                 properties.put("mail.smtp.port","587");
+//                properties.put("mail.smtp.connectiontimeout", 10000);
+//                properties.put("mail.smtp.timeout", 60000);
+
 
                 Session session = Session.getInstance(properties,
                         new Authenticator() {
@@ -400,6 +408,7 @@ public class TTDDH_Activity extends AppCompatActivity {
                 }
                 catch (MessagingException | IOException e) {
                     CustomToast.makeText(this,"Gửi mail thất bại!",CustomToast.LENGTH_SHORT,CustomToast.ERROR).show();
+                    Log.e("e.message",e.getMessage());
                     throw new RuntimeException();
                 }
             }
