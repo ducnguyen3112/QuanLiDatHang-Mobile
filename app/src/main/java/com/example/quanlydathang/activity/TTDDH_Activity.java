@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
@@ -368,6 +369,9 @@ public class TTDDH_Activity extends AppCompatActivity {
                 properties.put("mail.smtp.starttls.enable","true");
                 properties.put("mail.smtp.host","smtp.gmail.com");
                 properties.put("mail.smtp.port","587");
+//                properties.put("mail.smtp.connectiontimeout", 10000);
+//                properties.put("mail.smtp.timeout", 60000);
+
 
                 Session session = Session.getInstance(properties,
                         new Authenticator() {
@@ -404,6 +408,7 @@ public class TTDDH_Activity extends AppCompatActivity {
                 }
                 catch (MessagingException | IOException e) {
                     CustomToast.makeText(this,"Gửi mail thất bại!",CustomToast.LENGTH_SHORT,CustomToast.ERROR).show();
+                    Log.e("e.message",e.getMessage());
                     throw new RuntimeException();
                 }
             }
